@@ -11,7 +11,7 @@ import Navigation from 'Project/Navigation';
 const Routes = () => {
   return (
     <BrowserRouter>
-      <Navigation />
+      {/* <Navigation /> */}
       <Switch>
         <Route path="/preview" element={<Landing />} />
         <Route path="/" element={<Soon />} />

@@ -120,17 +120,25 @@ const Title = styled(Link)`
   ${font.header};
   ${font.size(24)};
   cursor: pointer;
+  margin-left: 150px;
+
+  @media (max-width: 1024px) {
+    margin-left: 11%;
+  }
 `;
 
 const DesktopLink = styled(Link)`
   margin-left: 40px;
   cursor: pointer;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 150px;
   max-width: 1650px;
   width: 100%;
 `;

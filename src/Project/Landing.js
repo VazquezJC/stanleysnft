@@ -3,7 +3,8 @@ import { font, color } from 'shared/styles';
 import stanleyAvatarFull1 from 'App/assets/images/stanleys_avatar_full_1.png';
 import stanleyAvatarFull2 from 'App/assets/images/stanleys_avatar_full_2.png';
 import photoBorder from 'App/assets/images/photo_border.png';
-import background2 from 'App/assets/images/section2_background.png';
+import backgroundRiver from 'App/assets/images/section2_background.png';
+import backgroundWhiteHouse from 'App/assets/images/section_background_whitehouse.png';
 import border from 'App/assets/images/border.png';
 import phone from 'App/assets/images/phone.png';
 import qr from 'App/assets/images/qr.png';
@@ -11,6 +12,9 @@ import repeatBg from 'App/assets/images/repeat-bg.png';
 import tickInactive from 'App/assets/images/icon_tick_inactive.png';
 import tickActive from 'App/assets/images/icon_tick_active.png';
 import tba from 'App/assets/images/icon_tba.png';
+import bullet from 'App/assets/images/icon_bullet.png';
+
+import roadmap0 from 'App/assets/images/roadmap_0.png';
 
 import map from 'App/assets/images/roadmap_map.png';
 import dice from 'App/assets/images/roadmap_dice.png';
@@ -20,227 +24,292 @@ import frame from 'App/assets/images/frame.png';
 import title from 'App/assets/images/title.png';
 import portrait from 'App/assets/images/frame-temp.png';
 
+import stars from 'App/assets/images/section_background_stars.png';
+import Navigation from 'Project/Navigation';
+
+import { Fragment } from 'react';
+
 const Landing = () => {
   return (
-    <Wrapper>
-      <Container>
-        <Section1 name="introduction">
-          <TitleArea>
-            <Framer>
-              <Frame src={frame} />
-              <Title src={title} />
-              <Portrait src={portrait} />
-            </Framer>
-          </TitleArea>
-          <Header>What is the Stanleys Family?</Header>
-          <TextWrap1>
-            <Text>
-              The Stanleys Family is an artful representation of the growing
-              international culturte curiosity of young adults. Our objective is
-              simple – help others achieve international cultural awareness and
-              make The Stanleys the first community owned NFT – Thousands of
-              minds are bettert than a few… Total Ownership and Profit Sharing –
-              First of its kind.
-            </Text>
-            <Text>
-              The first art models were created by teens in our circle of
-              families and friends. These models became the foundation of unique
-              characters that we hope you find interesting and playful, as we
-              do.
-            </Text>
-            <Text>
-              Come visit us and experience a sincere and safe environment in The
-              Stanleys Discord Community Channel.
-            </Text>
-          </TextWrap1>
-          <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
-        </Section1>
-        <PhotoBorderImg src={photoBorder} />
-        <Section2>
-          <TextWrap2>
-            <TextWrap2Section>
-              <Header name="whoare">Why did we create The Stanleys?</Header>
+    <Fragment>
+      <Navigation />
+      <Wrapper>
+        <Container>
+          <Section1 name="introduction">
+            <WhiteHouse src={backgroundWhiteHouse} />
+            <TitleArea>
+              <Framer>
+                <Frame src={frame} />
+                <Title src={title} />
+                <Portrait src={portrait} />
+              </Framer>
+            </TitleArea>
+            <Header>What is the Stanleys Family?</Header>
+            <TextWrap1>
               <Text>
-                Our team has been traveling throughout the world since we can
-                remember and are in various countries throughout North America,
-                Europe, and Asia. When we reflect on what triggered our cultural
-                curiosity, most of us can clearly recollect the experience our
-                kids had when completing the “Flat Stanley'' project in early
-                school years. The excitement they showed when getting responses
-                from all over the world was priceless… We realized this was a
-                significant crossroad in the lives of our kids…
-              </Text>
-            </TextWrap2Section>
-            <TextWrap2Section>
-              <Header>Who are The Stanleys?</Header>
-              <Text>
-                We do not have a “Flat Stanley'' to share with the crypto
-                community. Instead, our friends and family came up with their
-                own characters to share with the world. Meet The Stanleys ….
+                The Stanleys Family is an artful representation of the growing
+                international culturte curiosity of young adults. Our objective
+                is simple – help others achieve international cultural awareness
+                and make The Stanleys the first community owned NFT – Thousands
+                of minds are bettert than a few… Total Ownership and Profit
+                Sharing – First of its kind.
               </Text>
               <Text>
-                The Stanleys have lived by the river since the beginning of time
-                and always shown an interest in traveling, new foods, and
-                learning other cultures. Recently they invested in some meme
-                coins (you know what they are) and cashed “a load” of these
-                altcoins. The Stanleys are now ready to travel with their
-                friends and meet others around the world... Taking selfies at
-                interesting places and having fun
+                The first art models were created by teens in our circle of
+                families and friends. These models became the foundation of
+                unique characters that we hope you find interesting and playful,
+                as we do.
               </Text>
-            </TextWrap2Section>
-          </TextWrap2>
-          <StanleyAvatarFloat2 src={stanleyAvatarFull2} alt="" />
-        </Section2>
-        <Border2 src={border} />
-        <Section3>
-          <QRImg src={qr} />
-          <PhoneImg src={phone} />
-        </Section3>
-        <Section4>
-          <Wrap4>
-            <Roadmap>
-              <RoadmapExplainer>
-                <Header name="roadmap">The Roadmap</Header>
-                <Map src={map} />
+              <Text>
+                Come visit us and experience a sincere and safe environment in
+                The Stanleys Discord Community Channel.
+              </Text>
+            </TextWrap1>
+            <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
+          </Section1>
+          <PhotoBorderImg src={photoBorder} />
+          <Section2>
+            <LandscapeRiver src={backgroundRiver} />
+            <TextWrap2>
+              <TextWrap2Section>
+                <Header name="whoare">Why did we create The Stanleys?</Header>
                 <Text>
-                  The initial roadmap is based on a simple launch providing
-                  quality and playful NFTs at mint as well as substantial profit
-                  sharing with the community. Our goal is to be the first
-                  community owned NFT.
+                  Our team has been traveling throughout the world since we can
+                  remember and are in various countries throughout North
+                  America, Europe, and Asia. When we reflect on what triggered
+                  our cultural curiosity, most of us can clearly recollect the
+                  experience our kids had when completing the “Flat Stanley''
+                  project in early school years. The excitement they showed when
+                  getting responses from all over the world was priceless… We
+                  realized this was a significant crossroad in the lives of our
+                  kids…
+                </Text>
+              </TextWrap2Section>
+              <TextWrap2Section>
+                <Header>Who are The Stanleys?</Header>
+                <Text>
+                  We do not have a “Flat Stanley'' to share with the crypto
+                  community. Instead, our friends and family came up with their
+                  own characters to share with the world. Meet The Stanleys ….
                 </Text>
                 <Text>
-                  We recognized The Stanleys Family potential to continue being
-                  a model for international cultural awareness and assistance.
-                  We have identified some opportunities below and will seek
-                  community members' input to evolve our roadmap as we get
-                  closer to Mint.
+                  The Stanleys have lived by the river since the beginning of
+                  time and always shown an interest in traveling, new foods, and
+                  learning other cultures. Recently they invested in some meme
+                  coins (you know what they are) and cashed “a load” of these
+                  altcoins. The Stanleys are now ready to travel with their
+                  friends and meet others around the world... Taking selfies at
+                  interesting places and having fun
                 </Text>
-              </RoadmapExplainer>
-              <RoadmapLists>
-                <RoadmapInitialList>
-                  <HeaderList>Initial</HeaderList>
-                  <RoadmapListItem>
-                    <FloatingTick src={tickActive} />
-                    42.5% Profit Sharing during Mint for those that buy and hold
-                    beyond 10 days
-                  </RoadmapListItem>
-                  <RoadmapListItem>
-                    <FloatingTick src={tickInactive} />
-                    100% Ownership after Mint (first of its kind) for those that
-                    buy and hold beyond 10 days
-                  </RoadmapListItem>
-                  <RoadmapListItem>
-                    <FloatingTick src={tickInactive} />
-                    Eligibility to represent the community as part of the future
-                    leadership
-                  </RoadmapListItem>
-                  <RoadmapListItem>
-                    <FloatingTick src={tickInactive} />
-                    500 QR coded NFTs during Mint entitling buyer to an
-                    additional NFT at no charge
-                  </RoadmapListItem>
-                  <RoadmapListItem>
-                    <FloatingTick src={tickInactive} />
-                    3% Mint Proceeds Charity Contribution
-                  </RoadmapListItem>
-                  <RoadmapListItem>
-                    <FloatingTick src={tickInactive} />
-                    30 Days X 3 Giveaways plus additional NFTs for those
-                    whitelisted
-                  </RoadmapListItem>
-                  <RoadmapListItem>
-                    <FloatingTick src={tickInactive} />
-                    Selected Community Relationships
-                  </RoadmapListItem>
-                </RoadmapInitialList>
-                <RoadmapTBDList>
-                  <HeaderList>TBD</HeaderList>
-                  <RoadmapTBDItem>
-                    <FloatingTBA src={tba} />
-                    Evolving International Awareness (Badges, #Flyer
-                    Tokenization)
-                  </RoadmapTBDItem>
-                  <RoadmapTBDItem>
-                    <FloatingTBA src={tba} />
-                    Additional Characters that expand potential for future
-                    growth
-                  </RoadmapTBDItem>
-                  <RoadmapTBDItem>
-                    <FloatingTBA src={tba} />
-                    Profit Sharing Evolution
-                  </RoadmapTBDItem>
-                  <RoadmapTBDItem>
-                    <FloatingTBA src={tba} />
-                    Subsequent charity donations
-                  </RoadmapTBDItem>
-                  <RoadmapTBDItem>
-                    <FloatingTBA src={tba} />
-                    Travel Gaming
-                  </RoadmapTBDItem>
-                  <RoadmapTBDItem>
-                    <FloatingTBA src={tba} />
-                    Others
-                  </RoadmapTBDItem>
-                </RoadmapTBDList>
-              </RoadmapLists>
-            </Roadmap>
-            <Rarity>
-              <RarityExplainer>
-                <Header>Rarity Model</Header>
-                <Dice src={dice} />
-                <Text>
-                  The Rarity model is based on the following traits. More
-                  details will be shared as we get closer to Mint day.
-                </Text>
-              </RarityExplainer>
-              <RarityList>
-                <RarityItem>Character</RarityItem>
-                <RarityItem>Background</RarityItem>
-                <RarityItem>Facial Characteristics</RarityItem>
-                <RarityItem>Facial Accessories</RarityItem>
-                <RarityItem>Clothing Accessories</RarityItem>
-                <RarityItem>Landmarks</RarityItem>
-              </RarityList>
-            </Rarity>
-          </Wrap4>
-        </Section4>
-        <Section5></Section5>
-        <Border2 src={border} />
-        <Section6>
-          <QuestionImg src={headerQuestion} />
-          <WhoContent>
-            <WhoAreWe name="creators">Who are we?</WhoAreWe>
-            <Profiles>
-              <Profile>
-                <Name>LittleSuitCase</Name>
-                <Description>
-                  Crypto dad, golf enthusiast, and world traveler. Ask me where
-                  I am going next….
-                </Description>
-              </Profile>
-              <Profile>
-                <Name>ColorsOfTheWorld</Name>
-                <Description>
-                  Art lover, art creator, and travel fanatic. NFT aficionado,
-                  and eager to learn everything new that comes my way.
-                </Description>
-              </Profile>
-            </Profiles>
-          </WhoContent>
-        </Section6>
-        <Footer>
-          <Text>
-            © The Stanleys. 2021, All rights reserved When you visit or interact
-            with our sites, services, or tools, we or our authorized service
-            providers may use cookies for storing information to help provide
-            you with a better, faster and safer experience and for marketing
-            purposes.
-          </Text>
-        </Footer>
-      </Container>
-    </Wrapper>
+              </TextWrap2Section>
+            </TextWrap2>
+            <StanleyAvatarFloat2 src={stanleyAvatarFull2} alt="" />
+          </Section2>
+          <Border2 src={border} />
+          <Section3>
+            <QRImg src={qr} />
+            <PhoneImg src={phone} />
+          </Section3>
+          <Section4>
+            <Wrap4>
+              <Roadmap>
+                <RoadmapExplainer>
+                  <Header name="roadmap">The Roadmap</Header>
+                  <Map src={map} />
+                  <Text>
+                    The initial roadmap is based on a simple launch providing
+                    quality and playful NFTs at mint as well as substantial
+                    profit sharing with the community. Our goal is to be the
+                    first community owned NFT.
+                  </Text>
+                  <Text>
+                    We recognized The Stanleys Family potential to continue
+                    being a model for international cultural awareness and
+                    assistance. We have identified some opportunities below and
+                    will seek community members' input to evolve our roadmap as
+                    we get closer to Mint.
+                  </Text>
+                </RoadmapExplainer>
+                <RoadmapLists>
+                  <TextWrap3>
+                    <TextWrap2Section>
+                      <RoadmapInitialList>
+                        <HeaderList>Initial</HeaderList>
+                        <RoadmapListItem>
+                          <FloatingTick src={tickActive} />
+                          42.5% Profit Sharing during Mint for those that buy
+                          and hold beyond 10 days
+                        </RoadmapListItem>
+                        <RoadmapListItem>
+                          <FloatingTick src={tickInactive} />
+                          100% Ownership after Mint (first of its kind) for
+                          those that buy and hold beyond 10 days
+                        </RoadmapListItem>
+                        <RoadmapListItem>
+                          <FloatingTick src={tickInactive} />
+                          Eligibility to represent the community as part of the
+                          future leadership
+                        </RoadmapListItem>
+                        <RoadmapListItem>
+                          <FloatingTick src={tickInactive} />
+                          500 QR coded NFTs during Mint entitling buyer to an
+                          additional NFT at no charge
+                        </RoadmapListItem>
+                        <RoadmapListItem>
+                          <FloatingTick src={tickInactive} />
+                          3% Mint Proceeds Charity Contribution
+                        </RoadmapListItem>
+                        <RoadmapListItem>
+                          <FloatingTick src={tickInactive} />
+                          30 Days X 3 Giveaways plus additional NFTs for those
+                          whitelisted
+                        </RoadmapListItem>
+                        <RoadmapListItem>
+                          <FloatingTick src={tickInactive} />
+                          Selected Community Relationships
+                        </RoadmapListItem>
+                      </RoadmapInitialList>
+                    </TextWrap2Section>
+                    <TextWrap2Section>
+                      <RoadmapTBDList>
+                        <HeaderList>TBD</HeaderList>
+                        <RoadmapTBDItem>
+                          - Evolving International Awareness (Badges, #Flyer
+                          Tokenization)
+                        </RoadmapTBDItem>
+                        <RoadmapTBDItem>
+                          - Additional Characters that expand potential for
+                          future growth
+                        </RoadmapTBDItem>
+                        <RoadmapTBDItem>
+                          - Profit Sharing Evolution
+                        </RoadmapTBDItem>
+                        <RoadmapTBDItem>
+                          - Subsequent charity donations
+                        </RoadmapTBDItem>
+                        <RoadmapTBDItem>- Travel Gaming</RoadmapTBDItem>
+                        <RoadmapTBDItem>- Others</RoadmapTBDItem>
+                      </RoadmapTBDList>
+                    </TextWrap2Section>
+                  </TextWrap3>
+                </RoadmapLists>
+              </Roadmap>
+              <Rarity>
+                <RarityExplainer>
+                  <Header>Rarity Model</Header>
+                  <Dice src={dice} />
+                  <Text>
+                    The Rarity model is based on the following traits. More
+                    details will be shared as we get closer to Mint day.
+                  </Text>
+                </RarityExplainer>
+                <RarityList>
+                  <FloatingTBA src={bullet} />
+                  <RarityItem>- Character</RarityItem>
+                  <RarityItem>- Background</RarityItem>
+                  <RarityItem>- Facial Characteristics</RarityItem>
+                  <RarityItem>- Facial Accessories</RarityItem>
+                  <RarityItem>- Clothing Accessories</RarityItem>
+                  <RarityItem>- Landmarks</RarityItem>
+                </RarityList>
+              </Rarity>
+            </Wrap4>
+            <Stars src={stars} />
+          </Section4>
+          <RoadmapMap src={roadmap0} />
+          <Border2 src={border} />
+          <Section6>
+            <QuestionImg src={headerQuestion} />
+            <WhoContent>
+              <WhoAreWe name="creators">Who are we?</WhoAreWe>
+              <Profiles>
+                <Profile>
+                  <Name>LittleSuitCase</Name>
+                  <Description>
+                    Crypto dad, golf enthusiast, and world traveler. Ask me
+                    where I am going next….
+                  </Description>
+                </Profile>
+                <Profile>
+                  <Name>ColorsOfTheWorld</Name>
+                  <Description>
+                    Art lover, art creator, and travel fanatic. NFT aficionado,
+                    and eager to learn everything new that comes my way.
+                  </Description>
+                </Profile>
+              </Profiles>
+            </WhoContent>
+          </Section6>
+          <Footer>
+            <FootText>© The Stanleys. 2021, All rights reserved.</FootText>
+            <FootText>
+              When you visit or interact with our sites, services, or tools, we
+              or our authorized service providers may use cookies for storing
+              information to help provide you with a better, faster and safer
+              experience and for marketing purposes.
+            </FootText>
+          </Footer>
+        </Container>
+      </Wrapper>
+    </Fragment>
   );
 };
+
+const LandscapeRiver = styled.img`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  transition: opacity 0.5s ease-in;
+  @media (max-width: 1280px) {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1024px) {
+    opacity: 0.3;
+  }
+`;
+
+const RoadmapMap = styled.img`
+  position: relative;
+  height: auto;
+  width: 100%;
+  background-color: #7f8aa2;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Section5 = styled.section`
+  position: relative;
+  width: 100%;
+  height: auto;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const WhiteHouse = styled.img`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  transition: opacity 0.5s ease-in;
+  @media (max-width: 1280px) {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1024px) {
+    opacity: 0.3;
+  }
+`;
+
+const Stars = styled.img`
+  position: absolute;
+  bottom: 0;
+`;
 
 const Framer = styled.div`
   position: absolute;
@@ -256,16 +325,19 @@ const TitleArea = styled.div`
 
 const Frame = styled.img`
   position: absolute;
+  left: -63px;
+  width: 150px;
 `;
 const Title = styled.img`
   position: absolute;
-  top: 50px;
-  left: -150px;
+  top: 31px;
+  left: -230px;
 `;
 const Portrait = styled.img`
   position: absolute;
-  top: 93px;
-  left: 23px;
+  width: 81px;
+  top: 75px;
+  left: -49px;
 `;
 
 const Header = styled.h2`
@@ -279,6 +351,10 @@ const Header = styled.h2`
 
 const WhoAreWe = styled(Header)`
   margin-right: 10vw;
+
+  @media (max-width: 1024px) {
+    margin-right: 0;
+  }
 `;
 
 const WhoContent = styled.div`
@@ -286,6 +362,10 @@ const WhoContent = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 50px;
+
+  @media (max-width: 1024px) {
+    align-items: flex-start;
+  }
 `;
 
 const Profiles = styled.div`
@@ -317,16 +397,19 @@ const QuestionImg = styled.img`
   max-width: 167px;
   min-width: 90px;
   width: 100%;
+  height: auto;
 
   @media (max-width: 1024px) {
-    width: 80%;
+    width: 60px;
+    position: absolute;
+    right: 50px;
+    top: 30px;
   }
 `;
 
-const Section5 = styled.div`
-  height: 0;
-`;
 const Section6 = styled.div`
+  border-radius: 0 0 34px 34px;
+  position: relative;
   padding-left: 13%;
   gap: 4vw;
   display: flex;
@@ -335,15 +418,19 @@ const Section6 = styled.div`
   padding-bottom: 100px;
   background-color: ${color.background['container']};
   width: 100%;
+
+  margin-left: 3%;
+  margin-right: 3%;
 `;
 
 const Footer = styled.footer`
-  background-color: #000;
-  padding-left: 13%;
-  padding-right: 13%;
+  padding-left: 7%;
+  padding-right: 7%;
   padding-top: 50px;
   padding-bottom: 50px;
   width: 100%;
+  color: #7d8ab2;
+  margin-bottom: 100px;
 `;
 
 const Map = styled.img`
@@ -359,16 +446,16 @@ const Dice = styled.img`
 
 const FloatingTBA = styled.img`
   position: absolute;
-  width: 24px;
-  left: -35px;
-  top: 0px;
+  left: -31px;
+  top: 9px;
+  width: 15px;
   height: auto;
 `;
 
 const FloatingTick = styled.img`
   position: absolute;
   width: 22px;
-  left: -35px;
+  left: -30px;
   top: 5px;
   height: auto;
 `;
@@ -377,6 +464,7 @@ const RarityItem = styled.li`
   ${font.size(16)};
 `;
 const RarityList = styled.ul`
+  margin-left: 13%;
   line-height: 30px;
 `;
 const RoadmapTBDItem = styled.li`
@@ -387,13 +475,18 @@ const RoadmapTBDItem = styled.li`
 const RoadmapListItem = styled.li`
   position: relative;
   margin-top: 15px;
+  margin-left: 20px;
   ${font.size(16)};
 `;
 const RoadmapTBDList = styled.ul`
-  width: 40%;
+  @media (max-width: 768px) {
+    width: auto;
+  }
 `;
 const RoadmapInitialList = styled.ul`
-  width: 40%;
+  @media (max-width: 768px) {
+    width: auto;
+  }
 `;
 
 const RoadmapLists = styled.div`
@@ -403,17 +496,21 @@ const RoadmapLists = styled.div`
   display: flex;
   gap: 20%;
   line-height: 24px;
+
+  @media (max-width: 1024px) {
+    left: 0;
+  }
 `;
 
 const Wrap4 = styled.div`
   display: flex;
   margin-left: 13%;
-  margin-right: 13%;
-  gap: 150px;
   margin-top: 350px;
 
   @media (max-width: 1024px) {
     flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
   }
 `;
 
@@ -423,8 +520,8 @@ const Section4 = styled.section`
   padding-bottom: 200px;
   position: relative;
   background-image: url(${repeatBg});
-  background-repeat: no-repeat;
   background-position: bottom;
+  background-repeat: repeat-x;
   background-color: #6e91bb;
 `;
 
@@ -432,54 +529,90 @@ const RoadmapExplainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-left: 13%;
+  margin-right: 13%;
 `;
 
 const RarityExplainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  margin-left: 13%;
+  margin-right: 13%;
 `;
 
 const Roadmap = styled.div`
-  flex: 1 1 70%;
+  width: 55%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const Rarity = styled.div`
-  flex: 1 1 25%;
-  margin-right: 5%;
+  width: 25%;
+  margin-right: 10%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0;
+  }
 `;
 
 const QRImg = styled.img`
   position: absolute;
   top: 50%;
+  border: 6px solid #000;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 15;
-  max-width: 285px;
-  min-width: 150px;
-  width: 25vw;
+  max-width: 245px;
+  min-width: 80px;
+  width: 15vw;
+  height: auto;
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1024px) {
   }
 `;
 
 const PhoneImg = styled.img`
-  max-width: 355px;
+  max-width: 325px;
   min-width: 150px;
-  width: 40vw;
   height: auto;
   position: absolute;
-  right: 15vw;
-  top: 50%;
-  transform: translate(0, -50%);
+  top: 47%;
+  left: 73%;
+  transform: translate(-73%, -47%);
   z-index: 20;
+  width: 20vw;
 
   @media (max-width: 1280px) {
-    right: 5vw;
+    width: 25vw;
+    left: 77%;
+    transform: translate(-77%, -47%);
   }
 
-  @media (max-width: 1024px) {
-    right: 1vw;
+  @media (max-width: 768px) {
+    width: 25vw;
+    left: 83%;
+    transform: translate(-83%, -47%);
+  }
+
+  @media (max-width: 480px) {
+    width: 25vw;
+    left: 95%;
+    transform: translate(-95%, -47%);
+  }
+
+  @media (max-width: 380px) {
+    width: 25vw;
+    left: 110%;
+  }
+
+  @media (max-width: 290px) {
+    width: 25vw;
+    left: 130%;
   }
 `;
 
@@ -506,6 +639,9 @@ const Text = styled.p`
   ${font.regular};
   ${font.size(20)}
   line-height: 32px;
+  @media (max-width: 1024px) {
+    ${font.size(18)};
+  }
   @media (max-width: 480px) {
     ${font.size(18)};
   }
@@ -514,9 +650,9 @@ const Text = styled.p`
 const TextWrap2 = styled.div`
   width: 830px;
   display: flex;
+  margin-top: 200px;
   align-self: flex-end;
   gap: 60px;
-  margin-top: 200px;
   z-index: 10;
   margin-right: 13%;
   margin-left: 13%;
@@ -543,6 +679,10 @@ const TextWrap2 = styled.div`
     margin-right: auto;
     margin-left: auto;
   }
+`;
+
+const TextWrap3 = styled(TextWrap2)`
+  margin-top: 0;
 `;
 
 const TextWrap2Section = styled.div`
@@ -626,9 +766,22 @@ const Container = styled.main`
 const Wrapper = styled.main`
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 94%;
+  margin-right: 3%;
+  margin-left: 3%;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
 `;
 
+const FootText = styled(Text)`
+  ${font.regular};
+  ${font.size(15)};
+  line-height: 22px;
+`;
 const Section1 = styled.section`
   position: relative;
   height: 900px;
@@ -663,10 +816,7 @@ const Section2 = styled.section`
   height: 1050px;
   display: flex;
   flex-direction: column;
-  background-image: url(${background2});
-  background-repeat: no-repeat;
 
-  background-position: center;
   width: 100%;
   background-color: ${color.background['container']};
 `;
