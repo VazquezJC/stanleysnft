@@ -660,7 +660,7 @@ const Section1 = styled.section`
 
 const Section2 = styled.section`
   position: relative;
-  height: 1150px;
+  height: 1050px;
   display: flex;
   flex-direction: column;
   background-image: url(${background2});
