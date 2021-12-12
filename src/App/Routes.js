@@ -11,7 +11,7 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route path="/" element={<Landing />} /> */}
+        <Route path="/preview" element={<Landing />} />
         <Route path="/" element={<Soon />} />
       </Switch>
     </BrowserRouter>
