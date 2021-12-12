@@ -14,13 +14,24 @@ import tba from 'App/assets/images/icon_tba.png';
 
 import map from 'App/assets/images/roadmap_map.png';
 import dice from 'App/assets/images/roadmap_dice.png';
+import headerQuestion from 'App/assets/images/header_question.png';
+
+import frame from 'App/assets/images/frame.png';
+import title from 'App/assets/images/title.png';
+import portrait from 'App/assets/images/frame-temp.png';
 
 const Landing = () => {
   return (
     <Wrapper>
       <Container>
-        <Section1>
-          <TitleArea></TitleArea>
+        <Section1 name="introduction">
+          <TitleArea>
+            <Framer>
+              <Frame src={frame} />
+              <Title src={title} />
+              <Portrait src={portrait} />
+            </Framer>
+          </TitleArea>
           <Header>What is the Stanleys Family?</Header>
           <TextWrap1>
             <Text>
@@ -48,7 +59,7 @@ const Landing = () => {
         <Section2>
           <TextWrap2>
             <TextWrap2Section>
-              <Header>What is the Stanleys Family?</Header>
+              <Header name="whoare">Why did we create The Stanleys?</Header>
               <Text>
                 Our team has been traveling throughout the world since we can
                 remember and are in various countries throughout North America,
@@ -61,7 +72,7 @@ const Landing = () => {
               </Text>
             </TextWrap2Section>
             <TextWrap2Section>
-              <Header>What is the Stanleys Family?</Header>
+              <Header>Who are The Stanleys?</Header>
               <Text>
                 We do not have a “Flat Stanley'' to share with the crypto
                 community. Instead, our friends and family came up with their
@@ -89,7 +100,7 @@ const Landing = () => {
           <Wrap4>
             <Roadmap>
               <RoadmapExplainer>
-                <Header>The Roadmap</Header>
+                <Header name="roadmap">The Roadmap</Header>
                 <Map src={map} />
                 <Text>
                   The initial roadmap is based on a simple launch providing
@@ -193,10 +204,147 @@ const Landing = () => {
             </Rarity>
           </Wrap4>
         </Section4>
+        <Section5></Section5>
+        <Border2 src={border} />
+        <Section6>
+          <QuestionImg src={headerQuestion} />
+          <WhoContent>
+            <WhoAreWe name="creators">Who are we?</WhoAreWe>
+            <Profiles>
+              <Profile>
+                <Name>LittleSuitCase</Name>
+                <Description>
+                  Crypto dad, golf enthusiast, and world traveler. Ask me where
+                  I am going next….
+                </Description>
+              </Profile>
+              <Profile>
+                <Name>ColorsOfTheWorld</Name>
+                <Description>
+                  Art lover, art creator, and travel fanatic. NFT aficionado,
+                  and eager to learn everything new that comes my way.
+                </Description>
+              </Profile>
+            </Profiles>
+          </WhoContent>
+        </Section6>
+        <Footer>
+          <Text>
+            © The Stanleys. 2021, All rights reserved When you visit or interact
+            with our sites, services, or tools, we or our authorized service
+            providers may use cookies for storing information to help provide
+            you with a better, faster and safer experience and for marketing
+            purposes.
+          </Text>
+        </Footer>
       </Container>
     </Wrapper>
   );
 };
+
+const Framer = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const TitleArea = styled.div`
+  height: 300px;
+  position: relative;
+`;
+
+const Frame = styled.img`
+  position: absolute;
+`;
+const Title = styled.img`
+  position: absolute;
+  top: 50px;
+  left: -150px;
+`;
+const Portrait = styled.img`
+  position: absolute;
+  top: 93px;
+  left: 23px;
+`;
+
+const Header = styled.h2`
+  ${font.header};
+  font-weight: 500;
+  ${font.size(36)}
+  @media (max-width: 480px) {
+    ${font.size(28)};
+  }
+`;
+
+const WhoAreWe = styled(Header)`
+  margin-right: 10vw;
+`;
+
+const WhoContent = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+`;
+
+const Profiles = styled.div`
+  display: flex;
+  gap: 50px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
+
+const Profile = styled.div`
+  display: flex;
+  line-height: 28px;
+  flex-direction: column;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 35px;
+  }
+`;
+const Name = styled.div`
+  font-style: italic;
+  ${font.size(20)}
+  margin-bottom: 8px;
+`;
+const Description = styled.div``;
+
+const QuestionImg = styled.img`
+  max-width: 167px;
+  min-width: 90px;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+`;
+
+const Section5 = styled.div`
+  height: 0;
+`;
+const Section6 = styled.div`
+  padding-left: 13%;
+  gap: 4vw;
+  display: flex;
+  padding-right: 13%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: ${color.background['container']};
+  width: 100%;
+`;
+
+const Footer = styled.footer`
+  background-color: #000;
+  padding-left: 13%;
+  padding-right: 13%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+`;
 
 const Map = styled.img`
   position: absolute;
@@ -242,15 +390,18 @@ const RoadmapListItem = styled.li`
   ${font.size(16)};
 `;
 const RoadmapTBDList = styled.ul`
-  width: 50%;
+  width: 40%;
 `;
 const RoadmapInitialList = styled.ul`
-  width: 55%;
+  width: 40%;
 `;
 
 const RoadmapLists = styled.div`
+  position: relative;
+  left: 30px;
+
   display: flex;
-  gap: 80px;
+  gap: 20%;
   line-height: 24px;
 `;
 
@@ -336,17 +487,7 @@ const Border = styled.img`
   background-color: ${color.background['container']};
 `;
 
-const Border2 = styled.img`
-  background-color: #6e91bb;
-`;
-
-const Header = styled.h2`
-  ${font.header};
-  ${font.size(36)}
-  @media (max-width: 480px) {
-    ${font.size(28)};
-  }
-`;
+const Border2 = styled.img``;
 
 const HeaderList = styled.h2`
   margin-bottom: 10px;
@@ -433,10 +574,6 @@ const PhotoBorderImg = styled.img`
   overflow-x: hidden;
   position: relative;
   z-index: 10;
-`;
-
-const TitleArea = styled.div`
-  height: 300px;
 `;
 
 const StanleyAvatarFloat1 = styled.img`
