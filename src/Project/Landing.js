@@ -639,6 +639,8 @@ const Section1 = styled.section`
   padding-right: 13%;
   background: ${color.background['container']};
 
+  border-radius: 34px 34px 0 0;
+
   @media (max-width: 1280px) {
     height: calc(900px + 1vh);
   }

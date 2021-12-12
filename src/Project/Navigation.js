@@ -131,16 +131,16 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   margin-left: 150px;
+  max-width: 1650px;
   width: 100%;
 `;
 
 const Wrapper = styled.div`
+  margin-top: 20px;
   height: 80px;
-  max-width: 1650px;
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #2a4f80;
 `;
 
 export default Navigation;
