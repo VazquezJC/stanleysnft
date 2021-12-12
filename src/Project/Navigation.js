@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { Link, animateScroll as scroll } from 'react-scroll';
 import { font } from 'shared/styles';
+import MobileMenu from 'Project/MobileMenu';
+import menuOpen from 'App/assets/images/menu-open.png';
+import menuClose from 'App/assets/images/menu-close.png';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMnueOpen] = useState(false);
@@ -58,6 +61,7 @@ const Navigation = () => {
 
   return (
     <Wrapper>
+      <MobileMenu isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} />
       <Container>
         <Title
           to="introduction"
@@ -111,16 +115,36 @@ const Navigation = () => {
         >
           Who are the Creators?
         </DesktopLink>
+        <MobileMenuToggleButton>
+          {isMenuOpen ? (
+            <img onClick={handleClick} src={menuClose} alt="" />
+          ) : (
+            <img onClick={handleClick} src={menuOpen} alt="" />
+          )}
+        </MobileMenuToggleButton>
       </Container>
     </Wrapper>
   );
 };
 
+const MobileMenuToggleButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  right: 10%;
+  display: none;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
 const Title = styled(Link)`
   ${font.header};
   ${font.size(24)};
   cursor: pointer;
-  margin-left: 150px;
+  margin-left: 8%;
+  margin-right: 20px;
 
   @media (max-width: 1024px) {
     margin-left: 11%;

@@ -48,7 +48,7 @@ const Landing = () => {
             <TextWrap1>
               <Text>
                 The Stanleys Family is an artful representation of the growing
-                international culturte curiosity of young adults. Our objective
+                international culture curiosity of young adults. Our objective
                 is simple – help others achieve international cultural awareness
                 and make The Stanleys the first community owned NFT – Thousands
                 of minds are bettert than a few… Total Ownership and Profit
@@ -224,7 +224,7 @@ const Landing = () => {
               <WhoAreWe name="creators">Who are we?</WhoAreWe>
               <Profiles>
                 <Profile>
-                  <Name>LittleSuitCase</Name>
+                  <Name>LittleSuitcase</Name>
                   <Description>
                     Crypto dad, golf enthusiast, and world traveler. Ask me
                     where I am going next….
@@ -321,23 +321,45 @@ const Framer = styled.div`
 const TitleArea = styled.div`
   height: 300px;
   position: relative;
+
+  @media (max-width: 1024px) {
+    height: 250px;
+  }
 `;
 
 const Frame = styled.img`
   position: absolute;
+  height: auto;
   left: -63px;
   width: 150px;
+
+  @media (max-width: 1024px) {
+    width: calc(150px * 0.8);
+  }
 `;
 const Title = styled.img`
   position: absolute;
   top: 31px;
   left: -230px;
+  height: auto;
+
+  @media (max-width: 1024px) {
+    left: -160px;
+    width: calc(511px * 0.6);
+  }
 `;
 const Portrait = styled.img`
   position: absolute;
   width: 81px;
+  height: auto;
   top: 75px;
   left: -49px;
+
+  @media (max-width: 1024px) {
+    top: 60px;
+    left: -51px;
+    width: calc(81px * 0.8);
+  }
 `;
 
 const Header = styled.h2`
@@ -421,6 +443,11 @@ const Section6 = styled.div`
 
   margin-left: 3%;
   margin-right: 3%;
+
+  @media (max-width: 768px) {
+    padding-left: 7%;
+    padding-right: 7%;
+  }
 `;
 
 const Footer = styled.footer`
@@ -435,13 +462,27 @@ const Footer = styled.footer`
 
 const Map = styled.img`
   position: absolute;
+  height: auto;
   left: 215px;
   top: -100px;
+
+  @media (max-width: 480px) {
+    left: 165px;
+    top: -60px;
+    width: 120px;
+  }
 `;
 const Dice = styled.img`
   position: absolute;
-  left: 225px;
+  left: 215px;
   top: -50px;
+  height: auto;
+
+  @media (max-width: 480px) {
+    left: 165px;
+    top: -40px;
+    width: 130px;
+  }
 `;
 
 const FloatingTBA = styled.img`
@@ -508,6 +549,7 @@ const Wrap4 = styled.div`
   margin-top: 350px;
 
   @media (max-width: 1024px) {
+    margin-top: 220px;
     flex-direction: column;
     margin-left: 0;
     margin-right: 0;
@@ -531,6 +573,11 @@ const RoadmapExplainer = styled.div`
   flex-direction: column;
   margin-left: 13%;
   margin-right: 13%;
+
+  @media (max-width: 768px) {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
 `;
 
 const RarityExplainer = styled.div`
@@ -540,6 +587,11 @@ const RarityExplainer = styled.div`
 
   margin-left: 13%;
   margin-right: 13%;
+
+  @media (max-width: 768px) {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
 `;
 
 const Roadmap = styled.div`
@@ -556,6 +608,7 @@ const Rarity = styled.div`
 
   @media (max-width: 1024px) {
     width: 100%;
+    margin-top: 100px;
     margin-right: 0;
   }
 `;
@@ -677,7 +730,8 @@ const TextWrap2 = styled.div`
     flex-direction: row;
     justify-content: normal;
     margin-right: auto;
-    margin-left: auto;
+
+    margin-left: 7%;
   }
 `;
 
@@ -701,7 +755,7 @@ const TextWrap2Section = styled.div`
     min-width: 61%;
     padding: 0;
     height: auto;
-    margin: 0 0 30px 50px;
+    margin: 0 50px 30px 0;
   }
 `;
 
@@ -770,7 +824,7 @@ const Wrapper = styled.main`
   margin-right: 3%;
   margin-left: 3%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 480px) {
     margin-left: 0;
     margin-right: 0;
     width: 100%;
@@ -804,6 +858,8 @@ const Section1 = styled.section`
 
   @media (max-width: 768px) {
     height: calc(900px + 15vh);
+    padding-left: 7%;
+    padding-right: 7%;
   }
 
   @media (max-width: 480px) {
