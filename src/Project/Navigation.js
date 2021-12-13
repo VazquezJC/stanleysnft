@@ -159,8 +159,13 @@ const FloatingCorners = styled.div`
   position: absolute;
   display: flex;
   justify-content: space-between;
-  width: 100%;
   bottom: -35px;
+  width: 1650px;
+
+  @media (max-width: 1650px) {
+    width: 100%;
+
+  }
 
   @media (max-width: 1024px) {
     display none;
