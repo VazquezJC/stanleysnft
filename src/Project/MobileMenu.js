@@ -11,19 +11,17 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
       <MobileOverlayContents>
         <MobileLink
           onClick={handleMenuClose}
-          activeClass="active"
           className="timeline"
-          to="whoare"
+          to="who"
           spy={true}
           smooth={true}
           duration={500}
           offset={-130}
         >
-          Who are the Stanleys?
+          Who are The Stanleys?
         </MobileLink>
         <MobileLink
           onClick={handleMenuClose}
-          activeClass="active"
           to="roadmap"
           spy={true}
           smooth={true}
@@ -34,14 +32,13 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
         </MobileLink>
         <MobileLink
           onClick={handleMenuClose}
-          activeClass="active"
-          to="creators"
+          to="team"
           spy={true}
           smooth={true}
           duration={500}
           offset={-80}
         >
-          Who are the Creators?
+          Team
         </MobileLink>
         <LinkOut href="https://twitter.com/StanleysNFT">
           <TwitterIcon src={twitterIcon} />

@@ -79,7 +79,7 @@ const Navigation = () => {
       >
         <Container isBarVisible={isBarVisible}>
           <Link
-            to="introduction"
+            to="intro"
             smooth={true}
             duration={500}
             offset={-150}
@@ -91,7 +91,7 @@ const Navigation = () => {
           </Link>
 
           <Logo
-            to="introduction"
+            to="intro"
             spy={true}
             smooth={true}
             duration={500}
@@ -101,18 +101,15 @@ const Navigation = () => {
           </Logo>
 
           <DesktopLink
-            activeClass="active"
-            to="whoare"
+            to="who"
             spy={true}
             smooth={true}
             duration={500}
             offset={-150}
           >
-            Who are the Stanleys?
+            Who are The Stanleys?
           </DesktopLink>
           <DesktopLink
-            activeClass="active"
-            className="news"
             to="roadmap"
             spy={true}
             smooth={true}
@@ -122,15 +119,13 @@ const Navigation = () => {
             Roadmap
           </DesktopLink>
           <DesktopLink
-            activeClass="active"
-            className="news"
-            to="creators"
+            to="team"
             spy={true}
             smooth={true}
             duration={500}
             offset={-150}
           >
-            Who are the Creators?
+            Team
           </DesktopLink>
           <Socials>
             <LinkOut href="https://twitter.com/StanleysNFT">
@@ -151,6 +146,7 @@ const Navigation = () => {
               <img src={cornerRight} alt="" />
             </CornerRight>
           </FloatingCorners>
+
           <MobileMenuToggleButton>
             {isMenuOpen ? (
               <img onClick={handleClick} src={menuClose} alt="" />
@@ -257,12 +253,16 @@ const AlignTitle = styled.div`
 const MobileMenuToggleButton = styled.div`
   cursor: pointer;
   position: absolute;
-  right: 10%;
+  right: 0;
   display: none;
   z-index: 1000;
 
   @media (max-width: 1024px) {
     display: flex;
+  }
+
+  @media (max-width: 480px) {
+    right: 3%;
   }
 `;
 
@@ -293,7 +293,6 @@ const Container = styled.div`
   position: relative;
   align-items: center;
   max-width: 1650px;
-  width: 100%;
   width: 100%;
   display: ${(props) => (props.isBarVisible ? 'flex' : 'none')};
 `;

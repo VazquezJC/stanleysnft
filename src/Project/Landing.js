@@ -33,20 +33,20 @@ const Landing = () => {
       <Navigation />
       <Wrapper>
         <Container>
-          <Section1 name="introduction">
+          <Section1 name="intro">
             <WhiteHouse src={backgroundWhiteHouse} />
             <AlignTitle>
               <Title />
             </AlignTitle>
-            <Header>What is the Stanleys Family?</Header>
+            <Header>What is The Stanleys?</Header>
             <TextWrap1>
               <Text>
-                The Stanleys Family is an artful representation of the growing
-                international culture curiosity of young adults. Our objective
-                is simple – help others achieve international cultural awareness
-                and make The Stanleys the first community owned NFT – Thousands
-                of minds are bettert than a few… Total Ownership and Profit
-                Sharing – First of its kind.
+                <Italic>The Stanleys</Italic> is an artful representation of the
+                growing international culture curiosity of young adults. Our
+                objective is simple, help others to achieve international
+                cultural awareness. We will be the first 100% community owned
+                project and will harness the power of community to make profits
+                that will then be shared back to the members.
               </Text>
               <Text>
                 The first art models were created by teens in our circle of
@@ -55,8 +55,7 @@ const Landing = () => {
                 as we do.
               </Text>
               <Text>
-                Come visit us and experience a sincere and safe environment in
-                The Stanleys Discord Community Channel.
+                Come visit us and experience a sincere and safe environment.
               </Text>
             </TextWrap1>
             <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
@@ -66,34 +65,34 @@ const Landing = () => {
             <LandscapeRiver src={backgroundRiver} />
             <TextWrap2>
               <TextWrap2Section>
-                <Header name="whoare">Why did we create The Stanleys?</Header>
+                <Header name="who">Why did we create The Stanleys?</Header>
                 <Text>
                   Our team has been traveling throughout the world since we can
-                  remember and are in various countries throughout North
+                  remember and live in various countries throughout North
                   America, Europe, and Asia. When we reflect on what triggered
                   our cultural curiosity, most of us can clearly recollect the
-                  experience our kids had when completing the “Flat Stanley''
-                  project in early school years. The excitement they showed when
-                  getting responses from all over the world was priceless… We
-                  realized this was a significant crossroad in the lives of our
-                  kids…
+                  experience our kids had when completing the "Flat Stanley"
+                  project in their early school years. The excitement they
+                  showed when getting responses from all over the world was
+                  priceless. We realized this was a significant crossroad in the
+                  lives of our kids.
                 </Text>
               </TextWrap2Section>
               <TextWrap2Section>
                 <Header>Who are The Stanleys?</Header>
                 <Text>
-                  We do not have a “Flat Stanley'' to share with the crypto
+                  We do not have a "Flat Stanley" to share with the crypto
                   community. Instead, our friends and family came up with their
-                  own characters to share with the world. Meet The Stanleys ….
+                  own characters to share with the world. Meet{' '}
+                  <Italic>The Stanleys</Italic>.
                 </Text>
                 <Text>
-                  The Stanleys have lived by the river since the beginning of
-                  time and always shown an interest in traveling, new foods, and
-                  learning other cultures. Recently they invested in some meme
-                  coins (you know what they are) and cashed “a load” of these
-                  altcoins. The Stanleys are now ready to travel with their
-                  friends and meet others around the world... Taking selfies at
-                  interesting places and having fun
+                  <Italic>The Stanleys</Italic> have lived by the river since
+                  the beginning of time and have always shown an interest in
+                  traveling, experiencing different cultures and trying new
+                  foods. Recently they have struck it lucky trading meme coins
+                  and are now travelling the world with their friends, taking
+                  selfies at interesting locations, and having fun.
                 </Text>
               </TextWrap2Section>
             </TextWrap2>
@@ -113,15 +112,15 @@ const Landing = () => {
                   <Text>
                     The initial roadmap is based on a simple launch providing
                     quality and playful NFTs at mint as well as substantial
-                    profit sharing with the community. Our goal is to be the
-                    first community owned NFT.
+                    profit sharing with the community. We will be the first
+                    community owned NFT.
                   </Text>
                   <Text>
-                    We recognized The Stanleys Family potential to continue
-                    being a model for international cultural awareness and
-                    assistance. We have identified some opportunities below and
-                    will seek community members' input to evolve our roadmap as
-                    we get closer to Mint.
+                    We recognized <Italic>The Stanleys</Italic> potential to
+                    continue being a model for international cultural awareness
+                    and assistance. We have identified some opportunities below
+                    and will seek community members' input to evolve our roadmap
+                    as we get closer to mint.
                   </Text>
                 </RoadmapExplainer>
                 <RoadmapLists>
@@ -130,13 +129,13 @@ const Landing = () => {
                       <RoadmapInitialList>
                         <HeaderList>Initial</HeaderList>
                         <RoadmapListItem>
-                          <FloatingTick src={tickActive} />
-                          42.5% Profit Sharing during Mint for those that buy
+                          <FloatingTick src={tickInactive} />
+                          42.5% profit sharing during mint for those that buy
                           and hold beyond 10 days
                         </RoadmapListItem>
                         <RoadmapListItem>
                           <FloatingTick src={tickInactive} />
-                          100% Ownership after Mint (first of its kind) for
+                          100% ownership after mint (first of its kind) for
                           those that buy and hold beyond 10 days
                         </RoadmapListItem>
                         <RoadmapListItem>
@@ -146,21 +145,21 @@ const Landing = () => {
                         </RoadmapListItem>
                         <RoadmapListItem>
                           <FloatingTick src={tickInactive} />
-                          500 QR coded NFTs during Mint entitling buyer to an
+                          500 QR coded NFTs during mint entitling buyer to an
                           additional NFT at no charge
                         </RoadmapListItem>
                         <RoadmapListItem>
                           <FloatingTick src={tickInactive} />
-                          3% Mint Proceeds Charity Contribution
+                          3% mint proceeds charity contribution
                         </RoadmapListItem>
                         <RoadmapListItem>
                           <FloatingTick src={tickInactive} />
-                          30 Days X 3 Giveaways plus additional NFTs for those
+                          30 day 3x giveaways plus additional NFTs for those
                           whitelisted
                         </RoadmapListItem>
                         <RoadmapListItem>
                           <FloatingTick src={tickInactive} />
-                          Selected Community Relationships
+                          Selected community relationships
                         </RoadmapListItem>
                       </RoadmapInitialList>
                     </TextWrap2Section>
@@ -168,21 +167,22 @@ const Landing = () => {
                       <RoadmapTBDList>
                         <HeaderList>TBD</HeaderList>
                         <RoadmapTBDItem>
-                          - Evolving International Awareness (Badges, #Flyer
-                          Tokenization)
+                          - Evolving international awareness (badges, #flyer
+                          tokenization)
                         </RoadmapTBDItem>
                         <RoadmapTBDItem>
-                          - Additional Characters that expand potential for
+                          - Additional characters that expand potential for
                           future growth
                         </RoadmapTBDItem>
                         <RoadmapTBDItem>
-                          - Profit Sharing Evolution
+                          - Profit sharing evolution
                         </RoadmapTBDItem>
                         <RoadmapTBDItem>
                           - Subsequent charity donations
                         </RoadmapTBDItem>
-                        <RoadmapTBDItem>- Travel Gaming</RoadmapTBDItem>
+                        <RoadmapTBDItem>- Travel gaming</RoadmapTBDItem>
                         <RoadmapTBDItem>- Others</RoadmapTBDItem>
+                        <RoadmapTBDItem>- Merchandise</RoadmapTBDItem>
                       </RoadmapTBDList>
                     </TextWrap2Section>
                   </TextWrap3>
@@ -194,16 +194,16 @@ const Landing = () => {
                   <Dice src={dice} />
                   <Text>
                     The Rarity model is based on the following traits. More
-                    details will be shared as we get closer to Mint day.
+                    details will be shared as we get closer to mint.
                   </Text>
                 </RarityExplainer>
                 <RarityList>
                   <FloatingTBA src={bullet} />
                   <RarityItem>- Character</RarityItem>
                   <RarityItem>- Background</RarityItem>
-                  <RarityItem>- Facial Characteristics</RarityItem>
-                  <RarityItem>- Facial Accessories</RarityItem>
-                  <RarityItem>- Clothing Accessories</RarityItem>
+                  <RarityItem>- Facial characteristics</RarityItem>
+                  <RarityItem>- Facial accessories</RarityItem>
+                  <RarityItem>- Clothing accessories</RarityItem>
                   <RarityItem>- Landmarks</RarityItem>
                 </RarityList>
               </Rarity>
@@ -215,7 +215,7 @@ const Landing = () => {
           <Section6>
             <WhoContent>
               {/* <QuestionImg src={headerQuestion} /> */}
-              <Header>Who are we?</Header>
+              <Header name="team">Meet the Team</Header>
               <Profiles>
                 <Profile>
                   <Name>LittleSuitcase</Name>
@@ -250,7 +250,7 @@ const Landing = () => {
             </WhoContent>
           </Section6>
           <Footer>
-            <FootText>© The Stanleys. 2021, All rights reserved.</FootText>
+            <FootText>©2021 The Stanleys. All Rights Reserved.</FootText>
             <FootText>
               When you visit or interact with our sites, services, or tools, we
               or our authorized service providers may use cookies for storing
@@ -453,6 +453,7 @@ const Map = styled.img`
 `;
 const Dice = styled.img`
   position: absolute;
+  width: 140px;
   left: 215px;
   top: -50px;
   height: auto;
@@ -664,6 +665,11 @@ const HeaderList = styled.h2`
   @media (max-width: 480px) {
     ${font.size(20)};
   }
+`;
+
+const Italic = styled.em`
+  font-style: italic;
+  font-weight: 600;
 `;
 
 const Text = styled.p`
