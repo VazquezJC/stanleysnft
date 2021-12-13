@@ -7,7 +7,7 @@ import backgroundRiver from 'App/assets/images/section2_background.png';
 import backgroundWhiteHouse from 'App/assets/images/section_background_whitehouse.png';
 import border from 'App/assets/images/border.png';
 import phone from 'App/assets/images/phone.png';
-import qr from 'App/assets/images/qr.png';
+import qr from 'App/assets/images/qr.jpg';
 import repeatBg from 'App/assets/images/repeat-bg.png';
 import tickInactive from 'App/assets/images/icon_tick_inactive.png';
 import tickActive from 'App/assets/images/icon_tick_active.png';
@@ -20,14 +20,12 @@ import map from 'App/assets/images/roadmap_map.png';
 import dice from 'App/assets/images/roadmap_dice.png';
 import headerQuestion from 'App/assets/images/header_question.png';
 
-import frame from 'App/assets/images/frame.png';
-import title from 'App/assets/images/title.png';
-import portrait from 'App/assets/images/frame-temp.png';
-
 import stars from 'App/assets/images/section_background_stars.png';
 import Navigation from 'Project/Navigation';
 
 import { Fragment } from 'react';
+
+import Title from 'Project/Title';
 
 const Landing = () => {
   return (
@@ -37,13 +35,9 @@ const Landing = () => {
         <Container>
           <Section1 name="introduction">
             <WhiteHouse src={backgroundWhiteHouse} />
-            <TitleArea>
-              <Framer>
-                <Frame src={frame} />
-                <Title src={title} />
-                <Portrait src={portrait} />
-              </Framer>
-            </TitleArea>
+            <AlignTitle>
+              <Title />
+            </AlignTitle>
             <Header>What is the Stanleys Family?</Header>
             <TextWrap1>
               <Text>
@@ -255,6 +249,13 @@ const Landing = () => {
   );
 };
 
+const AlignTitle = styled.div`
+  height: 300px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
 const LandscapeRiver = styled.img`
   position: absolute;
   left: 0;
@@ -309,57 +310,6 @@ const WhiteHouse = styled.img`
 const Stars = styled.img`
   position: absolute;
   bottom: 0;
-`;
-
-const Framer = styled.div`
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const TitleArea = styled.div`
-  height: 300px;
-  position: relative;
-
-  @media (max-width: 1024px) {
-    height: 250px;
-  }
-`;
-
-const Frame = styled.img`
-  position: absolute;
-  height: auto;
-  left: -63px;
-  width: 150px;
-
-  @media (max-width: 1024px) {
-    width: calc(150px * 0.8);
-  }
-`;
-const Title = styled.img`
-  position: absolute;
-  top: 31px;
-  left: -230px;
-  height: auto;
-
-  @media (max-width: 1024px) {
-    left: -160px;
-    width: calc(511px * 0.6);
-  }
-`;
-const Portrait = styled.img`
-  position: absolute;
-  width: 81px;
-  height: auto;
-  top: 75px;
-  left: -49px;
-
-  @media (max-width: 1024px) {
-    top: 60px;
-    left: -51px;
-    width: calc(81px * 0.8);
-  }
 `;
 
 const Header = styled.h2`
@@ -821,6 +771,7 @@ const Wrapper = styled.main`
   display: flex;
   justify-content: center;
   width: 94%;
+  margin-top: 100px;
   margin-right: 3%;
   margin-left: 3%;
 
@@ -837,6 +788,7 @@ const FootText = styled(Text)`
   line-height: 22px;
 `;
 const Section1 = styled.section`
+  padding-top: 30px;
   position: relative;
   height: 900px;
   display: flex;
@@ -853,6 +805,7 @@ const Section1 = styled.section`
   }
 
   @media (max-width: 1024px) {
+    padding-top: 50px;
     height: calc(900px + 10vh);
   }
 

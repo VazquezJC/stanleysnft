@@ -8,7 +8,7 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
         <MobileLink
           onClick={handleMenuClose}
           activeClass="active"
-          to="intro"
+          to="introduction"
           spy={true}
           smooth={true}
           duration={500}
