@@ -232,7 +232,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   position: fixed;
   padding-top: 20px;
-  height: 90px;
+  height: 100px;
   display: flex;
   justify-content: center;
   z-index: 2000;
@@ -252,7 +252,7 @@ const Wrapper = styled.div`
 
   background: ${(props) =>
     props.isScrollDistanceFar && props.isBarVisible
-      ? '#374e85'
+      ? '#2b4f87'
       : 'transparent'};
 
   @media (max-width: 1024px) {
