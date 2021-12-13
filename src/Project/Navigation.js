@@ -10,12 +10,15 @@ import Title from './Title';
 import cornerLeft from 'App/assets/images/corner-left.png';
 import cornerRight from 'App/assets/images/corner-right.png';
 
+import twitterIcon from 'App/assets/images/twitter.png';
+import discordIcon from 'App/assets/images/discord.png';
+
 const Navigation = () => {
-  const [isMenuOpen, setIsMnueOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBarVisible, setIsBarVisible] = useState(true);
   const [isScrollDistanceFar, setIsScrollDistanceFar] = useState(false);
   const handleClick = () => {
-    setIsMnueOpen(!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const handleTitleClick = () => {
@@ -63,7 +66,7 @@ const Navigation = () => {
 
   const handleMenuClose = () => {
     if (isMenuOpen) {
-      setIsMnueOpen(false);
+      setIsMenuOpen(false);
     }
   };
 
@@ -75,9 +78,17 @@ const Navigation = () => {
         isBarVisible={isBarVisible}
       >
         <Container isBarVisible={isBarVisible}>
-          <AlignTitle onClick={handleTitleClick}>
-            <Title />
-          </AlignTitle>
+          <Link
+            to="introduction"
+            smooth={true}
+            duration={500}
+            offset={-150}
+            onClick={handleMenuClose}
+          >
+            <AlignTitle>
+              <Title />
+            </AlignTitle>
+          </Link>
 
           <Logo
             to="introduction"
@@ -88,17 +99,7 @@ const Navigation = () => {
           >
             The Stanleys
           </Logo>
-          <DesktopLink
-            activeClass="active"
-            className="news"
-            to="introduction"
-            spy={true}
-            smooth={true}
-            duration={500}
-            offset={-150}
-          >
-            Introduction
-          </DesktopLink>
+
           <DesktopLink
             activeClass="active"
             to="whoare"
@@ -131,6 +132,17 @@ const Navigation = () => {
           >
             Who are the Creators?
           </DesktopLink>
+          <Socials>
+            <LinkOut href="https://twitter.com/StanleysNFT">
+              <TwitterIcon src={twitterIcon} alt="" />
+              <TwitterLink>Twitter</TwitterLink>
+            </LinkOut>
+            <LinkOut href="https://t.co/1Emyr0KD1t">
+              <DiscordIcon src={discordIcon} alt="" />
+              <DiscordLink>Discord</DiscordLink>
+            </LinkOut>
+          </Socials>
+
           <FloatingCorners>
             <CornerLeft>
               <img src={cornerLeft} alt="" />
@@ -152,6 +164,64 @@ const Navigation = () => {
   );
 };
 
+const LinkOut = styled.a`
+  display: flex;
+`;
+
+const DiscordIcon = styled.img`
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+
+  @media (max-width: 1280px) {
+    width: 32px;
+    height: 32px;
+  }
+`;
+
+const TwitterIcon = styled.img`
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+
+  @media (max-width: 1280px) {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
+`;
+
+const Links = styled.div``;
+
+const Socials = styled.div`
+  position: absolute;
+  right: 0;
+  margin-right: 4%;
+  display: flex;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const OutboundLink = styled.div`
+  margin-right: 40px;
+  cursor: pointer;
+  display: flex;
+`;
+
+const TwitterLink = styled(OutboundLink)`
+  @media (max-width: 1280px) {
+    display: none;
+  }
+`;
+
+const DiscordLink = styled(OutboundLink)`
+  @media (max-width: 1280px) {
+    display: none;
+  }
+`;
+
 const CornerLeft = styled.div``;
 const CornerRight = styled.div``;
 
@@ -164,7 +234,6 @@ const FloatingCorners = styled.div`
 
   @media (max-width: 1650px) {
     width: 100%;
-
   }
 
   @media (max-width: 1024px) {
@@ -176,7 +245,7 @@ const AlignTitle = styled.div`
   position: absolute;
   display: none;
   left: 50%;
-  top: 0;
+  top: -12px;
   transform: translate(-50%);
 
   @media (max-width: 1024px) {
@@ -221,30 +290,31 @@ const DesktopLink = styled(Link)`
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   align-items: center;
   max-width: 1650px;
   width: 100%;
-
   width: 100%;
   display: ${(props) => (props.isBarVisible ? 'flex' : 'none')};
 `;
 
 const Wrapper = styled.div`
   position: fixed;
+  justify-content: center;
   padding-top: 20px;
   height: 100px;
   display: flex;
-  justify-content: center;
   z-index: 2000;
 
-  width: 94%;
-  margin-right: 3%;
-  margin-left: 3%;
+  width: 100%;
+  padding-right: 3%;
+  padding-left: 3%;
 
   @media (max-width: 480px) {
-    margin-left: 0;
-    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
     width: 100%;
+    height: 85px;
   }
 
   position: ${(props) =>
@@ -254,10 +324,6 @@ const Wrapper = styled.div`
     props.isScrollDistanceFar && props.isBarVisible
       ? '#2b4f87'
       : 'transparent'};
-
-  @media (max-width: 1024px) {
-    background: transparent;
-  }
 `;
 
 export default Navigation;

@@ -213,9 +213,9 @@ const Landing = () => {
           <RoadmapMap src={roadmap0} />
           <Border2 src={border} />
           <Section6>
-            <QuestionImg src={headerQuestion} />
             <WhoContent>
-              <WhoAreWe name="creators">Who are we?</WhoAreWe>
+              {/* <QuestionImg src={headerQuestion} /> */}
+              <Header>Who are we?</Header>
               <Profiles>
                 <Profile>
                   <Name>LittleSuitcase</Name>
@@ -229,6 +229,21 @@ const Landing = () => {
                   <Description>
                     Art lover, art creator, and travel fanatic. NFT aficionado,
                     and eager to learn everything new that comes my way.
+                  </Description>
+                </Profile>
+                <Profile>
+                  <Name>Chivas</Name>
+                  <Description>
+                    IRL business owner, NFT enthusiast and crypto trader. Loves
+                    sports, communicating and building NFT communities.
+                  </Description>
+                </Profile>
+                <Profile>
+                  <Name>Apura</Name>
+                  <Description>
+                    Dad, serial business owner and crypto enthusiast. Strong
+                    believer in transparency, teamwork, and the power of
+                    community
                   </Description>
                 </Profile>
               </Profiles>
@@ -260,8 +275,13 @@ const LandscapeRiver = styled.img`
   position: absolute;
   left: 0;
   bottom: 0;
+  height: 100%;
 
-  transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-out;
+  @media (max-width: 1650px) {
+    opacity: 0.7;
+  }
+
   @media (max-width: 1280px) {
     opacity: 0.5;
   }
@@ -315,6 +335,7 @@ const Stars = styled.img`
 const Header = styled.h2`
   ${font.header};
   font-weight: 500;
+  line-height: 48px;
   ${font.size(36)}
   @media (max-width: 480px) {
     ${font.size(28)};
@@ -331,7 +352,7 @@ const WhoAreWe = styled(Header)`
 
 const WhoContent = styled.div`
   display: flex;
-  align-items: center;
+  position: relative;
   flex-direction: column;
   gap: 50px;
 
@@ -346,6 +367,7 @@ const Profiles = styled.div`
 
   @media (max-width: 1024px) {
     flex-direction: column;
+    gap: 0;
   }
 `;
 
@@ -359,23 +381,26 @@ const Profile = styled.div`
   }
 `;
 const Name = styled.div`
-  font-style: italic;
   ${font.size(20)}
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 `;
-const Description = styled.div``;
+const Description = styled.div`
+  font-style: italic;
+`;
 
 const QuestionImg = styled.img`
-  max-width: 167px;
-  min-width: 90px;
-  width: 100%;
+  position: absolute;
+  width: 80px;
   height: auto;
+  top: -70px;
+  left: 210px;
 
   @media (max-width: 1024px) {
     width: 60px;
     position: absolute;
     right: 50px;
     top: 30px;
+    height: auto;
   }
 `;
 
@@ -397,6 +422,10 @@ const Section6 = styled.div`
   @media (max-width: 768px) {
     padding-left: 7%;
     padding-right: 7%;
+  }
+
+  @media (max-width: 1024px) {
+    border-radius: 0;
   }
 `;
 
@@ -775,7 +804,9 @@ const Wrapper = styled.main`
   margin-right: 3%;
   margin-left: 3%;
 
-  @media (max-width: 480px) {
+  @media (max-width: 1024px) {
+    margin-top: 85px;
+
     margin-left: 0;
     margin-right: 0;
     width: 100%;
@@ -805,18 +836,19 @@ const Section1 = styled.section`
   }
 
   @media (max-width: 1024px) {
-    padding-top: 50px;
-    height: calc(900px + 10vh);
+    padding-top: 110px;
+    height: calc(900px);
+    border-radius: 0;
   }
 
   @media (max-width: 768px) {
-    height: calc(900px + 15vh);
+    height: calc(900px);
     padding-left: 7%;
     padding-right: 7%;
   }
 
   @media (max-width: 480px) {
-    height: calc(900px + 25vh);
+    height: calc(1000px);
   }
 `;
 
@@ -828,6 +860,20 @@ const Section2 = styled.section`
 
   width: 100%;
   background-color: ${color.background['container']};
+
+  transition: 0.5s ease-out;
+
+  @media (max-width: 1650px) {
+    height: 1250px;
+  }
+
+  @media (max-width: 768px) {
+    height: 1150px;
+  }
+
+  @media (max-width: 480px) {
+    height: 1350px;
+  }
 `;
 
 const Section3 = styled.section`
