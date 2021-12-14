@@ -499,7 +499,7 @@ const Footer = styled.footer`
   padding-bottom: 50px;
   width: 100%;
   color: #7d8ab2;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 `;
 
 const Map = styled.img`
@@ -828,7 +828,7 @@ const Section1 = styled.section`
   padding-bottom: clamp(5vw, 12vw, 250px);
 
   @media (max-width: 1024px) {
-    padding-top: clamp(80px, 15vw, 120px);
+    padding-top: clamp(40px, 14vw, 120px);
     padding-bottom: 25vw;
     border-radius: 0;
   }

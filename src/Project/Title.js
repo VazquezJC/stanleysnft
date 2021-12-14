@@ -30,20 +30,30 @@ const TitleArea = styled.div`
 const Frame = styled.img`
   position: absolute;
   height: auto;
+  top: -5px;
   left: -63px;
   width: 150px;
 
   @media (max-width: 1024px) {
     width: calc(150px * 0.8);
   }
+
+  @media (max-width: 480px) {
+    width: calc(150px * 0.8);
+  }
 `;
 const Logo = styled.img`
   position: absolute;
-  top: 31px;
+  top: 24px;
   left: -230px;
   height: auto;
 
   @media (max-width: 1024px) {
+    left: -160px;
+    width: calc(511px * 0.6);
+  }
+
+  @media (max-width: 480px) {
     left: -160px;
     width: calc(511px * 0.6);
   }
@@ -53,11 +63,17 @@ const Portrait = styled.img`
   position: absolute;
   width: 81px;
   height: auto;
-  top: 75px;
+  top: 70px;
   left: -49px;
 
   @media (max-width: 1024px) {
-    top: 60px;
+    top: 55px;
+    left: -51px;
+    width: calc(81px * 0.8);
+  }
+
+  @media (max-width: 480px) {
+    top: 55px;
     left: -51px;
     width: calc(81px * 0.8);
   }

@@ -45,13 +45,11 @@ const Navigation = () => {
     if (window.scrollY > 100) {
       if (scrolledFar === false) {
         setIsScrollDistanceFar(true);
-        console.log('Set to true! ', isScrollDistanceFar);
         scrolledFar = true;
       }
     } else if (window.scrollY <= 100) {
       if (scrolledFar === true) {
         setIsScrollDistanceFar(false);
-        console.log('Set to false! ', isScrollDistanceFar);
         scrolledFar = false;
       }
     }
@@ -139,12 +137,8 @@ const Navigation = () => {
           </Socials>
 
           <FloatingCorners>
-            <CornerLeft>
-              <img src={cornerLeft} alt="" />
-            </CornerLeft>
-            <CornerRight>
-              <img src={cornerRight} alt="" />
-            </CornerRight>
+            <CornerLeft src={cornerLeft} />
+            <CornerRight src={cornerRight} />
           </FloatingCorners>
 
           <MobileMenuToggleButton>
@@ -218,14 +212,14 @@ const DiscordLink = styled(OutboundLink)`
   }
 `;
 
-const CornerLeft = styled.div``;
-const CornerRight = styled.div``;
+const CornerLeft = styled.img``;
+const CornerRight = styled.img``;
 
 const FloatingCorners = styled.div`
   position: absolute;
   display: flex;
   justify-content: space-between;
-  bottom: -35px;
+  bottom: -31px;
   width: 1650px;
 
   @media (max-width: 1650px) {
@@ -246,6 +240,17 @@ const AlignTitle = styled.div`
 
   @media (max-width: 1024px) {
     display: flex;
+    top: 0px;
+    transform: scale(0.9);
+  }
+
+  @media (max-width: 768px) {
+    transform: scale(0.8);
+  }
+
+  @media (max-width: 480px) {
+    display: flex;
+    top: -12px;
     transform: scale(0.7);
   }
 `;
@@ -300,16 +305,17 @@ const Container = styled.div`
 const Wrapper = styled.div`
   position: fixed;
   justify-content: center;
-  padding-top: 20px;
   height: 100px;
   display: flex;
   z-index: 2000;
+  padding-top: 15px;
 
   width: 100%;
   padding-right: 3%;
   padding-left: 3%;
 
-  @media (max-width: 480px) {
+  @media (max-width: 1024px) {
+    padding-top: 0;
     padding-left: 0;
     padding-right: 0;
     width: 100%;
