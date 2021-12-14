@@ -47,8 +47,8 @@ const Landing = () => {
                 growing international culture curiosity of young adults. Our
                 objective is simple, help others to achieve international
                 cultural awareness. We will be the first 100% community owned
-                project and will harness the power of community to make profits
-                that will then be shared back to the members.
+                project and will harness the power of the community to generate
+                profits and shared them with the members.
               </Text>
               <Text>
                 The first art models were created by teens in our circle of
@@ -204,10 +204,10 @@ const Landing = () => {
                   <FloatingTBA src={bullet} />
                   <RarityItem>- Character</RarityItem>
                   <RarityItem>- Background</RarityItem>
+                  <RarityItem>- Landmarks</RarityItem>
                   <RarityItem>- Facial characteristics</RarityItem>
                   <RarityItem>- Facial accessories</RarityItem>
                   <RarityItem>- Clothing accessories</RarityItem>
-                  <RarityItem>- Landmarks</RarityItem>
                 </RarityList>
               </Rarity>
             </Wrap4>
@@ -223,8 +223,8 @@ const Landing = () => {
                 <Profile>
                   <Name>LittleSuitcase</Name>
                   <Description>
-                    Crypto dad, golf enthusiast, and world traveler. Ask me
-                    where I am going next….
+                    Crypto dad, golf nut, and world traveler. Ask me where I am
+                    going next….
                   </Description>
                 </Profile>
                 <Profile>
@@ -296,14 +296,15 @@ const QR = styled.div`
 const QRText = styled.div`
   position: absolute;
   z-index: 2000;
-  width: clamp(110px, 15vw, 205px);
-  bottom: -110px;
+  width: clamp(110px, 14vw, 175px);
+  bottom: -120px;
   left: 50%;
   transform: translateX(-50%);
   ${font.regular};
   ${font.size(18)};
   color: #000;
   line-height: 22px;
+  color: #fff;
 
   @media (max-width: 1280px) {
     ${font.size(16)};
@@ -394,7 +395,7 @@ const WhiteHouse = styled.img`
 const Stars = styled.img`
   position: absolute;
   bottom: 0;
-  width: clamp(1300px, 100%, 100%);
+  width: clamp(1200px, 100%, 100%);
   height: auto;
 `;
 
@@ -422,10 +423,11 @@ const WhoContent = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 50px;
+  gap: 2vw;
 
   @media (max-width: 1024px) {
     align-items: flex-start;
+    gap: 0;
   }
 `;
 
@@ -449,11 +451,12 @@ const Profile = styled.div`
   }
 `;
 const Name = styled.div`
-  ${font.size(20)}
+  ${font.size(18)}
   margin-bottom: 6px;
 `;
 const Description = styled.div`
   font-style: italic;
+  ${font.size(18)};
 `;
 
 const QuestionImg = styled.img`
@@ -477,7 +480,7 @@ const Section6 = styled.div`
   position: relative;
   padding-left: 9vw;
   padding-right: 9vw;
-  padding-top: 10vw;
+  padding-top: clamp(80px, 12vw, 250px);
   padding-bottom: 14vw;
   gap: 4vw;
   display: flex;
@@ -587,14 +590,14 @@ const RoadmapLists = styled.div`
 
 const Wrap4 = styled.div`
   display: flex;
-  margin-top: 350px;
+  margin-top: clamp(180px, 19vw, 390px);
   gap: 5vw;
 
   margin-left: 9vw;
   margin-right: 9vw;
 
   @media (max-width: 1024px) {
-    margin-top: 220px;
+    gap: 0;
     flex-direction: column;
   }
 `;
@@ -602,7 +605,7 @@ const Wrap4 = styled.div`
 const Section4 = styled.section`
   width: 100%;
   display: flex;
-  padding-bottom: 200px;
+  padding-bottom: clamp(80px, 13vw, 250px);
   position: relative;
   background-image: url(${repeatBg});
   background-position: bottom;
@@ -833,7 +836,7 @@ const Section1 = styled.section`
 
 const Section2 = styled.section`
   position: relative;
-  padding-top: clamp(5px, 12vw, 250px);
+  padding-top: clamp(80px, 12vw, 250px);
   padding-bottom: clamp(1vw, 12vw, 250px);
   display: flex;
   flex-direction: column;

@@ -93,9 +93,15 @@ export default createGlobalStyle`
   }
 
   p {
-    margin-top: 15px;
+    margin-top: 5px;
     margin-bottom: 15px;
     line-height: 1.4285;
+
+    @media (max-width: 1024px) {
+    margin-top: 0;
+
+      margin-bottom: 18px;
+    }
   }
 
   textarea {
