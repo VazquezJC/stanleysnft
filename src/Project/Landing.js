@@ -39,6 +39,8 @@ const Landing = () => {
               <Title />
             </AlignTitle>
             <Header>What is The Stanleys?</Header>
+            <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
+
             <TextWrap1>
               <Text>
                 <Italic>The Stanleys</Italic> is an artful representation of the
@@ -58,12 +60,11 @@ const Landing = () => {
                 Come visit us and experience a sincere and safe environment.
               </Text>
             </TextWrap1>
-            <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
           </Section1>
           <PhotoBorderImg src={photoBorder} />
           <Section2>
             <LandscapeRiver src={backgroundRiver} />
-            <TextWrap2>
+            <Section2Organizer>
               <TextWrap2Section>
                 <Header name="who">Why did we create The Stanleys?</Header>
                 <Text>
@@ -95,20 +96,28 @@ const Landing = () => {
                   selfies at interesting locations, and having fun.
                 </Text>
               </TextWrap2Section>
-            </TextWrap2>
-            <StanleyAvatarFloat2 src={stanleyAvatarFull2} alt="" />
+              <StanleyAvatarFloat2 src={stanleyAvatarFull2} alt="" />
+            </Section2Organizer>
           </Section2>
           <Border2 src={border} />
           <Section3>
-            <QRImg src={qr} />
+            <QR>
+              <QRImg src={qr} />
+              <QRText>
+                Some of the NFTs will have a QR code - what does it mean?
+                Surprise, surprise…
+              </QRText>
+            </QR>
             <PhoneImg src={phone} />
           </Section3>
           <Section4>
             <Wrap4>
               <Roadmap>
                 <RoadmapExplainer>
-                  <Header name="roadmap">The Roadmap</Header>
-                  <Map src={map} />
+                  <Header name="roadmap">
+                    <Map src={map} />
+                    The Roadmap
+                  </Header>
                   <Text>
                     The initial roadmap is based on a simple launch providing
                     quality and playful NFTs at mint as well as substantial
@@ -124,74 +133,68 @@ const Landing = () => {
                   </Text>
                 </RoadmapExplainer>
                 <RoadmapLists>
-                  <TextWrap3>
-                    <TextWrap2Section>
-                      <RoadmapInitialList>
-                        <HeaderList>Initial</HeaderList>
-                        <RoadmapListItem>
-                          <FloatingTick src={tickInactive} />
-                          42.5% profit sharing during mint for those that buy
-                          and hold beyond 10 days
-                        </RoadmapListItem>
-                        <RoadmapListItem>
-                          <FloatingTick src={tickInactive} />
-                          100% ownership after mint (first of its kind) for
-                          those that buy and hold beyond 10 days
-                        </RoadmapListItem>
-                        <RoadmapListItem>
-                          <FloatingTick src={tickInactive} />
-                          Eligibility to represent the community as part of the
-                          future leadership
-                        </RoadmapListItem>
-                        <RoadmapListItem>
-                          <FloatingTick src={tickInactive} />
-                          500 QR coded NFTs during mint entitling buyer to an
-                          additional NFT at no charge
-                        </RoadmapListItem>
-                        <RoadmapListItem>
-                          <FloatingTick src={tickInactive} />
-                          3% mint proceeds charity contribution
-                        </RoadmapListItem>
-                        <RoadmapListItem>
-                          <FloatingTick src={tickInactive} />
-                          30 day 3x giveaways plus additional NFTs for those
-                          whitelisted
-                        </RoadmapListItem>
-                        <RoadmapListItem>
-                          <FloatingTick src={tickInactive} />
-                          Selected community relationships
-                        </RoadmapListItem>
-                      </RoadmapInitialList>
-                    </TextWrap2Section>
-                    <TextWrap2Section>
-                      <RoadmapTBDList>
-                        <HeaderList>TBD</HeaderList>
-                        <RoadmapTBDItem>
-                          - Evolving international awareness (badges, #flyer
-                          tokenization)
-                        </RoadmapTBDItem>
-                        <RoadmapTBDItem>
-                          - Additional characters that expand potential for
-                          future growth
-                        </RoadmapTBDItem>
-                        <RoadmapTBDItem>
-                          - Profit sharing evolution
-                        </RoadmapTBDItem>
-                        <RoadmapTBDItem>
-                          - Subsequent charity donations
-                        </RoadmapTBDItem>
-                        <RoadmapTBDItem>- Travel gaming</RoadmapTBDItem>
-                        <RoadmapTBDItem>- Others</RoadmapTBDItem>
-                        <RoadmapTBDItem>- Merchandise</RoadmapTBDItem>
-                      </RoadmapTBDList>
-                    </TextWrap2Section>
-                  </TextWrap3>
+                  <Initial>
+                    <HeaderList>Initial</HeaderList>
+                    <RoadmapListItem>
+                      <FloatingTick src={tickInactive} />
+                      42.5% profit sharing during mint for those that buy and
+                      hold beyond 10 days
+                    </RoadmapListItem>
+                    <RoadmapListItem>
+                      <FloatingTick src={tickInactive} />
+                      100% ownership after mint (first of its kind) for those
+                      that buy and hold beyond 10 days
+                    </RoadmapListItem>
+                    <RoadmapListItem>
+                      <FloatingTick src={tickInactive} />
+                      Eligibility to represent the community as part of the
+                      future leadership
+                    </RoadmapListItem>
+                    <RoadmapListItem>
+                      <FloatingTick src={tickInactive} />
+                      500 QR coded NFTs during mint entitling buyer to an
+                      additional NFT at no charge
+                    </RoadmapListItem>
+                    <RoadmapListItem>
+                      <FloatingTick src={tickInactive} />
+                      3% mint proceeds charity contribution
+                    </RoadmapListItem>
+                    <RoadmapListItem>
+                      <FloatingTick src={tickInactive} />
+                      30 day 3x giveaways plus additional NFTs for those
+                      whitelisted
+                    </RoadmapListItem>
+                    <RoadmapListItem>
+                      <FloatingTick src={tickInactive} />
+                      Selected community relationships
+                    </RoadmapListItem>
+                  </Initial>
+                  <TBD>
+                    <HeaderList>TBD</HeaderList>
+                    <RoadmapTBDItem>
+                      - Evolving international awareness (badges, #flyer
+                      tokenization)
+                    </RoadmapTBDItem>
+                    <RoadmapTBDItem>
+                      - Additional characters that expand potential for future
+                      growth
+                    </RoadmapTBDItem>
+                    <RoadmapTBDItem>- Profit sharing evolution</RoadmapTBDItem>
+                    <RoadmapTBDItem>
+                      - Subsequent charity donations
+                    </RoadmapTBDItem>
+                    <RoadmapTBDItem>- Travel gaming</RoadmapTBDItem>
+                    <RoadmapTBDItem>- Merchandise</RoadmapTBDItem>
+                    <RoadmapTBDItem>- Others</RoadmapTBDItem>
+                  </TBD>
                 </RoadmapLists>
               </Roadmap>
               <Rarity>
                 <RarityExplainer>
-                  <Header>Rarity Model</Header>
-                  <Dice src={dice} />
+                  <Header>
+                    <Dice src={dice} />
+                    Rarity Model
+                  </Header>
                   <Text>
                     The Rarity model is based on the following traits. More
                     details will be shared as we get closer to mint.
@@ -264,6 +267,66 @@ const Landing = () => {
   );
 };
 
+const Text = styled.p`
+  ${font.regular};
+  z-index: 15;
+  ${font.size(20)}
+  line-height: 32px;
+  @media (max-width: 1024px) {
+    ${font.size(18)};
+  }
+  @media (max-width: 480px) {
+    ${font.size(18)};
+  }
+`;
+
+const TextSpecial = styled(Text)`
+  position: relative;
+  left: -9vw;
+`;
+
+const QR = styled.div`
+  position: relative;
+  transform: translateY(-50%);
+  top: 50%;
+  height: clamp(110px, 15vw, 205px);
+  z-index: 15;
+`;
+
+const QRText = styled.div`
+  position: absolute;
+  z-index: 2000;
+  width: clamp(110px, 15vw, 205px);
+  bottom: -110px;
+  left: 50%;
+  transform: translateX(-50%);
+  ${font.regular};
+  ${font.size(18)};
+  color: #000;
+  line-height: 22px;
+
+  @media (max-width: 1280px) {
+    ${font.size(16)};
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Section2Organizer = styled.div`
+  display: flex;
+  margin-left: 9vw;
+  margin-right: 9vw;
+  gap: 5vw;
+  padding-left: clamp(50px, 100vw / 5, 450px);
+
+  @media (max-width: 1280px) {
+    padding-left: 0;
+    flex-direction: column;
+  }
+`;
+
 const AlignTitle = styled.div`
   height: 300px;
   @media (max-width: 1024px) {
@@ -276,8 +339,9 @@ const LandscapeRiver = styled.img`
   left: 0;
   bottom: 0;
   height: 100%;
+  z-index: 0;
 
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.25s ease-out;
   @media (max-width: 1650px) {
     opacity: 0.7;
   }
@@ -330,10 +394,14 @@ const WhiteHouse = styled.img`
 const Stars = styled.img`
   position: absolute;
   bottom: 0;
+  width: clamp(1300px, 100%, 100%);
+  height: auto;
 `;
 
 const Header = styled.h2`
+  position: relative;
   ${font.header};
+  z-index: 5;
   font-weight: 500;
   line-height: 48px;
   ${font.size(36)}
@@ -407,22 +475,14 @@ const QuestionImg = styled.img`
 const Section6 = styled.div`
   border-radius: 0 0 34px 34px;
   position: relative;
-  padding-left: 13%;
+  padding-left: 9vw;
+  padding-right: 9vw;
+  padding-top: 10vw;
+  padding-bottom: 14vw;
   gap: 4vw;
   display: flex;
-  padding-right: 13%;
-  padding-top: 100px;
-  padding-bottom: 100px;
   background-color: ${color.background['container']};
   width: 100%;
-
-  margin-left: 3%;
-  margin-right: 3%;
-
-  @media (max-width: 768px) {
-    padding-left: 7%;
-    padding-right: 7%;
-  }
 
   @media (max-width: 1024px) {
     border-radius: 0;
@@ -443,25 +503,23 @@ const Map = styled.img`
   position: absolute;
   height: auto;
   left: 215px;
-  top: -100px;
+  bottom: 5px;
+  width: clamp(100px, 10vw, 170px);
 
   @media (max-width: 480px) {
-    left: 165px;
-    top: -60px;
-    width: 120px;
+    left: 160px;
   }
 `;
+
 const Dice = styled.img`
   position: absolute;
-  width: 140px;
-  left: 215px;
-  top: -50px;
   height: auto;
+  left: 215px;
+  bottom: 5px;
+  width: clamp(100px, 10vw, 170px);
 
   @media (max-width: 480px) {
-    left: 165px;
-    top: -40px;
-    width: 130px;
+    left: 160px;
   }
 `;
 
@@ -499,12 +557,12 @@ const RoadmapListItem = styled.li`
   margin-left: 20px;
   ${font.size(16)};
 `;
-const RoadmapTBDList = styled.ul`
+const TBD = styled.ul`
   @media (max-width: 768px) {
     width: auto;
   }
 `;
-const RoadmapInitialList = styled.ul`
+const Initial = styled.ul`
   @media (max-width: 768px) {
     width: auto;
   }
@@ -521,18 +579,23 @@ const RoadmapLists = styled.div`
   @media (max-width: 1024px) {
     left: 0;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Wrap4 = styled.div`
   display: flex;
-  margin-left: 13%;
   margin-top: 350px;
+  gap: 5vw;
+
+  margin-left: 9vw;
+  margin-right: 9vw;
 
   @media (max-width: 1024px) {
     margin-top: 220px;
     flex-direction: column;
-    margin-left: 0;
-    margin-right: 0;
   }
 `;
 
@@ -551,31 +614,16 @@ const RoadmapExplainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-left: 13%;
-  margin-right: 13%;
-
-  @media (max-width: 768px) {
-    margin-left: 7%;
-    margin-right: 7%;
-  }
 `;
 
 const RarityExplainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-
-  margin-left: 13%;
-  margin-right: 13%;
-
-  @media (max-width: 768px) {
-    margin-left: 7%;
-    margin-right: 7%;
-  }
 `;
 
 const Roadmap = styled.div`
-  width: 55%;
+  width: 65%;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -583,8 +631,7 @@ const Roadmap = styled.div`
 `;
 
 const Rarity = styled.div`
-  width: 25%;
-  margin-right: 10%;
+  width: 35%;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -600,9 +647,7 @@ const QRImg = styled.img`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 15;
-  max-width: 245px;
-  min-width: 80px;
-  width: 15vw;
+  width: clamp(110px, 15vw, 205px);
   height: auto;
 
   @media (max-width: 1024px) {
@@ -614,39 +659,11 @@ const PhoneImg = styled.img`
   min-width: 150px;
   height: auto;
   position: absolute;
-  top: 47%;
-  left: 73%;
-  transform: translate(-73%, -47%);
+  left: clamp(56%, 100%, 56%);
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 20;
-  width: 20vw;
-
-  @media (max-width: 1280px) {
-    width: 25vw;
-    left: 77%;
-    transform: translate(-77%, -47%);
-  }
-
-  @media (max-width: 768px) {
-    width: 25vw;
-    left: 83%;
-    transform: translate(-83%, -47%);
-  }
-
-  @media (max-width: 480px) {
-    width: 25vw;
-    left: 95%;
-    transform: translate(-95%, -47%);
-  }
-
-  @media (max-width: 380px) {
-    width: 25vw;
-    left: 110%;
-  }
-
-  @media (max-width: 290px) {
-    width: 25vw;
-    left: 130%;
-  }
+  width: clamp(200px, 20vw, 20vw);
 `;
 
 const Border = styled.img`
@@ -672,19 +689,6 @@ const Italic = styled.em`
   font-weight: 600;
 `;
 
-const Text = styled.p`
-  position: relative;
-  ${font.regular};
-  ${font.size(20)}
-  line-height: 32px;
-  @media (max-width: 1024px) {
-    ${font.size(18)};
-  }
-  @media (max-width: 480px) {
-    ${font.size(18)};
-  }
-`;
-
 const TextWrap2 = styled.div`
   width: 830px;
   display: flex;
@@ -692,8 +696,8 @@ const TextWrap2 = styled.div`
   align-self: flex-end;
   gap: 60px;
   z-index: 10;
-  margin-right: 13%;
-  margin-left: 13%;
+  margin-right: 9vw;
+  margin-left: 9vw;
 
   @media (max-width: 1150px) {
     margin-top: 15vw;
@@ -725,28 +729,17 @@ const TextWrap3 = styled(TextWrap2)`
 `;
 
 const TextWrap2Section = styled.div`
-  position: relative;
-  width: 50%;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    min-width: 200px;
-    scroll-snap-align: center;
-    overflow: hidden;
-    white-space: normal;
-    display: inline-block;
-
-    min-width: 0;
-    min-width: 61%;
-    padding: 0;
-    height: auto;
-    margin: 0 50px 30px 0;
-  }
+  display: flex;
+  flex-direction: column;
 `;
 
 const TextWrap1 = styled.div`
-  max-width: 650px;
+  width: clamp(650px, 40vw * 1.1, 850px);
   z-index: 10;
+
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
 `;
 
 const PhotoBorderImg = styled.img`
@@ -761,20 +754,12 @@ const StanleyAvatarFloat1 = styled.img`
   right: 0;
   z-index: 5;
   height: auto;
-  width: calc(100vw * (9 / 16));
-
+  width: clamp(100px, 75vw / 2.2, 750px);
   max-width: 686px;
-  min-width: 350px;
+  min-width: 250px;
 
-  @media (max-width: 1650px) {
-  }
-
-  @media (max-width: 768px) {
-    right: -100px;
-  }
-
-  @media (max-width: 480px) {
-    right: -150px;
+  @media (max-width: 1280px) {
+    width: clamp(200px, 75vw / 2.2, 300px);
   }
 `;
 
@@ -783,11 +768,13 @@ const StanleyAvatarFloat2 = styled.img`
   bottom: 0;
   left: 0;
   z-index: 5;
-  max-width: 686px;
-  min-width: 480px;
+  height: auto;
+  width: clamp(100px, 75vw / 2.2, 650px);
 
-  @media (max-width: 1650px) {
-    width: 45%;
+  @media (max-width: 1280px) {
+    left: -9vw;
+    width: clamp(200px, 75vw / 2.2, 300px);
+    position: relative;
     height: auto;
   }
 `;
@@ -825,60 +812,39 @@ const FootText = styled(Text)`
   line-height: 22px;
 `;
 const Section1 = styled.section`
-  padding-top: 30px;
+  padding-top: 4vw;
   position: relative;
-  height: 900px;
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 13%;
-  padding-right: 13%;
+  padding-left: 9vw;
+  padding-right: 9vw;
   background: ${color.background['container']};
-
   border-radius: 34px 34px 0 0;
 
-  @media (max-width: 1280px) {
-    height: calc(900px + 1vh);
-  }
+  padding-bottom: clamp(5vw, 12vw, 250px);
 
   @media (max-width: 1024px) {
-    padding-top: 110px;
-    height: calc(900px);
+    padding-top: clamp(80px, 15vw, 120px);
+    padding-bottom: 25vw;
     border-radius: 0;
-  }
-
-  @media (max-width: 768px) {
-    height: calc(900px);
-    padding-left: 7%;
-    padding-right: 7%;
-  }
-
-  @media (max-width: 480px) {
-    height: calc(1000px);
   }
 `;
 
 const Section2 = styled.section`
   position: relative;
-  height: 1050px;
+  padding-top: clamp(5px, 12vw, 250px);
+  padding-bottom: clamp(1vw, 12vw, 250px);
   display: flex;
   flex-direction: column;
 
   width: 100%;
   background-color: ${color.background['container']};
 
-  transition: 0.5s ease-out;
+  transition: 0.25s ease-out;
 
-  @media (max-width: 1650px) {
-    height: 1250px;
-  }
-
-  @media (max-width: 768px) {
-    height: 1150px;
-  }
-
-  @media (max-width: 480px) {
-    height: 1350px;
+  @media (max-width: 1280px) {
+    padding-bottom: 0;
   }
 `;
 

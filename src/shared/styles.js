@@ -23,3 +23,9 @@ export const font = {
 export const border = {
   regular: 'border: 1px solid #2b2a38',
 };
+
+export const marginScale = {
+  large: '13%',
+  medium: '10%',
+  small: '7%',
+};
