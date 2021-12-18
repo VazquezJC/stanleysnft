@@ -9,7 +9,6 @@ import { Fragment } from 'react';
 import Title from './Title';
 import cornerLeft from 'App/assets/images/corner-left.png';
 import cornerRight from 'App/assets/images/corner-right.png';
-
 import twitterIcon from 'App/assets/images/twitter.png';
 import discordIcon from 'App/assets/images/discord.png';
 
@@ -297,10 +296,11 @@ const Container = styled.div`
   display: flex;
   position: relative;
   align-items: center;
+
   max-width: 1650px;
   width: 100%;
-  display: ${(props) => (props.isBarVisible ? 'flex' : 'none')};
 `;
+// display: ${(props) => (props.isBarVisible ? 'flex' : 'none')};
 
 const Wrapper = styled.div`
   position: fixed;
@@ -321,7 +321,6 @@ const Wrapper = styled.div`
     width: 100%;
     height: 85px;
   }
-
   position: ${(props) =>
     props.isScrollDistanceFar && props.isBarVisible ? 'fixed' : 'absolute'};
 
