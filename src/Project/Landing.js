@@ -48,7 +48,7 @@ const Landing = () => {
                 objective is simple, help others to achieve international
                 cultural awareness. We will be the first 100% community owned
                 project and will harness the power of the community to generate
-                profits and shared them with the members.
+                profits and share them with the members.
               </Text>
               <Text>
                 The first art models were created by teens in our circle of
