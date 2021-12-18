@@ -10,15 +10,12 @@ import phone from 'App/assets/images/phone.png';
 import qr from 'App/assets/images/qr.jpg';
 import repeatBg from 'App/assets/images/repeat-bg.png';
 import tickInactive from 'App/assets/images/icon_tick_inactive.png';
-import tickActive from 'App/assets/images/icon_tick_active.png';
-import tba from 'App/assets/images/icon_tba.png';
 import bullet from 'App/assets/images/icon_bullet.png';
 
 import roadmap0 from 'App/assets/images/roadmap_0.png';
 
 import map from 'App/assets/images/roadmap_map.png';
 import dice from 'App/assets/images/roadmap_dice.png';
-import headerQuestion from 'App/assets/images/header_question.png';
 
 import stars from 'App/assets/images/section_background_stars.png';
 import Navigation from 'Project/Navigation';
@@ -40,7 +37,6 @@ const Landing = () => {
             </AlignTitle>
             <Header>What is The Stanleys?</Header>
             <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
-
             <TextWrap1>
               <Text>
                 <Italic>The Stanleys</Italic> is an artful representation of the
