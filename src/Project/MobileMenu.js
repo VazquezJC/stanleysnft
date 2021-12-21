@@ -11,9 +11,7 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
       <MobileOverlayContents>
         <MobileLink
           onClick={handleMenuClose}
-          className="timeline"
           to="who"
-          spy={true}
           smooth={true}
           duration={500}
           offset={-130}
@@ -23,7 +21,6 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
         <MobileLink
           onClick={handleMenuClose}
           to="roadmap"
-          spy={true}
           smooth={true}
           duration={500}
           offset={-80}
@@ -33,7 +30,6 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
         <MobileLink
           onClick={handleMenuClose}
           to="team"
-          spy={true}
           smooth={true}
           duration={500}
           offset={-80}

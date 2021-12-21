@@ -5,7 +5,7 @@ import { font } from 'shared/styles';
 import MobileMenu from 'Project/MobileMenu';
 import menuOpen from 'App/assets/images/menu-open.png';
 import menuClose from 'App/assets/images/menu-close.png';
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import Title from './Title';
 import cornerLeft from 'App/assets/images/corner-left.png';
 import cornerRight from 'App/assets/images/corner-right.png';
@@ -15,8 +15,8 @@ import discordIcon from 'App/assets/images/discord.png';
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBarVisible, setIsBarVisible] = useState(true);
-  const [isScrollDistanceFar, setIsScrollDistanceFar] = useState(false);
-  const handleClick = () => {
+  const [isBeyondPageTop, setIsBeyondPageTop] = useState(false);
+  const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -24,12 +24,21 @@ const Navigation = () => {
     window.scrollTo(0, 0);
   };
 
-  var currentScrollPos = 0;
+  const newHandleNavBar = () => {
+    // hide bar
+  };
+
+  // You must scroll -40 from your current position to reveal navigation bar.
+  // This condition only happens if you are beyond top of page
+
+  const previousScrollPos = useRef(0);
   var isVisible = true;
-  var scrolledFar = false;
+  var beyondPageTop = false;
+
+  // If the vertical scroll is greater than our previous scroll position
 
   const handleNavBar = () => {
-    if (window.scrollY > currentScrollPos && window.scrollY > 100) {
+    if (beyondPrevScrollPos() && beyondTopPage()) {
       if (isVisible) {
         isVisible = false;
         setIsBarVisible(false);
@@ -41,19 +50,28 @@ const Navigation = () => {
       }
     }
 
-    if (window.scrollY > 100) {
-      if (scrolledFar === false) {
-        setIsScrollDistanceFar(true);
-        scrolledFar = true;
+    if (beyondTopPage()) {
+      if (beyondPageTop === false) {
+        setIsBeyondPageTop(true);
+        beyondPageTop = true;
       }
-    } else if (window.scrollY <= 100) {
-      if (scrolledFar === true) {
-        setIsScrollDistanceFar(false);
-        scrolledFar = false;
+    } else if (window.scrollY <= 1) {
+      if (beyondPageTop === true) {
+        setIsBeyondPageTop(false);
+        beyondPageTop = false;
       }
     }
 
-    currentScrollPos = window.scrollY;
+    previousScrollPos.current = window.scrollY;
+  };
+
+  const beyondPrevScrollPos = () => {
+    let currentWindowY = window.scrollY;
+    return currentWindowY > previousScrollPos.current;
+  };
+
+  const beyondTopPage = () => {
+    return window.scrollY > 160;
   };
 
   useEffect(() => {
@@ -63,6 +81,7 @@ const Navigation = () => {
 
   const handleMenuClose = () => {
     if (isMenuOpen) {
+      isVisible = false;
       setIsMenuOpen(false);
     }
   };
@@ -71,7 +90,7 @@ const Navigation = () => {
     <Fragment>
       <MobileMenu isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} />
       <Wrapper
-        isScrollDistanceFar={isScrollDistanceFar}
+        isScrollDistanceFar={isBeyondPageTop}
         isBarVisible={isBarVisible}
       >
         <Container isBarVisible={isBarVisible}>
@@ -142,9 +161,9 @@ const Navigation = () => {
 
           <MobileMenuToggleButton>
             {isMenuOpen ? (
-              <img onClick={handleClick} src={menuClose} alt="" />
+              <img onClick={handleMenuClick} src={menuClose} alt="" />
             ) : (
-              <img onClick={handleClick} src={menuOpen} alt="" />
+              <img onClick={handleMenuClick} src={menuOpen} alt="" />
             )}
           </MobileMenuToggleButton>
         </Container>

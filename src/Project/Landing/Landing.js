@@ -223,11 +223,17 @@ const Landing = () => {
                 <UpperProfiles>
                   <Profile>
                     <Identifier>
+                      <MobileNameContainer>
+                        <NameMobile>Carlos Vazquez</NameMobile>
+                        <AliasMobile>LittleSuitcase</AliasMobile>
+                      </MobileNameContainer>
                       <Name>Carlos "LittleSuitcase" Vazquez</Name>
                       <SocialsContainer>
-                        <a href="https://www.linkedin.com/in/jcvazquez/">
-                          <img src={socialLinkedin} alt="" />
-                        </a>
+                        <SocialIcons>
+                          <SocialLink href="https://www.linkedin.com/in/jcvazquez">
+                            <img src={socialLinkedin} alt="" />
+                          </SocialLink>
+                        </SocialIcons>
                       </SocialsContainer>
                     </Identifier>
                     <Description>
@@ -237,11 +243,17 @@ const Landing = () => {
                   </Profile>
                   <Profile>
                     <Identifier>
+                      <MobileNameContainer>
+                        <NameMobile>Hilde Hendriks-Vos</NameMobile>
+                        <AliasMobile>ColorsOfTheWorld</AliasMobile>
+                      </MobileNameContainer>
                       <Name>Hilde "ColorsOfTheWorld" Hendriks-Vos</Name>
                       <SocialsContainer>
-                        <a href="https://www.instagram.com/avondroodart">
-                          <img src={socialInstagram} alt="" />
-                        </a>
+                        <SocialIcons>
+                          <SocialLink href="https://www.instagram.com/avondroodart">
+                            <img src={socialInstagram} alt="" />
+                          </SocialLink>
+                        </SocialIcons>
                       </SocialsContainer>
                     </Identifier>
                     <Description>
@@ -254,6 +266,9 @@ const Landing = () => {
                 <LowerProfiles>
                   <Profile>
                     <Identifier>
+                      <MobileNameContainer>
+                        <AliasMobile>Chivas</AliasMobile>
+                      </MobileNameContainer>
                       <Name>Chivas </Name>
                       <SocialsContainer></SocialsContainer>
                     </Identifier>
@@ -264,9 +279,11 @@ const Landing = () => {
                   </Profile>
                   <Profile>
                     <Identifier>
+                      <MobileNameContainer>
+                        <AliasMobile>Apura</AliasMobile>
+                      </MobileNameContainer>
                       <Name>Apura</Name>
                     </Identifier>
-
                     <Description>
                       Dad, serial business owner and crypto enthusiast. Strong
                       believer in transparency, teamwork, and the power of
@@ -292,17 +309,47 @@ const Landing = () => {
   );
 };
 
+const SocialLink = styled.a`
+  padding: 3px;
+`;
+
+const SocialIcons = styled.div`
+  margin-left: 4px;
+  position: absolute;
+  display: flex;
+  top: -3px;
+  left: 0;
+`;
+
+const MobileNameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+`;
+
+const SocialsContainerMobile = styled.div`
+  display: none;
+  @media (max-width: 480px) {
+    margin-top: 8px;
+    display: flex;
+  }
+`;
+
 const Identifier = styled.div`
   display: flex;
 `;
 
 const SocialsContainer = styled.div`
-  margin-left: 8px;
+  position: relative;
 `;
 
 const UpperProfiles = styled.div`
   display: flex;
-  column-gap: 180px;
+  column-gap: 6%;
+
+  @media (max-width: 1280px) {
+    column-gap: 7%;
+  }
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -311,7 +358,11 @@ const UpperProfiles = styled.div`
 
 const LowerProfiles = styled.div`
   display: flex;
-  column-gap: 180px;
+  column-gap: 6%;
+
+  @media (max-width: 1280px) {
+    column-gap: 7%;
+  }
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -373,8 +424,8 @@ const QRText = styled.div`
 
 const Section2Organizer = styled.div`
   display: flex;
-  margin-left: 9vw;
-  margin-right: 9vw;
+  margin-left: 8vw;
+  margin-right: 8vw;
   gap: 5vw;
   padding-left: clamp(50px, 100vw / 5, 450px);
 
@@ -385,7 +436,7 @@ const Section2Organizer = styled.div`
 `;
 
 const AlignTitle = styled.div`
-  height: 300px;
+  height: 16vw;
   @media (max-width: 1024px) {
     display: none;
   }
@@ -479,9 +530,10 @@ const WhoContent = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 2vw;
-
-  @media (max-width: 1024px) {
+  gap: 7px;
+  width: 100%;
+  max-width: 1250px;
+  x @media (max-width: 1024px) {
     align-items: flex-start;
     gap: 0;
   }
@@ -490,7 +542,7 @@ const WhoContent = styled.div`
 const Profiles = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 80px;
+  row-gap: 30px;
 
   @media (max-width: 1024px) {
     row-gap: 0;
@@ -513,13 +565,46 @@ const Profile = styled.div`
   }
 `;
 const Name = styled.div`
+  display: flex;
   position: relative;
-  ${font.size(18)}
+  ${font.size(20)}
   margin-bottom: 6px;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
+
+const NameMobile = styled.div`
+  display: none;
+
+  ${font.size(22)};
+  @media (max-width: 480px) {
+    margin-bottom: 4px;
+    display: flex;
+  }
+`;
+
+const AliasMobile = styled.div`
+  display: none;
+  @media (max-width: 480px) {
+    display: flex;
+  }
+`;
+
 const Description = styled.div`
+  margin-left: 20px;
   font-style: italic;
-  ${font.size(18)};
+  line-height: 26px;
+  ${font.size(16)};
+
+  @media (max-width: 1024px) {
+    margin-left: 15px;
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 15px;
+  }
 `;
 
 const QuestionImg = styled.img`
@@ -541,10 +626,10 @@ const QuestionImg = styled.img`
 const Section6 = styled.div`
   border-radius: 0 0 34px 34px;
   position: relative;
-  padding-left: 9vw;
-  padding-right: 9vw;
-  padding-top: clamp(80px, 12vw, 250px);
-  padding-bottom: 14vw;
+  padding-left: 8vw;
+  padding-right: 8vw;
+  padding-top: clamp(70px, 12vw, 235px);
+  padding-bottom: clamp(80px, 14vw, 310px);
   gap: 4vw;
   display: flex;
   background-color: ${color.background['container']};
@@ -563,6 +648,10 @@ const Footer = styled.footer`
   width: 100%;
   color: #7d8ab2;
   margin-bottom: 30px;
+
+  @media (max-width: 480px) {
+    padding-bottom: 0px;
+  }
 `;
 
 const Map = styled.img`
@@ -656,8 +745,8 @@ const Wrap4 = styled.div`
   margin-top: clamp(180px, 19vw, 390px);
   gap: 5vw;
 
-  margin-left: 9vw;
-  margin-right: 9vw;
+  margin-left: 8vw;
+  margin-right: 8vw;
 
   @media (max-width: 1024px) {
     gap: 0;
@@ -668,7 +757,7 @@ const Wrap4 = styled.div`
 const Section4 = styled.section`
   width: 100%;
   display: flex;
-  padding-bottom: clamp(80px, 13vw, 250px);
+  padding-bottom: clamp(80px, 13vw, 150px);
   position: relative;
   background-image: url(${repeatBg});
   background-position: bottom;
@@ -913,8 +1002,8 @@ const Section1 = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 9vw;
-  padding-right: 9vw;
+  padding-left: 8vw;
+  padding-right: 8vw;
   background: ${color.background['container']};
   border-radius: 34px 34px 0 0;
 
@@ -929,8 +1018,8 @@ const Section1 = styled.section`
 
 const Section2 = styled.section`
   position: relative;
-  padding-top: clamp(80px, 12vw, 250px);
-  padding-bottom: clamp(1vw, 12vw, 250px);
+  padding-top: clamp(60px, 12vw, 190px);
+  padding-bottom: clamp(1vw, 12vw, 190px);
   display: flex;
   flex-direction: column;
 
