@@ -4,7 +4,7 @@ import {
   BrowserRouter,
   Redirect,
 } from 'react-router-dom';
-import Landing from 'Project/Landing';
+import Landing from 'Project/Landing/Landing';
 import Soon from 'Project/Soon';
 import Navigation from 'Project/Navigation';
 

@@ -13,6 +13,9 @@ import tickInactive from 'App/assets/images/icon_tick_inactive.png';
 import bullet from 'App/assets/images/icon_bullet.png';
 
 import roadmap0 from 'App/assets/images/roadmap_0.png';
+import socialTwitter from 'App/assets/images/social_twitter.png';
+import socialInstagram from 'App/assets/images/social_instagram.png';
+import socialLinkedin from 'App/assets/images/social_linkedin.png';
 
 import map from 'App/assets/images/roadmap_map.png';
 import dice from 'App/assets/images/roadmap_dice.png';
@@ -23,6 +26,26 @@ import Navigation from 'Project/Navigation';
 import { Fragment } from 'react';
 
 import Title from 'Project/Title';
+
+const body1 = `
+<h2>What is The Stanleys?</h2>
+<p>
+  <em>The Stanleys</em> is an artful representation of the growing
+  international culture curiosity of young adults. Our objective
+  is simple, help others to achieve international cultural
+  awareness. We will be the first 100% community owned project and
+  will harness the power of the community to generate profits and
+  share them with the members.
+</p>
+<p>
+  The first art models were created by teens in our circle of
+  families and friends. These models became the foundation of
+  unique characters that we hope you find interesting and playful,
+  as we do.
+</p>
+<p>
+  Come visit us and experience a sincere and safe environment.
+</p>`;
 
 const Landing = () => {
   return (
@@ -35,27 +58,8 @@ const Landing = () => {
             <AlignTitle>
               <Title />
             </AlignTitle>
-            <Header>What is The Stanleys?</Header>
             <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
-            <TextWrap1>
-              <Text>
-                <Italic>The Stanleys</Italic> is an artful representation of the
-                growing international culture curiosity of young adults. Our
-                objective is simple, help others to achieve international
-                cultural awareness. We will be the first 100% community owned
-                project and will harness the power of the community to generate
-                profits and share them with the members.
-              </Text>
-              <Text>
-                The first art models were created by teens in our circle of
-                families and friends. These models became the foundation of
-                unique characters that we hope you find interesting and playful,
-                as we do.
-              </Text>
-              <Text>
-                Come visit us and experience a sincere and safe environment.
-              </Text>
-            </TextWrap1>
+            <TextWrap1 dangerouslySetInnerHTML={{ __html: body1 }} />
           </Section1>
           <PhotoBorderImg src={photoBorder} />
           <Section2>
@@ -121,11 +125,11 @@ const Landing = () => {
                     community owned NFT.
                   </Text>
                   <Text>
-                    We recognized <Italic>The Stanleys</Italic> potential to
-                    continue being a model for international cultural awareness
-                    and assistance. We have identified some opportunities below
-                    and will seek community members' input to evolve our roadmap
-                    as we get closer to mint.
+                    We recognized <em>The Stanleys</em> potential to continue
+                    being a model for international cultural awareness and
+                    assistance. We have identified some opportunities below and
+                    will seek community members' input to evolve our roadmap as
+                    we get closer to mint.
                   </Text>
                 </RoadmapExplainer>
                 <RoadmapLists>
@@ -216,35 +220,60 @@ const Landing = () => {
               {/* <QuestionImg src={headerQuestion} /> */}
               <Header name="team">Meet the Team</Header>
               <Profiles>
-                <Profile>
-                  <Name>LittleSuitcase</Name>
-                  <Description>
-                    Crypto dad, golf nut, and world traveler. Ask me where I am
-                    going next….
-                  </Description>
-                </Profile>
-                <Profile>
-                  <Name>ColorsOfTheWorld</Name>
-                  <Description>
-                    Art lover, art creator, and travel fanatic. NFT aficionado,
-                    and eager to learn everything new that comes my way.
-                  </Description>
-                </Profile>
-                <Profile>
-                  <Name>Chivas</Name>
-                  <Description>
-                    IRL business owner, NFT enthusiast and crypto trader. Loves
-                    sports, communicating and building NFT communities.
-                  </Description>
-                </Profile>
-                <Profile>
-                  <Name>Apura</Name>
-                  <Description>
-                    Dad, serial business owner and crypto enthusiast. Strong
-                    believer in transparency, teamwork, and the power of
-                    community
-                  </Description>
-                </Profile>
+                <UpperProfiles>
+                  <Profile>
+                    <Identifier>
+                      <Name>Carlos "LittleSuitcase" Vazquez</Name>
+                      <SocialsContainer>
+                        <a href="https://www.linkedin.com/in/jcvazquez/">
+                          <img src={socialLinkedin} alt="" />
+                        </a>
+                      </SocialsContainer>
+                    </Identifier>
+                    <Description>
+                      Crypto dad, golf nut, and world traveler. Ask me where I
+                      am going next….
+                    </Description>
+                  </Profile>
+                  <Profile>
+                    <Identifier>
+                      <Name>Hilde "ColorsOfTheWorld" Hendriks-Vos</Name>
+                      <SocialsContainer>
+                        <a href="https://www.instagram.com/avondroodart">
+                          <img src={socialInstagram} alt="" />
+                        </a>
+                      </SocialsContainer>
+                    </Identifier>
+                    <Description>
+                      Art lover, art creator, and travel fanatic. NFT
+                      aficionado, and eager to learn everything new that comes
+                      my way.
+                    </Description>
+                  </Profile>
+                </UpperProfiles>
+                <LowerProfiles>
+                  <Profile>
+                    <Identifier>
+                      <Name>Chivas </Name>
+                      <SocialsContainer></SocialsContainer>
+                    </Identifier>
+                    <Description>
+                      IRL business owner, NFT enthusiast and crypto trader.
+                      Loves sports, communicating and building NFT communities.
+                    </Description>
+                  </Profile>
+                  <Profile>
+                    <Identifier>
+                      <Name>Apura</Name>
+                    </Identifier>
+
+                    <Description>
+                      Dad, serial business owner and crypto enthusiast. Strong
+                      believer in transparency, teamwork, and the power of
+                      community
+                    </Description>
+                  </Profile>
+                </LowerProfiles>
               </Profiles>
             </WhoContent>
           </Section6>
@@ -263,7 +292,38 @@ const Landing = () => {
   );
 };
 
+const Identifier = styled.div`
+  display: flex;
+`;
+
+const SocialsContainer = styled.div`
+  margin-left: 8px;
+`;
+
+const UpperProfiles = styled.div`
+  display: flex;
+  column-gap: 180px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
+
+const LowerProfiles = styled.div`
+  display: flex;
+  column-gap: 180px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
+
 const Text = styled.p`
+  em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
   ${font.regular};
   z-index: 15;
   ${font.size(20)}
@@ -429,24 +489,31 @@ const WhoContent = styled.div`
 
 const Profiles = styled.div`
   display: flex;
-  gap: 50px;
+  flex-direction: column;
+  row-gap: 80px;
 
   @media (max-width: 1024px) {
-    flex-direction: column;
-    gap: 0;
+    row-gap: 0;
   }
 `;
 
 const Profile = styled.div`
   display: flex;
+  width: 50%;
   line-height: 28px;
   flex-direction: column;
 
   @media (max-width: 1024px) {
     margin-bottom: 35px;
+    width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 const Name = styled.div`
+  position: relative;
   ${font.size(18)}
   margin-bottom: 6px;
 `;
@@ -736,6 +803,24 @@ const TextWrap1 = styled.div`
   width: clamp(650px, 40vw * 1.1, 850px);
   z-index: 10;
 
+  em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  p {
+    ${font.regular};
+    z-index: 15;
+    ${font.size(20)}
+    line-height: 32px;
+    @media (max-width: 1024px) {
+      ${font.size(18)};
+    }
+    @media (max-width: 480px) {
+      ${font.size(18)};
+    }
+  }
+
   @media (max-width: 1280px) {
     width: 100%;
   }
@@ -811,6 +896,18 @@ const FootText = styled(Text)`
   line-height: 22px;
 `;
 const Section1 = styled.section`
+  h2 {
+    position: relative;
+    ${font.header};
+    z-index: 5;
+    font-weight: 500;
+    line-height: 48px;
+    ${font.size(36)}
+    @media (max-width: 480px) {
+      ${font.size(28)};
+    }
+  }
+
   padding-top: 4vw;
   position: relative;
   display: flex;
