@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-scroll';
-import discordMobile from 'App/assets/images/discord_mobile.png';
 import twitterIcon from 'App/assets/images/twitter.png';
 import discordIcon from 'App/assets/images/discord.png';
 import { font } from 'shared/styles';
@@ -12,7 +11,7 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
         <MobileLink
           onClick={handleMenuClose}
           to="who"
-          smooth={true}
+          smooth={'easeOutQuint'}
           duration={500}
           offset={-130}
         >
@@ -21,18 +20,19 @@ const MobileMenu = ({ isMenuOpen, handleMenuClose }) => {
         <MobileLink
           onClick={handleMenuClose}
           to="roadmap"
-          smooth={true}
+          smooth={'easeOutQuint'}
           duration={500}
-          offset={-80}
+          offset={-130}
         >
           Roadmap
         </MobileLink>
         <MobileLink
           onClick={handleMenuClose}
           to="team"
-          smooth={true}
+          spy={true}
+          smooth={'easeOutQuint'}
           duration={500}
-          offset={-80}
+          offset={-130}
         >
           Team
         </MobileLink>

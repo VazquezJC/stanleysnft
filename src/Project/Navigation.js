@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { Link, animateScroll as scroll } from 'react-scroll';
+import { useEffect, useState, Fragment, useRef } from 'react';
+import { Link, Events } from 'react-scroll';
 import { font } from 'shared/styles';
 import MobileMenu from 'Project/MobileMenu';
 import menuOpen from 'App/assets/images/menu-open.png';
 import menuClose from 'App/assets/images/menu-close.png';
-import { Fragment, useRef } from 'react';
 import Title from './Title';
 import cornerLeft from 'App/assets/images/corner-left.png';
 import cornerRight from 'App/assets/images/corner-right.png';
@@ -14,86 +13,80 @@ import discordIcon from 'App/assets/images/discord.png';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isBarVisible, setIsBarVisible] = useState(true);
-  const [isBeyondPageTop, setIsBeyondPageTop] = useState(false);
+  const [navigationVisible, setNavigationVisible] = useState(false);
+  const freezeScrollState = useRef(false);
+  const scrollPosition = useRef(0);
+  const previousDownScrollPosition = useRef(0);
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleTitleClick = () => {
-    window.scrollTo(0, 0);
-  };
-
-  const newHandleNavBar = () => {
-    // hide bar
-  };
-
-  // You must scroll -40 from your current position to reveal navigation bar.
-  // This condition only happens if you are beyond top of page
-
-  const previousScrollPos = useRef(0);
-  var isVisible = true;
-  var beyondPageTop = false;
-
-  // If the vertical scroll is greater than our previous scroll position
-
-  const handleNavBar = () => {
-    if (beyondPrevScrollPos() && beyondTopPage()) {
-      if (isVisible) {
-        isVisible = false;
-        setIsBarVisible(false);
-      }
-    } else {
-      if (!isVisible) {
-        isVisible = true;
-        setIsBarVisible(true);
-      }
-    }
-
-    if (beyondTopPage()) {
-      if (beyondPageTop === false) {
-        setIsBeyondPageTop(true);
-        beyondPageTop = true;
-      }
-    } else if (window.scrollY <= 1) {
-      if (beyondPageTop === true) {
-        setIsBeyondPageTop(false);
-        beyondPageTop = false;
-      }
-    }
-
-    previousScrollPos.current = window.scrollY;
-  };
-
-  const beyondPrevScrollPos = () => {
-    let currentWindowY = window.scrollY;
-    return currentWindowY > previousScrollPos.current;
-  };
-
-  const beyondTopPage = () => {
-    return window.scrollY > 160;
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', handleNavBar);
-    return () => window.removeEventListener('scroll', handleNavBar);
-  }, []);
+    Events.scrollEvent.register(
+      'begin',
+      () => (freezeScrollState.current = true)
+    );
+    Events.scrollEvent.register('end', () => {
+      freezeScrollState.current = false;
+    });
+
+    const handleMouseScroll = () => {
+      if (freezeScrollState.current === false && scrollPosition.current > 200) {
+        handleUp();
+        handleDown();
+      } else if (scrollPosition.current < 1) {
+        handleFlushTop();
+      }
+      handleScrollPositions();
+    };
+
+    const handleScrollPositions = () => {
+      scrollPosition.current = window.scrollY;
+
+      if (
+        navigationVisible ||
+        scrollPosition.current >= previousDownScrollPosition.current
+      )
+        previousDownScrollPosition.current = window.scrollY;
+    };
+
+    const handleUp = () => {
+      const navThresholdUp = previousDownScrollPosition.current - 3;
+      if (
+        navigationVisible === false &&
+        navThresholdUp > scrollPosition.current
+      ) {
+        setNavigationVisible(true);
+      }
+    };
+
+    const handleDown = () => {
+      if (
+        navigationVisible === true &&
+        window.scrollY > previousDownScrollPosition.current
+      ) {
+        setNavigationVisible(false);
+      }
+    };
+
+    const handleFlushTop = () => {
+      setNavigationVisible(false);
+      previousDownScrollPosition.current = 0;
+    };
+
+    window.addEventListener('scroll', handleMouseScroll);
+    return () => window.removeEventListener('scroll', handleMouseScroll);
+  }, [navigationVisible]);
 
   const handleMenuClose = () => {
-    if (isMenuOpen) {
-      isVisible = false;
-      setIsMenuOpen(false);
-    }
+    setIsMenuOpen(false);
   };
 
   return (
     <Fragment>
       <MobileMenu isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} />
-      <Wrapper
-        isScrollDistanceFar={isBeyondPageTop}
-        isBarVisible={isBarVisible}
-      >
-        <Container isBarVisible={isBarVisible}>
+      <Wrapper navigationVisible={navigationVisible}>
+        <Container>
           <Link
             to="intro"
             smooth={true}
@@ -115,7 +108,6 @@ const Navigation = () => {
           >
             The Stanleys
           </Logo>
-
           <DesktopLink
             to="who"
             spy={true}
@@ -315,11 +307,9 @@ const Container = styled.div`
   display: flex;
   position: relative;
   align-items: center;
-
   max-width: 1650px;
   width: 100%;
 `;
-// display: ${(props) => (props.isBarVisible ? 'flex' : 'none')};
 
 const Wrapper = styled.div`
   position: fixed;
@@ -340,13 +330,10 @@ const Wrapper = styled.div`
     width: 100%;
     height: 85px;
   }
-  position: ${(props) =>
-    props.isScrollDistanceFar && props.isBarVisible ? 'fixed' : 'absolute'};
+  position: ${(props) => (props.navigationVisible ? 'fixed' : 'absolute')};
 
   background: ${(props) =>
-    props.isScrollDistanceFar && props.isBarVisible
-      ? '#2b4f87'
-      : 'transparent'};
+    props.navigationVisible ? '#2b4f87' : 'transparent'};
 `;
 
 export default Navigation;
