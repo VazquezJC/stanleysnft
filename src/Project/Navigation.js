@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState, Fragment, useRef } from 'react';
+import { useEffect, useState, Fragment, useRef, useCallback } from 'react';
 import { Link, Events } from 'react-scroll';
 import { font } from 'shared/styles';
 import MobileMenu from 'Project/MobileMenu';
@@ -11,89 +11,67 @@ import cornerRight from 'App/assets/images/corner-right.png';
 import twitterIcon from 'App/assets/images/twitter.png';
 import discordIcon from 'App/assets/images/discord.png';
 
+import { useScrollDirection } from 'react-use-scroll-direction';
+
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [navigationVisible, setNavigationVisible] = useState(false);
+  const [navigationVisible, setNavigationVisible] = useState(true);
   const freezeScrollState = useRef(false);
-  const scrollPosition = useRef(0);
-  const previousDownScrollPosition = useRef(0);
+
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const {
+    isScrollingUp,
+    isScrollingDown,
+    scrollDirection,
+  } = useScrollDirection();
+
+  // TODO:
+  // [ ] If below 200 pixels
+  //     [ ] When scroll down & is visible, hide.
+  //     [  ] When scroll up & is hidden, reveal.
+  // [ ] If we hit the top, hide.
+  //
+  // One option is to make the resting place on top fixed.
+
   useEffect(() => {
-    Events.scrollEvent.register(
-      'begin',
-      () => (freezeScrollState.current = true)
-    );
+    const handleNavigation = (e) => {
+      if (freezeScrollState.current === false && window.scrollY > 200) {
+        if (isScrollingUp) setNavigationVisible(true);
+        if (isScrollingDown) setNavigationVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleNavigation);
+
+    return () => {
+      window.removeEventListener('scroll', handleNavigation);
+    };
+  }, [scrollDirection]);
+
+  useEffect(() => {
+    Events.scrollEvent.register('begin', () => {
+      freezeScrollState.current = true;
+      setIsMenuOpen(false);
+    });
     Events.scrollEvent.register('end', () => {
       freezeScrollState.current = false;
     });
 
-    const handleMouseScroll = () => {
-      if (freezeScrollState.current === false && scrollPosition.current > 200) {
-        handleUp();
-        handleDown();
-      } else if (scrollPosition.current < 1) {
-        handleFlushTop();
-      }
-      handleScrollPositions();
+    return () => {
+      Events.scrollEvent.remove('begin');
+      Events.scrollEvent.remove('end');
     };
-
-    const handleScrollPositions = () => {
-      scrollPosition.current = window.scrollY;
-
-      if (
-        navigationVisible ||
-        scrollPosition.current >= previousDownScrollPosition.current
-      )
-        previousDownScrollPosition.current = window.scrollY;
-    };
-
-    const handleUp = () => {
-      const navThresholdUp = previousDownScrollPosition.current - 3;
-      if (
-        navigationVisible === false &&
-        navThresholdUp > scrollPosition.current
-      ) {
-        setNavigationVisible(true);
-      }
-    };
-
-    const handleDown = () => {
-      if (
-        navigationVisible === true &&
-        window.scrollY > previousDownScrollPosition.current
-      ) {
-        setNavigationVisible(false);
-      }
-    };
-
-    const handleFlushTop = () => {
-      setNavigationVisible(false);
-      previousDownScrollPosition.current = 0;
-    };
-
-    window.addEventListener('scroll', handleMouseScroll);
-    return () => window.removeEventListener('scroll', handleMouseScroll);
-  }, [navigationVisible]);
-
-  const handleMenuClose = () => {
-    setIsMenuOpen(false);
-  };
+  }, []);
 
   return (
     <Fragment>
-      <MobileMenu isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} />
-      <Wrapper navigationVisible={navigationVisible}>
+      <MobileMenu isMenuOpen={isMenuOpen} />
+      <Wrapper displayNavigation={navigationVisible}>
         <Container>
-          <Link
-            to="intro"
-            smooth={true}
-            duration={500}
-            offset={-150}
-            onClick={handleMenuClose}
-          >
+          <Link to="intro" smooth={true} duration={500} offset={-150}>
             <AlignTitle>
               <Title />
             </AlignTitle>
@@ -330,10 +308,10 @@ const Wrapper = styled.div`
     width: 100%;
     height: 85px;
   }
-  position: ${(props) => (props.navigationVisible ? 'fixed' : 'absolute')};
+  position: ${(props) => (props.displayNavigation ? 'fixed' : 'absolute')};
 
   background: ${(props) =>
-    props.navigationVisible ? '#2b4f87' : 'transparent'};
+    props.displayNavigation ? '#2b4f87' : 'transparent'};
 `;
 
 export default Navigation;
