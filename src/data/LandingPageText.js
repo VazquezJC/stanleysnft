@@ -13,9 +13,9 @@ export const team = {
   },
   colorsoftheworld: {
     name: `Hilde Hendriks-Vos`,
-    nickname: `ColorsOfTheWorlde`,
+    nickname: `ColorsOfTheWorld`,
     description: `Art lover, art creator, and travel fanatic. NFT aficionado, and eager to learn everything new that comes my way.`,
-    linkedin: ``,
+    linkedin: `https://www.linkedin.com/in/hilde-vos/`,
     twitter: ``,
     instagram: `https://www.instagram.com/avondroodart`,
   },
