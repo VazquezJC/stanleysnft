@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState, Fragment, useRef, useCallback } from 'react';
+import { useEffect, useState, Fragment, useRef } from 'react';
 import { Link, Events } from 'react-scroll';
 import { font } from 'shared/styles';
 import MobileMenu from 'Project/MobileMenu';
@@ -10,37 +10,38 @@ import cornerLeft from 'App/assets/images/corner-left.png';
 import cornerRight from 'App/assets/images/corner-right.png';
 import twitterIcon from 'App/assets/images/twitter.png';
 import discordIcon from 'App/assets/images/discord.png';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import { useScrollDirection } from 'react-use-scroll-direction';
+import { body1 } from '../data/LandingPageText';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [navigationVisible, setNavigationVisible] = useState(true);
+  const [navigationVisible, setNavigationVisible] = useState(false);
   const freezeScrollState = useRef(false);
 
   const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (isMenuOpen === true) {
+      setIsMenuOpen(false);
+
+      enableBodyScroll(document.getElementById('root'));
+    } else {
+      setIsMenuOpen(true);
+      disableBodyScroll(document.getElementById('root'));
+    }
   };
 
-  const {
-    isScrollingUp,
-    isScrollingDown,
-    scrollDirection,
-  } = useScrollDirection();
-
-  // TODO:
-  // [ ] If below 200 pixels
-  //     [ ] When scroll down & is visible, hide.
-  //     [  ] When scroll up & is hidden, reveal.
-  // [ ] If we hit the top, hide.
-  //
-  // One option is to make the resting place on top fixed.
+  const { isScrollingUp, isScrollingDown } = useScrollDirection();
 
   useEffect(() => {
-    const handleNavigation = (e) => {
+    const handleNavigation = e => {
       if (freezeScrollState.current === false && window.scrollY > 200) {
         if (isScrollingUp) setNavigationVisible(true);
         if (isScrollingDown) setNavigationVisible(false);
+      }
+
+      if (freezeScrollState.current === false && window.scrollY > 1 && window.scrollY < 5) {
+        setNavigationVisible(false);
       }
     };
 
@@ -49,11 +50,13 @@ const Navigation = () => {
     return () => {
       window.removeEventListener('scroll', handleNavigation);
     };
-  }, [scrollDirection]);
+  }, [isScrollingUp, isScrollingDown]);
 
   useEffect(() => {
     Events.scrollEvent.register('begin', () => {
       freezeScrollState.current = true;
+
+      enableBodyScroll(document.getElementById('root'));
       setIsMenuOpen(false);
     });
     Events.scrollEvent.register('end', () => {
@@ -69,7 +72,7 @@ const Navigation = () => {
   return (
     <Fragment>
       <MobileMenu isMenuOpen={isMenuOpen} />
-      <Wrapper displayNavigation={navigationVisible}>
+      <Wrapper displayNavigation={navigationVisible} position={isScrollingDown}>
         <Container>
           <Link to="intro" smooth={true} duration={500} offset={-150}>
             <AlignTitle>
@@ -77,40 +80,16 @@ const Navigation = () => {
             </AlignTitle>
           </Link>
 
-          <Logo
-            to="intro"
-            spy={true}
-            smooth={true}
-            duration={500}
-            offset={-150}
-          >
+          <Logo to="intro" spy={true} smooth={true} duration={500} offset={-150}>
             The Stanleys
           </Logo>
-          <DesktopLink
-            to="who"
-            spy={true}
-            smooth={true}
-            duration={500}
-            offset={-150}
-          >
+          <DesktopLink to="who" spy={true} smooth={true} duration={500} offset={-150}>
             Who are The Stanleys?
           </DesktopLink>
-          <DesktopLink
-            to="roadmap"
-            spy={true}
-            smooth={true}
-            duration={500}
-            offset={-150}
-          >
+          <DesktopLink to="roadmap" spy={true} smooth={true} duration={500} offset={-150}>
             Roadmap
           </DesktopLink>
-          <DesktopLink
-            to="team"
-            spy={true}
-            smooth={true}
-            duration={500}
-            offset={-150}
-          >
+          <DesktopLink to="team" spy={true} smooth={true} duration={500} offset={-150}>
             Team
           </DesktopLink>
           <Socials>
@@ -308,10 +287,12 @@ const Wrapper = styled.div`
     width: 100%;
     height: 85px;
   }
-  position: ${(props) => (props.displayNavigation ? 'fixed' : 'absolute')};
 
-  background: ${(props) =>
-    props.displayNavigation ? '#2b4f87' : 'transparent'};
+  top: ${props => props.position}px;
+
+  position: ${props => (props.displayNavigation ? 'fixed' : 'absolute')};
+
+  background: ${props => (props.displayNavigation ? '#2b4f87' : '#2b4f87')};
 `;
 
 export default Navigation;

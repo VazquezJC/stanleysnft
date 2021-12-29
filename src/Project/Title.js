@@ -23,8 +23,11 @@ const Framer = styled.div`
 `;
 
 const TitleArea = styled.div`
-  cursor: pointer;
   position: relative;
+
+  @media (max-width: 1024px) {
+    cursor: pointer;
+  }
 `;
 
 const Frame = styled.img`

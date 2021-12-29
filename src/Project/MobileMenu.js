@@ -8,46 +8,43 @@ const MobileMenu = ({ isMenuOpen }) => {
   return (
     <Wrapper isOpen={isMenuOpen}>
       <MobileOverlayContents>
-        <MobileLink
-          to="who"
-          smooth={'easeOutQuint'}
-          duration={500}
-          offset={-130}
-        >
-          Who are The Stanleys?
-        </MobileLink>
-        <MobileLink
-          to="roadmap"
-          smooth={'easeOutQuint'}
-          duration={500}
-          offset={-130}
-        >
-          Roadmap
-        </MobileLink>
-        <MobileLink
-          to="team"
-          spy={true}
-          smooth={'easeOutQuint'}
-          duration={500}
-          offset={-130}
-        >
-          Team
-        </MobileLink>
-        <LinkOut href="https://twitter.com/StanleysNFT">
-          <TwitterIcon src={twitterIcon} />
-          Twitter
-        </LinkOut>
-        <LinkOut href="https://t.co/1Emyr0KD1t">
-          <DiscordIcon src={discordIcon} />
-          Discord
-        </LinkOut>
+        <Column>
+          <MobileLink to="who" smooth={'easeOutQuint'} duration={500} offset={-130}>
+            Who are The Stanleys?
+          </MobileLink>
+          <MobileLink to="roadmap" smooth={'easeOutQuint'} duration={500} offset={-130}>
+            Roadmap
+          </MobileLink>
+          <MobileLink to="team" spy={true} smooth={'easeOutQuint'} duration={500} offset={-130}>
+            Team
+          </MobileLink>
+        </Column>
+        <Column>
+          <LinkOut href="https://twitter.com/StanleysNFT">
+            <TwitterIcon src={twitterIcon} />
+            Twitter
+          </LinkOut>
+          <LinkOut href="https://t.co/1Emyr0KD1t">
+            <DiscordIcon src={discordIcon} />
+            Discord
+          </LinkOut>
+        </Column>
       </MobileOverlayContents>
     </Wrapper>
   );
 };
 
+const Column = styled.div`
+  display: flex;
+  row-gap: 30px;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    row-gap: 50px;
+  }
+`;
+
 const LinkOut = styled.a`
-  margin-bottom: 50px;
   padding: px;
   cursor: pointer;
   display: flex;
@@ -96,9 +93,7 @@ const OutboundMobileLink = styled.div`
 `;
 
 const MobileLink = styled(Link)`
-  margin-bottom: 50px;
   cursor: pointer;
-  font-size: 22px;
 `;
 
 const MobileOverlayContents = styled.div`
@@ -109,18 +104,31 @@ const MobileOverlayContents = styled.div`
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+  font-size: 22px;
+  row-gap: 30px;
+
+  @media (max-width: 768px) {
+    row-gap: 50px;
+  }
+
+  @media only screen and (max-height: 575.98px) and (orientation: landscape) {
+    flex-direction: row;
+    column-gap: 50px;
+
+    transform: translate(-50%);
+    row-gap: 0;
+  }
 `;
 
 const Wrapper = styled.div`
   position: fixed;
   top: 0;
-  left: ${(props) => (props.isOpen ? '0%' : '100%')};
+  left: ${props => (props.isOpen ? '0%' : '100%')};
   z-index: 1000;
   overflow-x: hidden;
   width: 100vw;
   height: 100vh;
-  transition: ${(props) =>
-    props.isOpen ? 'left 0.1s ease-out' : 'left 0.05s ease-out'};
+  transition: ${props => (props.isOpen ? 'left 0.1s ease-out' : 'left 0.05s ease-out')};
   text-align: center;
   backdrop-filter: blur(6px);
   background-color: rgb(55 96 160 / 80%);

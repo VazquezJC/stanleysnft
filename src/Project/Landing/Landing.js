@@ -25,29 +25,25 @@ import Navigation from 'Project/Navigation';
 
 import { Fragment } from 'react';
 
+import Profile from 'Project/Landing/Profile';
 import Title from 'Project/Title';
-
-const body1 = `
-<h2>What is The Stanleys?</h2>
-<p>
-  <em>The Stanleys</em> is an artful representation of the growing
-  international culture curiosity of young adults. Our objective
-  is simple, help others to achieve international cultural
-  awareness. We will be the first 100% community owned project and
-  will harness the power of the community to generate profits and
-  share them with the members.
-</p>
-<p>
-  The first art models were created by teens in our circle of
-  families and friends. These models became the foundation of
-  unique characters that we hope you find interesting and playful,
-  as we do.
-</p>
-<p>
-  Come visit us and experience a sincere and safe environment.
-</p>`;
+import {
+  riverProgression,
+  section1,
+  section2_column1,
+  section2_column2,
+  qr_text,
+  section3_column1_roadmapExplainer,
+  section3_column1_initialList,
+  section3_column1_tbdList,
+  section3_column2_rarityExplainer,
+  section3_column2_traitsList,
+  team,
+  footer,
+} from 'data/LandingPageText';
 
 const Landing = () => {
+  console.log(team.littlesuitcase);
   return (
     <Fragment>
       <Navigation />
@@ -59,43 +55,14 @@ const Landing = () => {
               <Title />
             </AlignTitle>
             <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
-            <TextWrap1 dangerouslySetInnerHTML={{ __html: body1 }} />
+            <TextWrap1 dangerouslySetInnerHTML={{ __html: section1 }} />
           </Section1>
           <PhotoBorderImg src={photoBorder} />
-          <Section2>
+          <Section2 name="who">
             <LandscapeRiver src={backgroundRiver} />
             <Section2Organizer>
-              <TextWrap2Section>
-                <Header name="who">Why did we create The Stanleys?</Header>
-                <Text>
-                  Our team has been traveling throughout the world since we can
-                  remember and live in various countries throughout North
-                  America, Europe, and Asia. When we reflect on what triggered
-                  our cultural curiosity, most of us can clearly recollect the
-                  experience our kids had when completing the "Flat Stanley"
-                  project in their early school years. The excitement they
-                  showed when getting responses from all over the world was
-                  priceless. We realized this was a significant crossroad in the
-                  lives of our kids.
-                </Text>
-              </TextWrap2Section>
-              <TextWrap2Section>
-                <Header>Who are The Stanleys?</Header>
-                <Text>
-                  We do not have a "Flat Stanley" to share with the crypto
-                  community. Instead, our friends and family came up with their
-                  own characters to share with the world. Meet{' '}
-                  <Italic>The Stanleys</Italic>.
-                </Text>
-                <Text>
-                  <Italic>The Stanleys</Italic> have lived by the river since
-                  the beginning of time and have always shown an interest in
-                  traveling, experiencing different cultures and trying new
-                  foods. Recently they have struck it lucky trading meme coins
-                  and are now travelling the world with their friends, taking
-                  selfies at interesting locations, and having fun.
-                </Text>
-              </TextWrap2Section>
+              <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column1 }} />
+              <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column2 }} />
               <StanleyAvatarFloat2 src={stanleyAvatarFull2} alt="" />
             </Section2Organizer>
           </Section2>
@@ -103,112 +70,24 @@ const Landing = () => {
           <Section3>
             <QR>
               <QRImg src={qr} />
-              <QRText>
-                Some of the NFTs will have a QR code - what does it mean?
-                Surprise, surprise…
-              </QRText>
+              <QRText>{qr_text}</QRText>
             </QR>
             <PhoneImg src={phone} />
           </Section3>
           <Section4>
-            <Wrap4>
+            <Wrap4 name="roadmap">
               <Roadmap>
-                <RoadmapExplainer>
-                  <Header name="roadmap">
-                    <Map src={map} />
-                    The Roadmap
-                  </Header>
-                  <Text>
-                    The initial roadmap is based on a simple launch providing
-                    quality and playful NFTs at mint as well as substantial
-                    profit sharing with the community. We will be the first
-                    community owned NFT.
-                  </Text>
-                  <Text>
-                    We recognized <em>The Stanleys</em> potential to continue
-                    being a model for international cultural awareness and
-                    assistance. We have identified some opportunities below and
-                    will seek community members' input to evolve our roadmap as
-                    we get closer to mint.
-                  </Text>
-                </RoadmapExplainer>
+                <Map src={map} />
+                <RoadmapExplainer dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }} />
                 <RoadmapLists>
-                  <Initial>
-                    <HeaderList>Initial</HeaderList>
-                    <RoadmapListItem>
-                      <FloatingTick src={tickInactive} />
-                      42.5% profit sharing during mint for those that buy and
-                      hold beyond 10 days
-                    </RoadmapListItem>
-                    <RoadmapListItem>
-                      <FloatingTick src={tickInactive} />
-                      100% ownership after mint (first of its kind) for those
-                      that buy and hold beyond 10 days
-                    </RoadmapListItem>
-                    <RoadmapListItem>
-                      <FloatingTick src={tickInactive} />
-                      Eligibility to represent the community as part of the
-                      future leadership
-                    </RoadmapListItem>
-                    <RoadmapListItem>
-                      <FloatingTick src={tickInactive} />
-                      500 QR coded NFTs during mint entitling buyer to an
-                      additional NFT at no charge
-                    </RoadmapListItem>
-                    <RoadmapListItem>
-                      <FloatingTick src={tickInactive} />
-                      3% mint proceeds charity contribution
-                    </RoadmapListItem>
-                    <RoadmapListItem>
-                      <FloatingTick src={tickInactive} />
-                      30 day 3x giveaways plus additional NFTs for those
-                      whitelisted
-                    </RoadmapListItem>
-                    <RoadmapListItem>
-                      <FloatingTick src={tickInactive} />
-                      Selected community relationships
-                    </RoadmapListItem>
-                  </Initial>
-                  <TBD>
-                    <HeaderList>TBD</HeaderList>
-                    <RoadmapTBDItem>
-                      - Evolving international awareness (badges, #flyer
-                      tokenization)
-                    </RoadmapTBDItem>
-                    <RoadmapTBDItem>
-                      - Additional characters that expand potential for future
-                      growth
-                    </RoadmapTBDItem>
-                    <RoadmapTBDItem>- Profit sharing evolution</RoadmapTBDItem>
-                    <RoadmapTBDItem>
-                      - Subsequent charity donations
-                    </RoadmapTBDItem>
-                    <RoadmapTBDItem>- Travel gaming</RoadmapTBDItem>
-                    <RoadmapTBDItem>- Merchandise</RoadmapTBDItem>
-                    <RoadmapTBDItem>- Others</RoadmapTBDItem>
-                  </TBD>
+                  <InitialList dangerouslySetInnerHTML={{ __html: section3_column1_initialList }} />
+                  <TBDList dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}></TBDList>
                 </RoadmapLists>
               </Roadmap>
               <Rarity>
-                <RarityExplainer>
-                  <Header>
-                    <Dice src={dice} />
-                    Rarity Model
-                  </Header>
-                  <Text>
-                    The Rarity model is based on the following traits. More
-                    details will be shared as we get closer to mint.
-                  </Text>
-                </RarityExplainer>
-                <RarityList>
-                  <FloatingTBA src={bullet} />
-                  <RarityItem>- Character</RarityItem>
-                  <RarityItem>- Background</RarityItem>
-                  <RarityItem>- Landmarks</RarityItem>
-                  <RarityItem>- Facial characteristics</RarityItem>
-                  <RarityItem>- Facial accessories</RarityItem>
-                  <RarityItem>- Clothing accessories</RarityItem>
-                </RarityList>
+                <Dice src={dice} />
+                <RarityExplainer dangerouslySetInnerHTML={{ __html: section3_column2_rarityExplainer }} />
+                <RarityList dangerouslySetInnerHTML={{ __html: section3_column2_traitsList }}></RarityList>
               </Rarity>
             </Wrap4>
             <Stars src={stars} />
@@ -221,88 +100,17 @@ const Landing = () => {
               <Header name="team">Meet the Team</Header>
               <Profiles>
                 <UpperProfiles>
-                  <Profile>
-                    <Identifier>
-                      <MobileNameContainer>
-                        <NameMobile>Carlos Vazquez</NameMobile>
-                        <AliasMobile>LittleSuitcase</AliasMobile>
-                      </MobileNameContainer>
-                      <Name>Carlos "LittleSuitcase" Vazquez</Name>
-                      <SocialsContainer>
-                        <SocialIcons>
-                          <SocialLink href="https://www.linkedin.com/in/jcvazquez">
-                            <img src={socialLinkedin} alt="" />
-                          </SocialLink>
-                        </SocialIcons>
-                      </SocialsContainer>
-                    </Identifier>
-                    <Description>
-                      Crypto dad, golf nut, and world traveler. Ask me where I
-                      am going next….
-                    </Description>
-                  </Profile>
-                  <Profile>
-                    <Identifier>
-                      <MobileNameContainer>
-                        <NameMobile>Hilde Hendriks-Vos</NameMobile>
-                        <AliasMobile>ColorsOfTheWorld</AliasMobile>
-                      </MobileNameContainer>
-                      <Name>Hilde "ColorsOfTheWorld" Hendriks-Vos</Name>
-                      <SocialsContainer>
-                        <SocialIcons>
-                          <SocialLink href="https://www.instagram.com/avondroodart">
-                            <img src={socialInstagram} alt="" />
-                          </SocialLink>
-                        </SocialIcons>
-                      </SocialsContainer>
-                    </Identifier>
-                    <Description>
-                      Art lover, art creator, and travel fanatic. NFT
-                      aficionado, and eager to learn everything new that comes
-                      my way.
-                    </Description>
-                  </Profile>
+                  <Profile person={team.littlesuitcase} />
+                  <Profile person={team.colorsoftheworld} />
                 </UpperProfiles>
                 <LowerProfiles>
-                  <Profile>
-                    <Identifier>
-                      <MobileNameContainer>
-                        <AliasMobile>Chivas</AliasMobile>
-                      </MobileNameContainer>
-                      <Name>Chivas </Name>
-                      <SocialsContainer></SocialsContainer>
-                    </Identifier>
-                    <Description>
-                      IRL business owner, NFT enthusiast and crypto trader.
-                      Loves sports, communicating and building NFT communities.
-                    </Description>
-                  </Profile>
-                  <Profile>
-                    <Identifier>
-                      <MobileNameContainer>
-                        <AliasMobile>Apura</AliasMobile>
-                      </MobileNameContainer>
-                      <Name>Apura</Name>
-                    </Identifier>
-                    <Description>
-                      Dad, serial business owner and crypto enthusiast. Strong
-                      believer in transparency, teamwork, and the power of
-                      community
-                    </Description>
-                  </Profile>
+                  <Profile person={team.chivas} />
+                  <Profile person={team.apura} />
                 </LowerProfiles>
               </Profiles>
             </WhoContent>
           </Section6>
-          <Footer>
-            <FootText>©2021 The Stanleys. All Rights Reserved.</FootText>
-            <FootText>
-              When you visit or interact with our sites, services, or tools, we
-              or our authorized service providers may use cookies for storing
-              information to help provide you with a better, faster and safer
-              experience and for marketing purposes.
-            </FootText>
-          </Footer>
+          <Footer dangerouslySetInnerHTML={{ __html: footer }} />
         </Container>
       </Wrapper>
     </Fragment>
@@ -549,21 +357,6 @@ const Profiles = styled.div`
   }
 `;
 
-const Profile = styled.div`
-  display: flex;
-  width: 50%;
-  line-height: 28px;
-  flex-direction: column;
-
-  @media (max-width: 1024px) {
-    margin-bottom: 35px;
-    width: 80%;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
 const Name = styled.div`
   display: flex;
   position: relative;
@@ -595,7 +388,7 @@ const AliasMobile = styled.div`
 const Description = styled.div`
   margin-left: 20px;
   font-style: italic;
-  line-height: 26px;
+  line-height: 24px;
   ${font.size(16)};
 
   @media (max-width: 1024px) {
@@ -648,6 +441,17 @@ const Footer = styled.footer`
   width: 100%;
   color: #7d8ab2;
   margin-bottom: 30px;
+  p {
+    ${font.size(15)};
+    line-height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    p {
+      ${font.size(15)};
+      line-height: 22px;
+    }
+  }
 
   @media (max-width: 480px) {
     padding-bottom: 0px;
@@ -657,11 +461,20 @@ const Footer = styled.footer`
 const Map = styled.img`
   position: absolute;
   height: auto;
-  left: 215px;
-  bottom: 5px;
+  left: 205px;
+  top: -95px;
   width: clamp(100px, 10vw, 170px);
 
+  @media (max-width: 1280px) {
+    top: -55px;
+  }
+
+  @media (max-width: 1024px) {
+    top: -45px;
+  }
+
   @media (max-width: 480px) {
+    top: -35px;
     left: 160px;
   }
 `;
@@ -669,11 +482,20 @@ const Map = styled.img`
 const Dice = styled.img`
   position: absolute;
   height: auto;
-  left: 215px;
-  bottom: 5px;
+  left: 205px;
+  top: -95px;
   width: clamp(100px, 10vw, 170px);
 
+  @media (max-width: 1280px) {
+    top: -55px;
+  }
+
+  @media (max-width: 1024px) {
+    top: -45px;
+  }
+
   @media (max-width: 480px) {
+    top: -35px;
     left: 160px;
   }
 `;
@@ -698,8 +520,19 @@ const RarityItem = styled.li`
   ${font.size(16)};
 `;
 const RarityList = styled.ul`
-  margin-left: 13%;
-  line-height: 30px;
+  li {
+    &:before {
+      content: '- ';
+    }
+
+    position: relative;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    line-height: 22px;
+    ${font.size(16)};
+  }
+
+  line-height: 20px;
 `;
 const RoadmapTBDItem = styled.li`
   position: relative;
@@ -712,26 +545,67 @@ const RoadmapListItem = styled.li`
   margin-left: 20px;
   ${font.size(16)};
 `;
-const TBD = styled.ul`
+
+const TBDList = styled.ul`
+  li {
+    &:before {
+      content: '- ';
+    }
+
+    position: relative;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    line-height: 22px;
+    ${font.size(16)};
+  }
+
+  width: 40%;
   @media (max-width: 768px) {
     width: auto;
   }
 `;
-const Initial = styled.ul`
+//tickInactive
+const InitialList = styled.ul`
+  li {
+    &:before {
+      position: absolute;
+      display: inline-block;
+      top: 4px;
+      left: -25px;
+      content: '';
+      background-image: url(${tickInactive});
+      background-size: 20px 16px;
+      width: 20px;
+      height: 16px;
+    }
+
+    position: relative;
+    margin-bottom: 12px;
+    left: 15px;
+    margin-left: 10px;
+    line-height: 22px;
+    ${font.size(16)};
+  }
+
+  width: 50%;
+  margin-top: 10px;
+
   @media (max-width: 768px) {
+    margin-top: 0;
+
     width: auto;
   }
 `;
 
 const RoadmapLists = styled.div`
   position: relative;
-  left: 30px;
-
+  gap: 10%;
   display: flex;
-  gap: 20%;
   line-height: 24px;
+  margin-top: 10px;
 
   @media (max-width: 1024px) {
+    margin-top: 0;
     left: 0;
   }
 
@@ -743,7 +617,7 @@ const RoadmapLists = styled.div`
 const Wrap4 = styled.div`
   display: flex;
   margin-top: clamp(180px, 19vw, 390px);
-  gap: 5vw;
+  gap: 15%;
 
   margin-left: 8vw;
   margin-right: 8vw;
@@ -778,7 +652,8 @@ const RarityExplainer = styled.div`
 `;
 
 const Roadmap = styled.div`
-  width: 65%;
+  position: relative;
+  width: 60%;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -786,7 +661,8 @@ const Roadmap = styled.div`
 `;
 
 const Rarity = styled.div`
-  width: 35%;
+  position: relative;
+  width: 25%;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -892,24 +768,6 @@ const TextWrap1 = styled.div`
   width: clamp(650px, 40vw * 1.1, 850px);
   z-index: 10;
 
-  em {
-    font-style: italic;
-    font-weight: 600;
-  }
-
-  p {
-    ${font.regular};
-    z-index: 15;
-    ${font.size(20)}
-    line-height: 32px;
-    @media (max-width: 1024px) {
-      ${font.size(18)};
-    }
-    @media (max-width: 480px) {
-      ${font.size(18)};
-    }
-  }
-
   @media (max-width: 1280px) {
     width: 100%;
   }
@@ -953,6 +811,49 @@ const StanleyAvatarFloat2 = styled.img`
 `;
 
 const Container = styled.main`
+  h2 {
+    position: relative;
+    ${font.header};
+    margin-bottom: 5px;
+    z-index: 5;
+    font-weight: 500;
+    line-height: 48px;
+    ${font.size(36)}
+    @media (max-width: 480px) {
+      line-height: 42px;
+      ${font.size(28)};
+    }
+  }
+
+  h3 {
+    position: relative;
+    ${font.header};
+    z-index: 5;
+    font-weight: 500;
+    line-height: 44px;
+    ${font.size(26)}
+    @media (max-width: 480px) {
+      ${font.size(22)};
+    }
+  }
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  p {
+    ${font.regular};
+    z-index: 15;
+    ${font.size(20)}
+    line-height: 30px;
+
+    @media (max-width: 1024px) {
+      ${font.size(18)};
+      line-height: 27px;
+    }
+  }
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -979,24 +880,7 @@ const Wrapper = styled.main`
   }
 `;
 
-const FootText = styled(Text)`
-  ${font.regular};
-  ${font.size(15)};
-  line-height: 22px;
-`;
 const Section1 = styled.section`
-  h2 {
-    position: relative;
-    ${font.header};
-    z-index: 5;
-    font-weight: 500;
-    line-height: 48px;
-    ${font.size(36)}
-    @media (max-width: 480px) {
-      ${font.size(28)};
-    }
-  }
-
   padding-top: 4vw;
   position: relative;
   display: flex;

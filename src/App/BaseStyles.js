@@ -8,6 +8,7 @@ export default createGlobalStyle`
   }
 
   body {
+    position: relative;
     color: ${color.text['primary']};
     background: ${color.background['background']};
     -webkit-tap-highlight-color: transparent;

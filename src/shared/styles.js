@@ -17,7 +17,7 @@ export const font = {
   regular: 'font-family: "ABeeZee", "Helvetica", "sans-serif";',
   italic: 'font-family: "ABeeZee", "Helvetica", "sans-serif";',
   header: 'font-family: "Sedgwick Ave",  "cursive";',
-  size: (size) => `font-size: ${size}px;`,
+  size: size => `font-size: ${size}px;`,
 };
 
 export const border = {
