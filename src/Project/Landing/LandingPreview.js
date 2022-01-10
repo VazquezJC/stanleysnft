@@ -1,17 +1,15 @@
 import styled, { keyframes } from 'styled-components';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { font, color } from 'shared/styles';
-import stanleyAvatarFull1 from 'App/assets/images/stanleys_avatar_full_1.png';
-import stanleyAvatarFull2 from 'App/assets/images/stanleys_avatar_full_2.png';
+import { useInView } from 'react-intersection-observer';
+
 import photoBorder from 'App/assets/images/photo_border2.png';
-import backgroundRiver from 'App/assets/images/section2_background.png';
+import backgroundRiver from 'App/assets/images/section2_background2.png';
 import backgroundWhiteHouse from 'App/assets/images/section_background_whitehouse.png';
 import border from 'App/assets/images/border.png';
 import phone from 'App/assets/images/phone2.png';
 import qr from 'App/assets/images/qr.jpg';
 import repeatBg from 'App/assets/images/repeat-bg.png';
-import tickInactive from 'App/assets/images/icon_tick_inactive.png';
-import bullet from 'App/assets/images/icon_bullet.png';
 
 import qrScan from 'App/assets/images/qrscan.png';
 import cameraFlash from 'App/assets/images/cameraflash.png';
@@ -25,18 +23,14 @@ import whitehouse from 'App/assets/images/background-whitehouse.png';
 
 import ufo from 'App/assets/images/ufo.png';
 
-import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
-
-import { useInView } from 'react-intersection-observer';
-
 import mapLeft from 'App/assets/images/map-left2.png';
 import mapMiddle from 'App/assets/images/map-middle2.png';
 import mapRight from 'App/assets/images/map-right2.png';
-import mapBottom from 'App/assets/images/map-bottom.png';
 
 import starsSmall from 'App/assets/images/stars-small.png';
 import starsMedium from 'App/assets/images/stars-medium.png';
 import starsLarge from 'App/assets/images/stars-large.png';
+import section2bg from 'App/assets/images/section2-bg-gradient.png';
 
 import mapLeftBottom from 'App/assets/images/map-bottom-left.png';
 import mapRightBottom from 'App/assets/images/map-bottom-right.png';
@@ -45,16 +39,8 @@ import mapMiddleBottom from 'App/assets/images/map-bottom-middle.png';
 import filmStripEdge from 'App/assets/images/film-strip.png';
 
 import checkBox1 from 'App/assets/images/checkbox1.png';
-import checkBox2 from 'App/assets/images/checkbox3.png';
-import checkBox3 from 'App/assets/images/checkbox3.png';
 
-import roadmapBackdrop from 'App/assets/images/roadmap_backdrop.png';
-
-import roadmap0 from 'App/assets/images/roadmap_0.png';
 import roadmapWithoutUfo from 'App/assets/images/roadmap_0_without_ufo.png';
-import socialTwitter from 'App/assets/images/social_twitter.png';
-import socialInstagram from 'App/assets/images/social_instagram.png';
-import socialLinkedin from 'App/assets/images/social_linkedin.png';
 
 import newStanley1 from 'App/assets/images/Stanley_hippo-boy_1.png';
 import newStanley2 from 'App/assets/images/Stanley_hippo-boy_2.png';
@@ -62,11 +48,8 @@ import newStanley3 from 'App/assets/images/Stanley_hippo-boy_3.png';
 import newStanley4 from 'App/assets/images/Stanleys_croc_1.png';
 import newStanley5 from 'App/assets/images/Stanleys_croc_2.png';
 import newStanley6 from 'App/assets/images/Stanleys_croc_3.png';
-
-import map from 'App/assets/images/roadmap_map.png';
 import dice from 'App/assets/images/roadmap_dice.png';
 
-import stars from 'App/assets/images/section_background_stars.png';
 import Navigation from 'Project/Navigation';
 
 import { Fragment } from 'react';
@@ -74,11 +57,9 @@ import { Fragment } from 'react';
 import Profile from 'Project/Landing/Profile';
 import Title from 'Project/Title';
 import {
-  riverProgression,
   section1,
   section2_column1,
   section2_column2,
-  qr_text,
   section3_column1_roadmapExplainer,
   section3_column1_initialList,
   section3_column1_tbdList,
@@ -88,29 +69,76 @@ import {
   footer,
 } from 'data/LandingPageText';
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 const LandingPreview = () => {
   const [stanleyIndex, setStanleyIndex] = useState(0);
-  const [stanleyBackgroundIndex, setStanleyBackgroundIndex] = useState(0);
-  const [stanley2Ref, stanley2InView] = useInView({
+  const [stanleyBackgroundIndex, setStanleyBackgroundIndex] = useState(getRandomInt(3));
+
+  const [titleRef, titleInView] = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
-  const stanleys = [newStanley1, newStanley2, newStanley3, newStanley4, newStanley5, newStanley6];
+  const [stanley2Ref, stanley2InView] = useInView({
+    threshold: 0.55,
+    triggerOnce: true,
+  });
+
+  const [section2Paragaraph1Ref, section2Paragaraph1InView] = useInView({
+    threshold: 0.15,
+    triggerOnce: true,
+  });
+
+  const [section2Paragaraph2Ref, section2Paragaraph2InView] = useInView({
+    threshold: 0.55,
+    triggerOnce: true,
+  });
+
+  const [section2backgroundRef, section2backgroundInView] = useInView({
+    threshold: 0.85,
+    triggerOnce: true,
+  });
+
+  const [roadmapRef, roadmapInView] = useInView({
+    threshold: 0.45,
+    triggerOnce: true,
+  });
+
+  const [roadmapExplainerRef, roadmapExplainerInView] = useInView({
+    threshold: 1,
+    triggerOnce: true,
+  });
+
+  const [roadmapList1Ref, roadmapList1InView] = useInView({
+    threshold: 0.45,
+    triggerOnce: true,
+  });
+
+  const [roadmapList2Ref, roadmapList2InView] = useInView({
+    threshold: 0.65,
+    triggerOnce: true,
+  });
+
+  const [rarityRef, rarityInView] = useInView({
+    threshold: 0.65,
+    triggerOnce: true,
+  });
+
+  const [rivermapRef, rivermapInView] = useInView({
+    threshold: 0.45,
+    triggerOnce: true,
+  });
+
   const stanleysHippos = [newStanley1, newStanley2, newStanley3];
   const stanleysCrocs = [newStanley4, newStanley5, newStanley6];
-
   const stanleysBackgrounds = [eiffel, stonehenge, kremlin, whitehouse];
 
   useEffect(() => {
     let stanleyTimer;
     stanleyTimer = setTimeout(() => {
-      if (stanleyBackgroundIndex < 3) {
-        setStanleyBackgroundIndex(stanleyBackgroundIndex + 1);
-      } else {
-        setStanleyBackgroundIndex(0);
-      }
-
       if (stanleyIndex < 2) {
         setStanleyIndex(stanleyIndex + 1);
       } else {
@@ -121,19 +149,17 @@ const LandingPreview = () => {
   }, [stanleyIndex]);
 
   return (
-    <ParallaxProvider>
+    <>
       <Navigation />
       <Wrapper>
         <Container>
           <Section1 name="intro">
-            <WhiteHouse src={stanleysBackgrounds[stanleyBackgroundIndex]} />
-            <Parallax y={[0, 5]}>
-              <AlignTitle>
-                <Title />
-              </AlignTitle>
-            </Parallax>
-            <StanleyAvatarFloat1 src={stanleysHippos[stanleyIndex]} alt="" />
-            <TextWrap1 dangerouslySetInnerHTML={{ __html: section1 }} />
+            <WhiteHouse inView={titleInView} src={stanleysBackgrounds[stanleyBackgroundIndex]} />
+            <AlignTitle inView={titleInView}>
+              <Title />
+            </AlignTitle>
+            <StanleyAvatarFloat1 inView={titleInView} src={stanleysHippos[stanleyIndex]} alt="" />
+            <TextWrap1 ref={titleRef} inView={titleInView} dangerouslySetInnerHTML={{ __html: section1 }} />
           </Section1>
           <PhotoLineupContainer>
             <PhotoBorderImg src={photoBorder} />
@@ -141,28 +167,44 @@ const LandingPreview = () => {
             <FilmStripBottom src={filmStripEdge} alt="" />
           </PhotoLineupContainer>
           <Section2 name="who">
-            <Parallax styleInner={{ position: 'absolute', top: '-25px', left: 0, height: '100%' }} y={['-7%', '5%']}>
-              <LandscapeRiver src={backgroundRiver} />
-            </Parallax>
+            <LandscapeRiver src={backgroundRiver} ref={section2backgroundRef} inView={section2backgroundInView} />
             <Section2Organizer>
-              <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column1 }} />
-              <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column2 }} />
-              <Parallax styleInner={{ position: 'absolute', bottom: 0, left: '-25px' }} y={[-3, 8]}>
-                <StanleyAvatarFloat2 inView={stanley2InView} ref={stanley2Ref} src={stanleysCrocs[stanleyIndex]} alt="" />
-              </Parallax>
+              <TextWrap2Section
+                ref={section2Paragaraph1Ref}
+                inView={section2Paragaraph1InView}
+                dangerouslySetInnerHTML={{ __html: section2_column1 }}
+              />
+              <TextWrap2Section2
+                ref={section2Paragaraph2Ref}
+                inView={section2Paragaraph2InView}
+                dangerouslySetInnerHTML={{ __html: section2_column2 }}
+              />
+              <StanleyAvatarFloat2 inView={stanley2InView} ref={stanley2Ref} src={stanleysCrocs[stanleyIndex]} alt="" />
             </Section2Organizer>
           </Section2>
           <Border2 src={border} />
           <Section4>
             <Wrap4 name="roadmap">
-              <Roadmap>
+              <Roadmap ref={roadmapRef} inView={roadmapInView}>
                 <MapContainer>
                   <LeftMap />
                   <MapContents>
-                    <RoadmapExplainer dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }} />
+                    <RoadmapExplainer
+                      ref={roadmapExplainerRef}
+                      inView={roadmapExplainerInView}
+                      dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }}
+                    />
                     <RoadmapLists>
-                      <InitialList dangerouslySetInnerHTML={{ __html: section3_column1_initialList }} />
-                      <TBDList dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}></TBDList>
+                      <InitialList
+                        ref={roadmapList1Ref}
+                        inView={roadmapList1InView}
+                        dangerouslySetInnerHTML={{ __html: section3_column1_initialList }}
+                      />
+                      <TBDList
+                        ref={roadmapList2Ref}
+                        inView={roadmapList2InView}
+                        dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}
+                      ></TBDList>
                     </RoadmapLists>
                   </MapContents>
                   <RightMap />
@@ -173,24 +215,24 @@ const LandingPreview = () => {
                   <RightMapBottom />
                 </MapBottom>
               </Roadmap>
-              <Rarity>
+              <Rarity ref={rarityRef} inView={rarityInView}>
                 <Dice src={dice} />
                 <RarityExplainer dangerouslySetInnerHTML={{ __html: section3_column2_rarityExplainer }} />
                 <RarityList dangerouslySetInnerHTML={{ __html: section3_column2_traitsList }}></RarityList>
               </Rarity>
             </Wrap4>
             <BackgroundGradient src={repeatBg} />
-            <Parallax styleInner={{ position: 'absolute', bottom: '30px', right: 0 }} y={['-5%', '5%']}>
+            {/* <Parallax styleInner={{ position: 'absolute', bottom: '30px', right: 0 }} y={['-5%', '5%']}>
               <StarsSmallScroll />
             </Parallax>
 
             <Parallax styleInner={{ position: 'absolute', bottom: '10px', left: 0 }} y={['-20%', '35%']}>
               <StarsMediumScroll />
-            </Parallax>
+            </Parallax> */}
           </Section4>
-          <RoadmapWrapper>
-            <RoadmapMap src={roadmapWithoutUfo} />
-            <UfoImage src={ufo} alt="" />
+          <RoadmapWrapper ref={rivermapRef}>
+            <RoadmapMap inView={rivermapInView} src={roadmapWithoutUfo} />
+            <UfoImage inView={rivermapInView} src={ufo} alt="" />
           </RoadmapWrapper>
           <Border2 src={border} />
           <Section6>
@@ -212,7 +254,7 @@ const LandingPreview = () => {
           <Footer dangerouslySetInnerHTML={{ __html: footer }} />
         </Container>
       </Wrapper>
-    </ParallaxProvider>
+    </>
   );
 };
 
@@ -237,6 +279,10 @@ const UfoImage = styled.img`
   position: absolute;
   right: 23%;
 
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
   width: clamp(135px, 13.5vw, 236px);
   top: 0;
   z-index: 6000;
@@ -254,7 +300,7 @@ const animatesMediumStarsHorizontal = keyframes`
 `;
 
 const animeSmallStarsPulse = keyframes`
-  0% { opacity: 0.1;  }
+  0% { opacity: 0.1; }
   50% { opacity: 0.3; }
   100% { opacity: 0.1; }
 `;
@@ -556,7 +602,8 @@ const QRText = styled.div`
 const Section2Organizer = styled.div`
   display: flex;
   margin-left: 8vw;
-  gap: 5vw;
+  margin-right: 6vw;
+  gap: 3vw;
   padding-left: clamp(50px, 100vw / 5, 450px);
 
   @media (max-width: 1280px) {
@@ -567,10 +614,14 @@ const Section2Organizer = styled.div`
 `;
 
 const AlignTitle = styled.div`
-  height: 15vw;
-  transform: scale(1.3);
+  height: inherit;
+  position: relative;
+  transform: translateY(${props => (props.inView ? '270px' : '260px')}) scale(${props => (props.inView ? '1.6' : '1.4')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.2s 0.35s linear, transform 0.7s 0.25s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1650px) {
+    transform: translateY(${props => (props.inView ? '40px' : '30px')}) scale(${props => (props.inView ? '1.3' : '1.2')});
     transform: scale(1);
   }
 
@@ -580,12 +631,15 @@ const AlignTitle = styled.div`
 `;
 
 const LandscapeRiver = styled.img`
+  position: absolute;
+  filter: blur(18px);
+  bottom: 0;
+  left: 0;
+  height: 100%;
   z-index: 0;
-
-  transition: opacity 0.25s ease-out;
-  @media (max-width: 1650px) {
-    opacity: 0.7;
-  }
+  transform: translateY(${props => (props.inView ? 0 : '50px')}) scaleX(-1);
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     opacity: 0.5;
@@ -598,6 +652,9 @@ const LandscapeRiver = styled.img`
 
 const RoadmapMap = styled.img`
   width: 100%;
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 0.3s linear, transform 1s 0.3s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const Section5 = styled.section`
@@ -612,12 +669,14 @@ const Section5 = styled.section`
 
 const WhiteHouse = styled.img`
   position: absolute;
-  bottom: 10vw;
-  right: 0;
-  transform: scale(2);
-  filter: blur(4px);
+  bottom: 8vw;
+  right: 2vw;
+  filter: blur(2.5px);
   transition: opacity 0.5s ease-in;
-  opacity: 0.6;
+
+  transform: translateY(${props => (props.inView ? '0px' : '-60px')}) scale(2);
+  opacity: ${props => (props.inView ? 0.6 : 0)};
+  transition: opacity 0.6s 2.7s linear, transform 0.6s 2.5s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     opacity: 0.5;
@@ -748,6 +807,7 @@ const Section6 = styled.div`
   gap: 4vw;
   display: flex;
   background-color: ${color.background['container']};
+
   width: 100%;
 
   @media (max-width: 1024px) {
@@ -871,6 +931,10 @@ const RoadmapListItem = styled.li`
 `;
 
 const TBDList = styled.ul`
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
   li {
     &:before {
       content: '- ';
@@ -891,6 +955,10 @@ const TBDList = styled.ul`
 
 //tickInactive
 const InitialList = styled.ul`
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
   li {
     &:before {
       position: absolute;
@@ -978,6 +1046,10 @@ const RoadmapExplainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const RarityExplainer = styled.div`
@@ -993,6 +1065,10 @@ const Roadmap = styled.div`
   z-index: 150;
   top: -80px;
 
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
   @media (max-width: 1280px) {
     width: 100%;
   }
@@ -1003,6 +1079,10 @@ const Rarity = styled.div`
   position: relative;
   width: 30%;
   top: 200px;
+
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     top: 0;
@@ -1102,12 +1182,26 @@ const TextWrap3 = styled(TextWrap2)`
 
 const TextWrap2Section = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
+
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? '-30px' : '0')});
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+`;
+
+const TextWrap2Section2 = styled(TextWrap2Section)`
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const TextWrap1 = styled.div`
-  width: clamp(650px, 40vw * 1.1, 750px);
+  position: relative;
+  width: clamp(650px, 40vw * 1.1, 650px);
   z-index: 10;
+
+  transform: translateY(${props => (props.inView ? 0 : '30px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.5s 1.45s linear, transform 1s 1.45s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     width: 100%;
@@ -1121,8 +1215,11 @@ const PhotoBorderImg = styled.img`
 `;
 
 const StanleyAvatarFloat1 = styled.img`
+  transform: translateY(${props => (props.inView ? 0 : '50px')}) scaleX(-1);
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.5s 2.3s linear, transform 1.1s 2.3s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
   position: absolute;
-  transform: scaleX(-1);
   bottom: 0;
   right: 0;
   z-index: 5;
@@ -1135,9 +1232,15 @@ const StanleyAvatarFloat1 = styled.img`
 `;
 
 const StanleyAvatarFloat2 = styled.img`
+  position: absolute;
+  left: 0;
+  bottom: 0;
   z-index: 5;
   height: auto;
-  width: clamp(100px, 75vw / 2.2, 750px);
+  width: clamp(100px, 95vw / 2.2, 950px);
+  transform: translateX(${props => (props.inView ? 0 : '-90px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     left: 0;
@@ -1154,8 +1257,9 @@ const Container = styled.main`
     margin-bottom: 5px;
     z-index: 5;
     font-weight: 500;
-    line-height: 48px;
+    line-height: 43px;
     ${font.size(36)}
+
     @media (max-width: 480px) {
       line-height: 42px;
       ${font.size(28)};
@@ -1180,10 +1284,16 @@ const Container = styled.main`
   }
 
   p {
+    letter-spacing: -0.4px;
     ${font.regular};
     z-index: 15;
-    ${font.size(20)}
-    line-height: 30px;
+    ${font.size(23)}
+    line-height: 32px;
+
+    @media (max-width: 1650px) {
+      ${font.size(22)}
+      line-height: 31px;
+    }
 
     @media (max-width: 1024px) {
       ${font.size(18)};
@@ -1219,15 +1329,17 @@ const Wrapper = styled.main`
 
 const Section1 = styled.section`
   position: relative;
+  height: 50vw;
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-left: 8vw;
   padding-right: 8vw;
-  background: ${color.background['container']};
+  background-color: ${color.background['container']};
+
   border-radius: 34px 34px 0 0;
 
-  padding-bottom: clamp(5vw, 12vw, 250px);
+  padding-bottom: clamp(7vw, 5vw, 250px);
 
   @media (max-width: 1024px) {
     padding-top: clamp(40px, 14vw, 120px);
@@ -1237,6 +1349,9 @@ const Section1 = styled.section`
 `;
 
 const Section2 = styled.section`
+  background: url(${section2bg});
+  background-repeat: repeat-y;
+  background-position: left;
   position: relative;
   padding-top: clamp(60px, 12vw, 190px);
   padding-bottom: clamp(2vw, 12vw, 190px);
