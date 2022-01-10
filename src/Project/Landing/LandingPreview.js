@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useEffect, useState, useMemo } from 'react';
 import { font, color } from 'shared/styles';
 import stanleyAvatarFull1 from 'App/assets/images/stanleys_avatar_full_1.png';
 import stanleyAvatarFull2 from 'App/assets/images/stanleys_avatar_full_2.png';
-import photoBorder from 'App/assets/images/photo_border.png';
+import photoBorder from 'App/assets/images/photo_border2.png';
 import backgroundRiver from 'App/assets/images/section2_background.png';
 import backgroundWhiteHouse from 'App/assets/images/section_background_whitehouse.png';
 import border from 'App/assets/images/border.png';
@@ -17,6 +17,13 @@ import qrScan from 'App/assets/images/qrscan.png';
 import cameraFlash from 'App/assets/images/cameraflash.png';
 import starMedium from 'App/assets/images/star-medium.png';
 import starSmall from 'App/assets/images/star-small.png';
+
+import eiffel from 'App/assets/images/background-eiffel.png';
+import stonehenge from 'App/assets/images/background-stonehenge.png';
+import kremlin from 'App/assets/images/background-kremlin.png';
+import whitehouse from 'App/assets/images/background-whitehouse.png';
+
+import ufo from 'App/assets/images/ufo.png';
 
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 
@@ -35,6 +42,8 @@ import mapLeftBottom from 'App/assets/images/map-bottom-left.png';
 import mapRightBottom from 'App/assets/images/map-bottom-right.png';
 import mapMiddleBottom from 'App/assets/images/map-bottom-middle.png';
 
+import filmStripEdge from 'App/assets/images/film-strip.png';
+
 import checkBox1 from 'App/assets/images/checkbox1.png';
 import checkBox2 from 'App/assets/images/checkbox3.png';
 import checkBox3 from 'App/assets/images/checkbox3.png';
@@ -42,6 +51,7 @@ import checkBox3 from 'App/assets/images/checkbox3.png';
 import roadmapBackdrop from 'App/assets/images/roadmap_backdrop.png';
 
 import roadmap0 from 'App/assets/images/roadmap_0.png';
+import roadmapWithoutUfo from 'App/assets/images/roadmap_0_without_ufo.png';
 import socialTwitter from 'App/assets/images/social_twitter.png';
 import socialInstagram from 'App/assets/images/social_instagram.png';
 import socialLinkedin from 'App/assets/images/social_linkedin.png';
@@ -78,20 +88,29 @@ import {
   footer,
 } from 'data/LandingPageText';
 
-const stanleys = [newStanley1, newStanley2, newStanley3, newStanley4, newStanley5, newStanley6];
-const stanleysHippos = [newStanley1, newStanley2, newStanley3];
-const stanleysCrocs = [newStanley4, newStanley5, newStanley6];
-
 const LandingPreview = () => {
   const [stanleyIndex, setStanleyIndex] = useState(0);
+  const [stanleyBackgroundIndex, setStanleyBackgroundIndex] = useState(0);
   const [stanley2Ref, stanley2InView] = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
+  const stanleys = [newStanley1, newStanley2, newStanley3, newStanley4, newStanley5, newStanley6];
+  const stanleysHippos = [newStanley1, newStanley2, newStanley3];
+  const stanleysCrocs = [newStanley4, newStanley5, newStanley6];
+
+  const stanleysBackgrounds = [eiffel, stonehenge, kremlin, whitehouse];
+
   useEffect(() => {
     let stanleyTimer;
     stanleyTimer = setTimeout(() => {
+      if (stanleyBackgroundIndex < 3) {
+        setStanleyBackgroundIndex(stanleyBackgroundIndex + 1);
+      } else {
+        setStanleyBackgroundIndex(0);
+      }
+
       if (stanleyIndex < 2) {
         setStanleyIndex(stanleyIndex + 1);
       } else {
@@ -107,9 +126,7 @@ const LandingPreview = () => {
       <Wrapper>
         <Container>
           <Section1 name="intro">
-            <Parallax styleInner={{ position: 'absolute', bottom: 0, right: 0 }} y={['-7%', '5%']}>
-              <WhiteHouse src={backgroundWhiteHouse} />
-            </Parallax>
+            <WhiteHouse src={stanleysBackgrounds[stanleyBackgroundIndex]} />
             <Parallax y={[0, 5]}>
               <AlignTitle>
                 <Title />
@@ -118,12 +135,15 @@ const LandingPreview = () => {
             <StanleyAvatarFloat1 src={stanleysHippos[stanleyIndex]} alt="" />
             <TextWrap1 dangerouslySetInnerHTML={{ __html: section1 }} />
           </Section1>
-          <PhotoBorderImg src={photoBorder} />
+          <PhotoLineupContainer>
+            <PhotoBorderImg src={photoBorder} />
+            <FilmStripTop src={filmStripEdge} alt="" />
+            <FilmStripBottom src={filmStripEdge} alt="" />
+          </PhotoLineupContainer>
           <Section2 name="who">
             <Parallax styleInner={{ position: 'absolute', top: '-25px', left: 0, height: '100%' }} y={['-7%', '5%']}>
               <LandscapeRiver src={backgroundRiver} />
             </Parallax>
-
             <Section2Organizer>
               <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column1 }} />
               <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column2 }} />
@@ -153,29 +173,25 @@ const LandingPreview = () => {
                   <RightMapBottom />
                 </MapBottom>
               </Roadmap>
-
               <Rarity>
                 <Dice src={dice} />
                 <RarityExplainer dangerouslySetInnerHTML={{ __html: section3_column2_rarityExplainer }} />
                 <RarityList dangerouslySetInnerHTML={{ __html: section3_column2_traitsList }}></RarityList>
               </Rarity>
             </Wrap4>
-            {/* <Stars src={stars} /> */}
             <BackgroundGradient src={repeatBg} />
-
             <Parallax styleInner={{ position: 'absolute', bottom: '30px', right: 0 }} y={['-5%', '5%']}>
-              <StarsSmall src={starsSmall} />
+              <StarsSmallScroll />
             </Parallax>
 
-            <Parallax styleInner={{ position: 'absolute', bottom: '30px', left: 0 }} y={['-20%', '15%']}>
-              <StarsMedium src={starsMedium} />
-            </Parallax>
-
-            <Parallax styleInner={{ position: 'absolute', bottom: '30px', right: 0 }} y={['-35%', '35%']}>
-              <StarsLarge src={starsLarge} />
+            <Parallax styleInner={{ position: 'absolute', bottom: '10px', left: 0 }} y={['-20%', '35%']}>
+              <StarsMediumScroll />
             </Parallax>
           </Section4>
-          <RoadmapMap src={roadmap0} />
+          <RoadmapWrapper>
+            <RoadmapMap src={roadmapWithoutUfo} />
+            <UfoImage src={ufo} alt="" />
+          </RoadmapWrapper>
           <Border2 src={border} />
           <Section6>
             <WhoContent>
@@ -199,6 +215,92 @@ const LandingPreview = () => {
     </ParallaxProvider>
   );
 };
+
+const RoadmapWrapper = styled.div`
+  position: relative;
+  height: auto;
+  width: 100%;
+  background-color: #7f8aa2;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const ufoAnimation = keyframes`
+  0% { top: 0px; }
+  50% { top: 10px; }
+  100% { top: 0px;}
+`;
+
+const UfoImage = styled.img`
+  position: absolute;
+  right: 23%;
+
+  width: clamp(135px, 13.5vw, 236px);
+  top: 0;
+  z-index: 6000;
+  animation: ${ufoAnimation} 4s ease-in-out infinite;
+`;
+
+const animatesSmallStarsHorizontal = keyframes`
+  from { background-position: 0px 0;  }
+  to { background-position: -1650px 0; }
+`;
+
+const animatesMediumStarsHorizontal = keyframes`
+  from { background-position: 0px 0;  }
+  to { background-position: -1650px 0; }
+`;
+
+const animeSmallStarsPulse = keyframes`
+  0% { opacity: 0.1;  }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.1; }
+`;
+
+const animateMediumStarsPulse = keyframes`
+  0% { opacity: 0.7;  }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+`;
+
+const StarsSmallScroll = styled.div`
+  background: url(${starsSmall});
+  width: 1650px;
+  height: 158px;
+  animation: ${animatesSmallStarsHorizontal} 500s linear infinite, ${animeSmallStarsPulse} 1s linear infinite;
+  background-repeat: repeat-x;
+`;
+
+const StarsMediumScroll = styled.div`
+  background: url(${starsMedium});
+  width: 1650px;
+  height: 158px;
+  animation: ${animatesMediumStarsHorizontal} 400s linear infinite, ${animateMediumStarsPulse} 2s linear infinite;
+  background-repeat: repeat-x;
+`;
+
+const FilmStrip = styled.img`
+  z-index: 900;
+  position: absolute;
+`;
+
+const FilmStripTop = styled(FilmStrip)`
+  top: -20px;
+  left: 0;
+`;
+const FilmStripBottom = styled(FilmStrip)`
+  transform: scaleY(-1);
+  bottom: -20px;
+  left: 0;
+`;
+
+const PhotoLineupContainer = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+`;
 
 const StarsSmall = styled.img`
   width: auto;
@@ -224,21 +326,6 @@ const BackgroundGradient = styled.img`
   width: 100%;
   bottom: 0;
 `;
-
-{
-  /* <Section3>
-<QRPhoneLayer>
-  <ThePhone>
-    <PhoneImg src={phone} />
-    <QRScan src={qrScan} />
-  </ThePhone>
-</QRPhoneLayer>
-<QR>
-  fdsfds
-  <QRImg src={qr} />
-</QR>
-</Section3> */
-}
 
 const ThePhone = styled.div`
   position: relative;
@@ -312,6 +399,8 @@ const MapContainer = styled.div`
 
 const MapContents = styled.div`
   padding-left: 45px;
+  display: flex;
+  flex-direction: column;
   padding-right: 25px;
 
   width: 100%;
@@ -329,6 +418,8 @@ const MapContents = styled.div`
 
   @media (max-width: 1024px) {
     padding-left: 8vw;
+    row-gap: 20px;
+
     padding-right: 8vw;
   }
 `;
@@ -477,7 +568,11 @@ const Section2Organizer = styled.div`
 
 const AlignTitle = styled.div`
   height: 15vw;
-  transform: scale(1);
+  transform: scale(1.3);
+
+  @media (max-width: 1650px) {
+    transform: scale(1);
+  }
 
   @media (max-width: 1024px) {
     display: none;
@@ -502,14 +597,7 @@ const LandscapeRiver = styled.img`
 `;
 
 const RoadmapMap = styled.img`
-  position: relative;
-  height: auto;
   width: 100%;
-  background-color: #7f8aa2;
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
 `;
 
 const Section5 = styled.section`
@@ -523,12 +611,20 @@ const Section5 = styled.section`
 `;
 
 const WhiteHouse = styled.img`
+  position: absolute;
+  bottom: 10vw;
+  right: 0;
+  transform: scale(2);
+  filter: blur(4px);
   transition: opacity 0.5s ease-in;
+  opacity: 0.6;
+
   @media (max-width: 1280px) {
     opacity: 0.5;
   }
 
   @media (max-width: 1024px) {
+    display: none;
     opacity: 0.3;
   }
 `;
@@ -746,6 +842,8 @@ const RarityItem = styled.li`
   ${font.size(16)};
 `;
 const RarityList = styled.ul`
+  display: flex;
+  flex-direction: column;
   li {
     &:before {
       content: '- ';
@@ -838,6 +936,7 @@ const RoadmapLists = styled.div`
   }
 
   @media (max-width: 768px) {
+    row-gap: 30px;
     flex-direction: column;
   }
 `;
@@ -900,6 +999,7 @@ const Roadmap = styled.div`
 `;
 
 const Rarity = styled.div`
+  z-index: 5000;
   position: relative;
   width: 30%;
   top: 200px;
@@ -907,14 +1007,15 @@ const Rarity = styled.div`
   @media (max-width: 1280px) {
     top: 0;
     margin-left: 5vw;
+
     width: 60%;
   }
 
   @media (max-width: 1024px) {
-    width: 100%;
+    width: 84vw;
     margin-left: 8vw;
-    margin-top: 100px;
-    margin-right: 0;
+    margin-top: 30px;
+    margin-right: 8vw;
   }
 `;
 
@@ -1036,10 +1137,10 @@ const StanleyAvatarFloat1 = styled.img`
 const StanleyAvatarFloat2 = styled.img`
   z-index: 5;
   height: auto;
-  width: clamp(100px, 75vw / 2.2, 650px);
+  width: clamp(100px, 75vw / 2.2, 750px);
 
   @media (max-width: 1280px) {
-    left: -9vw;
+    left: 0;
     width: clamp(200px, 75vw / 2.2, 300px);
     position: relative;
     height: auto;
@@ -1138,7 +1239,7 @@ const Section1 = styled.section`
 const Section2 = styled.section`
   position: relative;
   padding-top: clamp(60px, 12vw, 190px);
-  padding-bottom: clamp(1vw, 12vw, 190px);
+  padding-bottom: clamp(2vw, 12vw, 190px);
   display: flex;
   flex-direction: column;
 
@@ -1147,8 +1248,8 @@ const Section2 = styled.section`
 
   transition: 0.25s ease-out;
 
-  @media (max-width: 1280px) {
-    padding-bottom: 0;
+  @media (max-width: 480px) {
+    padding-bottom: 100px;
   }
 `;
 
