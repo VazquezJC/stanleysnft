@@ -108,7 +108,7 @@ const LandingPreview = () => {
   });
 
   const [roadmapExplainerRef, roadmapExplainerInView] = useInView({
-    threshold: 1,
+    threshold: 0.85,
     triggerOnce: true,
   });
 
@@ -128,7 +128,7 @@ const LandingPreview = () => {
   });
 
   const [rivermapRef, rivermapInView] = useInView({
-    threshold: 0.45,
+    threshold: 0.25,
     triggerOnce: true,
   });
 
@@ -184,14 +184,14 @@ const LandingPreview = () => {
           </Section2>
           <Border2 src={border} />
           <Section4>
-            <Wrap4 name="roadmap">
-              <Roadmap ref={roadmapRef} inView={roadmapInView}>
+            <Wrap4 ref={roadmapRef} name="roadmap">
+              <Roadmap inView={roadmapInView}>
                 <MapContainer>
                   <LeftMap />
                   <MapContents>
                     <RoadmapExplainer
                       ref={roadmapExplainerRef}
-                      inView={roadmapExplainerInView}
+                      inView={roadmapInView}
                       dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }}
                     />
                     <RoadmapLists>
@@ -229,6 +229,16 @@ const LandingPreview = () => {
             <Parallax styleInner={{ position: 'absolute', bottom: '10px', left: 0 }} y={['-20%', '35%']}>
               <StarsMediumScroll />
             </Parallax> */}
+            <Stars isWoken={rivermapInView}>
+              <StarSmall animation={Pulse1} left={'40%'} src={starSmall} />
+              <StarSmall animation={Pulse3} left={'60%'} bottom={'5px'} src={starSmall} />
+              <StarSmall animation={Pulse3} left={'10%'} bottom={'25px'} src={starSmall} />
+              <StarSmall animation={Pulse2} left={'60%'} bottom={0} src={starSmall} />
+              <StarSmall animation={Pulse1} left={'80%'} bottom={'40px'} src={starSmall} />
+              <StarSmall animation={Pulse2} left={'10%'} bottom={'10px'} src={starSmall} />
+              <StarSmall animation={Pulse1} left={'30%'} bottom={'10px'} src={starSmall} />
+              <StarSmall animation={Pulse0} left={'90%'} src={starSmall} />
+            </Stars>
           </Section4>
           <RoadmapWrapper ref={rivermapRef}>
             <RoadmapMap inView={rivermapInView} src={roadmapWithoutUfo} />
@@ -258,9 +268,53 @@ const LandingPreview = () => {
   );
 };
 
+const Pulse0 = keyframes`
+0% { opacity: 1; transform: scale(0.6); }
+50% { opacity: 0.8; transform: scale(0.5);}
+100% { opacity: 1; transform: scale(0.6);}
+`;
+
+const Pulse1 = keyframes`
+0% { opacity: 1; transform: scale(0.4); }
+50% { opacity: 0.8; transform: scale(0.5);}
+100% { opacity: 1; transform: scale(0.4);}
+`;
+
+const Pulse2 = keyframes`
+0% { opacity: 0.2; transform: scale(0); }
+50% { opacity: 0.6; transform: scale(0.2);}
+100% { opacity: 0.3; transform: scale(0);}
+`;
+
+const Pulse3 = keyframes`
+0% { opacity: 0.8; transform: scale(0.95); }
+50% { opacity: 1; transform: scale(1);}
+100% { opacity: 0.8; transform: scale(0.92);}
+`;
+
+const StarSmall = styled.img`
+  position: absolute;
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+  animation: ${props => props.animation} 1s linear infinite;
+`;
+
+const StarMedium = styled.img`
+  position: absolute;
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+`;
+
+const StarLarge = styled.img`
+  width: auto;
+  height: auto;
+  z-index: 200;
+`;
+
 const RoadmapWrapper = styled.div`
   position: relative;
   height: auto;
+  line-height: 0;
   width: 100%;
   background-color: #7f8aa2;
 
@@ -281,50 +335,12 @@ const UfoImage = styled.img`
 
   transform: translateY(${props => (props.inView ? 0 : '50px')});
   opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s 0.63s linear, transform 1s 0.63s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   width: clamp(135px, 13.5vw, 236px);
   top: 0;
   z-index: 6000;
   animation: ${ufoAnimation} 4s ease-in-out infinite;
-`;
-
-const animatesSmallStarsHorizontal = keyframes`
-  from { background-position: 0px 0;  }
-  to { background-position: -1650px 0; }
-`;
-
-const animatesMediumStarsHorizontal = keyframes`
-  from { background-position: 0px 0;  }
-  to { background-position: -1650px 0; }
-`;
-
-const animeSmallStarsPulse = keyframes`
-  0% { opacity: 0.1; }
-  50% { opacity: 0.3; }
-  100% { opacity: 0.1; }
-`;
-
-const animateMediumStarsPulse = keyframes`
-  0% { opacity: 0.7;  }
-  50% { opacity: 1; }
-  100% { opacity: 0.7; }
-`;
-
-const StarsSmallScroll = styled.div`
-  background: url(${starsSmall});
-  width: 1650px;
-  height: 158px;
-  animation: ${animatesSmallStarsHorizontal} 500s linear infinite, ${animeSmallStarsPulse} 1s linear infinite;
-  background-repeat: repeat-x;
-`;
-
-const StarsMediumScroll = styled.div`
-  background: url(${starsMedium});
-  width: 1650px;
-  height: 158px;
-  animation: ${animatesMediumStarsHorizontal} 400s linear infinite, ${animateMediumStarsPulse} 2s linear infinite;
-  background-repeat: repeat-x;
 `;
 
 const FilmStrip = styled.img`
@@ -346,24 +362,6 @@ const PhotoLineupContainer = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-`;
-
-const StarsSmall = styled.img`
-  width: auto;
-  height: auto;
-  z-index: 200;
-`;
-
-const StarsMedium = styled.img`
-  width: auto;
-  height: auto;
-  z-index: 200;
-`;
-
-const StarsLarge = styled.img`
-  width: auto;
-  height: auto;
-  z-index: 200;
 `;
 
 const BackgroundGradient = styled.img`
@@ -450,7 +448,7 @@ const MapContents = styled.div`
   padding-right: 25px;
 
   width: 100%;
-  padding-top: 120px;
+  padding-top: 140px;
   padding-bottom: 30px;
 
   background: url(${mapMiddle});
@@ -654,7 +652,7 @@ const RoadmapMap = styled.img`
   width: 100%;
   transform: translateY(${props => (props.inView ? 0 : '50px')});
   opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.6s 0.3s linear, transform 1s 0.3s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s 1s linear, transform 1s 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const Section5 = styled.section`
@@ -688,11 +686,15 @@ const WhiteHouse = styled.img`
   }
 `;
 
-const Stars = styled.img`
+const Stars = styled.div`
   position: absolute;
+  height: 200px;
+  width: 100%;
   bottom: 0;
-  width: clamp(1200px, 100%, 100%);
-  height: auto;
+  opacity: ${props => (props.isWoken ? 1 : 0)};
+  visibility: ${props => (props.isWoken ? 'visible' : 'hidden')};
+  transform: translateY(${props => (props.isWoken ? 0 : '90px')});
+  transition: opacity 0.6s linear, transform 2s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const Header = styled.h2`
@@ -1049,7 +1051,7 @@ const RoadmapExplainer = styled.div`
 
   opacity: ${props => (props.inView ? 1 : 0)};
   transform: translateY(${props => (props.inView ? 0 : '50px')});
-  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const RarityExplainer = styled.div`
@@ -1067,7 +1069,7 @@ const Roadmap = styled.div`
 
   opacity: ${props => (props.inView ? 1 : 0)};
   transform: translateY(${props => (props.inView ? 0 : '50px')});
-  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     width: 100%;
