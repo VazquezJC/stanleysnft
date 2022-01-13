@@ -79,14 +79,13 @@ const Navigation = () => {
               <Title />
             </AlignTitle>
           </Link>
-
           <Logo to="intro" smooth={true} duration={500} offset={-150}>
             The Stanleys
           </Logo>
           <DesktopLink to="who" smooth={true} duration={500} offset={-150}>
             Who are The Stanleys?
           </DesktopLink>
-          <DesktopLink to="roadmap" smooth={true} duration={500} offset={-150}>
+          <DesktopLink to="roadmap" smooth={true} duration={500} offset={250}>
             Roadmap
           </DesktopLink>
           <DesktopLink to="team" smooth={true} duration={500} offset={-150}>

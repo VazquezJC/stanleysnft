@@ -69,6 +69,7 @@ function getRandomInt(max) {
 
 const LandingPreview = () => {
   const [stanleyIndex, setStanleyIndex] = useState(getRandomInt(3));
+  const [stanleyBackgroundIndex, setStanleyBackgroundIndex] = useState(getRandomInt(4));
 
   const [titleRef, titleInView] = useInView({
     threshold: isMobileOnly ? 0 : 0.2,
@@ -91,7 +92,7 @@ const LandingPreview = () => {
   });
 
   const [roadmapRef, roadmapInView] = useInView({
-    threshold: isMobileOnly ? 0 : 0.35,
+    threshold: isMobileOnly ? 0 : 0.25,
     triggerOnce: true,
   });
 
@@ -123,10 +124,10 @@ const LandingPreview = () => {
   const stanleysHippos = [newStanley1, newStanley2, newStanley3];
   const stanleysCrocs = [newStanley4, newStanley5, newStanley6];
   const stanleysBackgrounds = [
-    { image: eiffel, x: 5, y: 15 },
-    { image: stonehenge, x: 1, y: 9 },
-    { image: kremlin, x: 25, y: 25 },
-    { image: whitehouse, x: 25, y: 25 },
+    { image: eiffel, x: 0, y: 8 },
+    { image: stonehenge, x: 1, y: 13 },
+    { image: kremlin, x: 3, y: 15 },
+    { image: whitehouse, x: 0, y: 13 },
   ];
 
   useEffect(() => {
@@ -147,7 +148,12 @@ const LandingPreview = () => {
       <Wrapper>
         <Container>
           <Section1 name="intro">
-            <WhiteHouse inView={titleInView} x={stanleysBackgrounds[1].x} y={stanleysBackgrounds[1].y} src={stanleysBackgrounds[1].image} />
+            <WhiteHouse
+              inView={titleInView}
+              x={stanleysBackgrounds[stanleyBackgroundIndex].x}
+              y={stanleysBackgrounds[stanleyBackgroundIndex].y}
+              src={stanleysBackgrounds[stanleyBackgroundIndex].image}
+            />
             <AlignTitle inView={titleInView}>
               <Title />
             </AlignTitle>
@@ -159,10 +165,11 @@ const LandingPreview = () => {
             <FilmStripTop src={filmStripEdge} alt="" />
             <FilmStripBottom src={filmStripEdge} alt="" />
           </PhotoLineupContainer>
-          <Section2 name="who">
-            <LandscapeRiver src={backgroundRiver} inView={stanley2InView} />
+          <Section2>
+            <LandscapeRiver src={backgroundRiver} inView={section2Paragaraph1Ref} />
             <Section2Organizer>
               <TextWrap2Section
+                name="who"
                 ref={section2Paragaraph1Ref}
                 inView={section2Paragaraph1InView}
                 dangerouslySetInnerHTML={{ __html: section2_column1 }}
@@ -177,9 +184,9 @@ const LandingPreview = () => {
           </Section2>
           <Border2 src={border} />
           <Section4>
-            <Wrap4 ref={roadmapRef} name="roadmap">
+            <Wrap4 ref={roadmapRef}>
               <Roadmap inView={roadmapInView}>
-                <MapContainer>
+                <MapContainer name="roadmap">
                   <LeftMap />
                   <MapContents>
                     <RoadmapExplainer
@@ -616,11 +623,11 @@ const LandscapeRiver = styled.img`
   transition: opacity 0.6s 1.3s linear, transform 0.6s 1.1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
-    opacity: 0.5;
+    opacity: ${props => (props.inView ? 0.5 : 0)};
   }
 
   @media (max-width: 1024px) {
-    opacity: 0.3;
+    opacity: ${props => (props.inView ? 0.3 : 0)};
   }
 `;
 
@@ -656,8 +663,9 @@ const WhiteHouse = styled.img`
   }
 
   @media (max-width: 1024px) {
-    display: none;
-    opacity: 0.1;
+    transform: translateY(${props => (props.inView ? '0px' : '20px')}) scale(1.15);
+    transition: opacity 2s 0.2s linear, transform 3s 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+    opacity: ${props => (props.inView ? 0.1 : 0)};
   }
 `;
 
@@ -1034,9 +1042,12 @@ const Roadmap = styled.div`
   color: #000;
   z-index: 500;
   top: -80px;
+
   opacity: ${props => (props.inView ? 1 : 0)};
   transform: translateY(${props => (props.inView ? 0 : '50px')});
   transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  ${isMobileOnly && 'opacity: 1; transform: translateY(0);'}
 
   @media (max-width: 1280px) {
     width: 100%;
@@ -1165,10 +1176,11 @@ const TextWrap2Section2 = styled(TextWrap2Section)`
 
   @media (max-width: 1280px) {
     p:nth-last-child(1) {
-      margin-right: 20%;
     }
   }
 `;
+
+// margin-right: 20%;
 
 const TextWrap1 = styled.div`
   position: relative;
@@ -1218,7 +1230,10 @@ const PhotoBorderImg = styled.img`
 const StanleyAvatarFloat1 = styled.img`
   transform: translateY(${props => (props.inView ? 0 : '50px')}) scaleX(-1);
   opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.5s 2.3s linear, transform 1.1s 2.3s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  ${isMobileOnly
+    ? 'transition: opacity 0.6s 0.35s linear, transform 0.8s 0.35s cubic-bezier(0.26, 0.67, 0.48, 0.91)'
+    : 'transition: opacity 0.5s 2.3s linear, transform 1.1s 2.3s cubic-bezier(0.26, 0.67, 0.48, 0.91)'};
 
   position: absolute;
   bottom: 0;
