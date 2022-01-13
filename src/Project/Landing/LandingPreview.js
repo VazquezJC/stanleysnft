@@ -2,10 +2,10 @@ import styled, { keyframes } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { font, color } from 'shared/styles';
 import { useInView } from 'react-intersection-observer';
+import { isMobileOnly } from 'react-device-detect';
 
 import photoBorder from 'App/assets/images/photo_border2.png';
 import backgroundRiver from 'App/assets/images/section2_background2.png';
-import backgroundWhiteHouse from 'App/assets/images/section_background_whitehouse.png';
 import border from 'App/assets/images/border.png';
 import phone from 'App/assets/images/phone2.png';
 import qr from 'App/assets/images/qr.jpg';
@@ -13,7 +13,6 @@ import repeatBg from 'App/assets/images/repeat-bg.png';
 
 import qrScan from 'App/assets/images/qrscan.png';
 import cameraFlash from 'App/assets/images/cameraflash.png';
-import starMedium from 'App/assets/images/star-medium.png';
 import starSmall from 'App/assets/images/star-small.png';
 
 import eiffel from 'App/assets/images/background-eiffel.png';
@@ -26,11 +25,6 @@ import ufo from 'App/assets/images/ufo.png';
 import mapLeft from 'App/assets/images/map-left2.png';
 import mapMiddle from 'App/assets/images/map-middle2.png';
 import mapRight from 'App/assets/images/map-right2.png';
-
-import starsSmall from 'App/assets/images/stars-small.png';
-import starsMedium from 'App/assets/images/stars-medium.png';
-import starsLarge from 'App/assets/images/stars-large.png';
-import section2bg from 'App/assets/images/section2-bg-gradient.png';
 
 import mapLeftBottom from 'App/assets/images/map-bottom-left.png';
 import mapRightBottom from 'App/assets/images/map-bottom-right.png';
@@ -74,16 +68,15 @@ function getRandomInt(max) {
 }
 
 const LandingPreview = () => {
-  const [stanleyIndex, setStanleyIndex] = useState(0);
-  const [stanleyBackgroundIndex, setStanleyBackgroundIndex] = useState(getRandomInt(3));
+  const [stanleyIndex, setStanleyIndex] = useState(getRandomInt(3));
 
   const [titleRef, titleInView] = useInView({
-    threshold: 0.2,
+    threshold: isMobileOnly ? 0 : 0.2,
     triggerOnce: true,
   });
 
   const [stanley2Ref, stanley2InView] = useInView({
-    threshold: 0.55,
+    threshold: isMobileOnly ? 0.15 : 0.55,
     triggerOnce: true,
   });
 
@@ -93,48 +86,48 @@ const LandingPreview = () => {
   });
 
   const [section2Paragaraph2Ref, section2Paragaraph2InView] = useInView({
-    threshold: 0.55,
-    triggerOnce: true,
-  });
-
-  const [section2backgroundRef, section2backgroundInView] = useInView({
-    threshold: 0.85,
+    threshold: isMobileOnly ? 0.15 : 0.55,
     triggerOnce: true,
   });
 
   const [roadmapRef, roadmapInView] = useInView({
-    threshold: 0.45,
+    threshold: isMobileOnly ? 0 : 0.35,
     triggerOnce: true,
   });
 
   const [roadmapExplainerRef, roadmapExplainerInView] = useInView({
-    threshold: 0.85,
+    threshold: isMobileOnly ? 0.15 : 0.85,
     triggerOnce: true,
   });
 
   const [roadmapList1Ref, roadmapList1InView] = useInView({
-    threshold: 0.45,
+    threshold: isMobileOnly ? 0.1 : 0.25,
     triggerOnce: true,
   });
 
   const [roadmapList2Ref, roadmapList2InView] = useInView({
-    threshold: 0.65,
+    threshold: isMobileOnly ? 0.1 : 0.45,
     triggerOnce: true,
   });
 
   const [rarityRef, rarityInView] = useInView({
-    threshold: 0.65,
+    threshold: isMobileOnly ? 0.1 : 0.65,
     triggerOnce: true,
   });
 
   const [rivermapRef, rivermapInView] = useInView({
-    threshold: 0.25,
+    threshold: 0.15,
     triggerOnce: true,
   });
 
   const stanleysHippos = [newStanley1, newStanley2, newStanley3];
   const stanleysCrocs = [newStanley4, newStanley5, newStanley6];
-  const stanleysBackgrounds = [eiffel, stonehenge, kremlin, whitehouse];
+  const stanleysBackgrounds = [
+    { image: eiffel, x: 5, y: 15 },
+    { image: stonehenge, x: 1, y: 9 },
+    { image: kremlin, x: 25, y: 25 },
+    { image: whitehouse, x: 25, y: 25 },
+  ];
 
   useEffect(() => {
     let stanleyTimer;
@@ -150,11 +143,11 @@ const LandingPreview = () => {
 
   return (
     <>
-      <Navigation />
+      <Navigation titleInView={titleInView} />
       <Wrapper>
         <Container>
           <Section1 name="intro">
-            <WhiteHouse inView={titleInView} src={stanleysBackgrounds[stanleyBackgroundIndex]} />
+            <WhiteHouse inView={titleInView} x={stanleysBackgrounds[1].x} y={stanleysBackgrounds[1].y} src={stanleysBackgrounds[1].image} />
             <AlignTitle inView={titleInView}>
               <Title />
             </AlignTitle>
@@ -167,7 +160,7 @@ const LandingPreview = () => {
             <FilmStripBottom src={filmStripEdge} alt="" />
           </PhotoLineupContainer>
           <Section2 name="who">
-            <LandscapeRiver src={backgroundRiver} ref={section2backgroundRef} inView={section2backgroundInView} />
+            <LandscapeRiver src={backgroundRiver} inView={stanley2InView} />
             <Section2Organizer>
               <TextWrap2Section
                 ref={section2Paragaraph1Ref}
@@ -191,7 +184,7 @@ const LandingPreview = () => {
                   <MapContents>
                     <RoadmapExplainer
                       ref={roadmapExplainerRef}
-                      inView={roadmapInView}
+                      inView={roadmapExplainerInView}
                       dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }}
                     />
                     <RoadmapLists>
@@ -222,26 +215,17 @@ const LandingPreview = () => {
               </Rarity>
             </Wrap4>
             <BackgroundGradient src={repeatBg} />
-            {/* <Parallax styleInner={{ position: 'absolute', bottom: '30px', right: 0 }} y={['-5%', '5%']}>
-              <StarsSmallScroll />
-            </Parallax>
-
-            <Parallax styleInner={{ position: 'absolute', bottom: '10px', left: 0 }} y={['-20%', '35%']}>
-              <StarsMediumScroll />
-            </Parallax> */}
             <Stars isWoken={rivermapInView}>
-              <StarSmall animation={Pulse1} left={'40%'} src={starSmall} />
-              <StarSmall animation={Pulse3} left={'60%'} bottom={'5px'} src={starSmall} />
-              <StarSmall animation={Pulse3} left={'10%'} bottom={'25px'} src={starSmall} />
-              <StarSmall animation={Pulse2} left={'60%'} bottom={0} src={starSmall} />
-              <StarSmall animation={Pulse1} left={'80%'} bottom={'40px'} src={starSmall} />
-              <StarSmall animation={Pulse2} left={'10%'} bottom={'10px'} src={starSmall} />
-              <StarSmall animation={Pulse1} left={'30%'} bottom={'10px'} src={starSmall} />
-              <StarSmall animation={Pulse0} left={'90%'} src={starSmall} />
+              <StarSmall duration={getRandomInt(3)} animation={Pulse1} left={'10%'} bottom={'60px'} src={starSmall} />
+              <StarSmall duration={getRandomInt(3)} animation={Pulse1} left={'40%'} src={starSmall} />
+              <StarSmall duration={getRandomInt(3)} animation={Pulse2} left={'60%'} bottom={0} src={starSmall} />
+              <StarSmall duration={getRandomInt(3)} animation={Pulse1} left={'80%'} bottom={'40px'} src={starSmall} />
+              <StarSmall duration={getRandomInt(3)} animation={Pulse1} left={'30%'} bottom={'10px'} src={starSmall} />
+              <StarSmall duration={getRandomInt(3)} animation={Pulse0} left={'90%'} src={starSmall} />
             </Stars>
           </Section4>
-          <RoadmapWrapper ref={rivermapRef}>
-            <RoadmapMap inView={rivermapInView} src={roadmapWithoutUfo} />
+          <RoadmapWrapper>
+            <RoadmapMap ref={rivermapRef} inView={rivermapInView} src={roadmapWithoutUfo} />
             <UfoImage inView={rivermapInView} src={ufo} alt="" />
           </RoadmapWrapper>
           <Border2 src={border} />
@@ -269,20 +253,20 @@ const LandingPreview = () => {
 };
 
 const Pulse0 = keyframes`
-0% { opacity: 1; transform: scale(0.6); }
-50% { opacity: 0.8; transform: scale(0.5);}
-100% { opacity: 1; transform: scale(0.6);}
+0% { opacity: 0.3; transform: scale(0.6); }
+50% { opacity: 0.8; transform: scale(0.7);}
+100% { opacity: 0.3; transform: scale(0.6);}
 `;
 
 const Pulse1 = keyframes`
-0% { opacity: 1; transform: scale(0.4); }
-50% { opacity: 0.8; transform: scale(0.5);}
-100% { opacity: 1; transform: scale(0.4);}
+0% { opacity: 0.5; transform: scale(0.3); }
+50% { opacity: 0.9; transform: scale(0.5);}
+100% { opacity: 0.5; transform: scale(0.3);}
 `;
 
 const Pulse2 = keyframes`
 0% { opacity: 0.2; transform: scale(0); }
-50% { opacity: 0.6; transform: scale(0.2);}
+50% { opacity: 0.6; transform: scale(0.3);}
 100% { opacity: 0.3; transform: scale(0);}
 `;
 
@@ -296,7 +280,7 @@ const StarSmall = styled.img`
   position: absolute;
   bottom: ${props => props.bottom};
   left: ${props => props.left};
-  animation: ${props => props.animation} 1s linear infinite;
+  animation: ${props => props.animation} ${props => props.duration}s steps(1, end) infinite;
 `;
 
 const StarMedium = styled.img`
@@ -450,9 +434,7 @@ const MapContents = styled.div`
   width: 100%;
   padding-top: 140px;
   padding-bottom: 30px;
-
   background: url(${mapMiddle});
-
   background-repeat: no-repeat;
 
   @media (max-width: 1280px) {
@@ -463,7 +445,6 @@ const MapContents = styled.div`
   @media (max-width: 1024px) {
     padding-left: 8vw;
     row-gap: 20px;
-
     padding-right: 8vw;
   }
 `;
@@ -614,14 +595,10 @@ const Section2Organizer = styled.div`
 const AlignTitle = styled.div`
   height: inherit;
   position: relative;
-  transform: translateY(${props => (props.inView ? '270px' : '260px')}) scale(${props => (props.inView ? '1.6' : '1.4')});
+  transform: translateY(${props => (props.inView ? '270px' : '260px')}) scale(${props => (props.inView ? 1.6 : '1.4')});
   opacity: ${props => (props.inView ? 1 : 0)};
   transition: opacity 0.2s 0.35s linear, transform 0.7s 0.25s cubic-bezier(0.26, 0.67, 0.48, 0.91);
-
-  @media (max-width: 1650px) {
-    transform: translateY(${props => (props.inView ? '40px' : '30px')}) scale(${props => (props.inView ? '1.3' : '1.2')});
-    transform: scale(1);
-  }
+  ${isMobileOnly && 'transition: opacity 0.2s 0.15s linear, transform 0.7s 0.05s cubic-bezier(0.26, 0.67, 0.48, 0.91)'};
 
   @media (max-width: 1024px) {
     display: none;
@@ -630,14 +607,14 @@ const AlignTitle = styled.div`
 
 const LandscapeRiver = styled.img`
   position: absolute;
-  filter: blur(18px);
+  filter: blur(12px);
   bottom: 0;
   left: 0;
   height: 100%;
   z-index: 0;
-  transform: translateY(${props => (props.inView ? 0 : '50px')}) scaleX(-1);
-  opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transform: translateY(${props => (props.inView ? '-100px' : '-140px')}) scaleX(-1);
+  opacity: ${props => (props.inView ? 0.5 : 0)};
+  transition: opacity 0.6s 1.3s linear, transform 0.6s 1.1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     opacity: 0.5;
@@ -667,22 +644,21 @@ const Section5 = styled.section`
 
 const WhiteHouse = styled.img`
   position: absolute;
-  bottom: 8vw;
-  right: 2vw;
+  right: ${props => props.x}vw;
+  bottom: ${props => props.y}vw;
   filter: blur(2.5px);
-  transition: opacity 0.5s ease-in;
 
   transform: translateY(${props => (props.inView ? '0px' : '-60px')}) scale(2);
-  opacity: ${props => (props.inView ? 0.6 : 0)};
+  opacity: ${props => (props.inView ? 0.3 : 0)};
   transition: opacity 0.6s 2.7s linear, transform 0.6s 2.5s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
-    opacity: 0.5;
+    opacity: 0.15;
   }
 
   @media (max-width: 1024px) {
     display: none;
-    opacity: 0.3;
+    opacity: 0.1;
   }
 `;
 
@@ -934,8 +910,8 @@ const RoadmapListItem = styled.li`
 
 const TBDList = styled.ul`
   opacity: ${props => (props.inView ? 1 : 0)};
-  transform: translateY(${props => (props.inView ? 0 : '50px')});
-  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s 0.3s linear;
+  width: 40%;
 
   li {
     &:before {
@@ -948,8 +924,6 @@ const TBDList = styled.ul`
     line-height: 22px;
     ${font.size(16)};
   }
-
-  width: 40%;
   @media (max-width: 768px) {
     width: auto;
   }
@@ -958,8 +932,7 @@ const TBDList = styled.ul`
 //tickInactive
 const InitialList = styled.ul`
   opacity: ${props => (props.inView ? 1 : 0)};
-  transform: translateY(${props => (props.inView ? 0 : '50px')});
-  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s 0.3s linear;
 
   li {
     &:before {
@@ -1035,12 +1008,9 @@ const Wrap4 = styled.div`
 const Section4 = styled.section`
   width: 100%;
   display: flex;
-  z-index: 50;
+  z-index: 600;
   padding-bottom: clamp(150px, 13vw, 230px);
   position: relative;
-  /* background-image: url(${repeatBg});
-  background-position: bottom;
-  background-repeat: repeat-x; */
   background-color: #6e91bb;
 `;
 
@@ -1050,8 +1020,7 @@ const RoadmapExplainer = styled.div`
   flex-direction: column;
 
   opacity: ${props => (props.inView ? 1 : 0)};
-  transform: translateY(${props => (props.inView ? 0 : '50px')});
-  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s 0.3s linear;
 `;
 
 const RarityExplainer = styled.div`
@@ -1064,9 +1033,8 @@ const Roadmap = styled.div`
   position: relative;
   width: 65%;
   color: #000;
-  z-index: 150;
+  z-index: 500;
   top: -80px;
-
   opacity: ${props => (props.inView ? 1 : 0)};
   transform: translateY(${props => (props.inView ? 0 : '50px')});
   transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
@@ -1089,7 +1057,6 @@ const Rarity = styled.div`
   @media (max-width: 1280px) {
     top: 0;
     margin-left: 5vw;
-
     width: 60%;
   }
 
@@ -1124,7 +1091,9 @@ const Border = styled.img`
   background-color: ${color.background['container']};
 `;
 
-const Border2 = styled.img``;
+const Border2 = styled.img`
+  z-index: 500;
+`;
 
 const HeaderList = styled.h2`
   margin-bottom: 10px;
@@ -1194,6 +1163,12 @@ const TextWrap2Section = styled.div`
 
 const TextWrap2Section2 = styled(TextWrap2Section)`
   transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  @media (max-width: 1280px) {
+    p:nth-last-child(1) {
+      margin-right: 20%;
+    }
+  }
 `;
 
 const TextWrap1 = styled.div`
@@ -1203,10 +1178,35 @@ const TextWrap1 = styled.div`
 
   transform: translateY(${props => (props.inView ? 0 : '30px')});
   opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.5s 1.45s linear, transform 1s 1.45s cubic-bezier(0.26, 0.67, 0.48, 0.91);
-
+  ${isMobileOnly
+    ? 'transition: opacity 0.5s 0.35s linear, transform 1s 0.35s cubic-bezier(0.26, 0.67, 0.48, 0.91)'
+    : 'transition: opacity 0.5s 1.45s linear, transform 1s 1.45s cubic-bezier(0.26, 0.67, 0.48, 0.91)'};
   @media (max-width: 1280px) {
     width: 100%;
+
+    p:nth-last-child(3) {
+      margin-right: 10%;
+    }
+
+    p:nth-last-child(2) {
+      margin-right: 30%;
+    }
+    p:nth-last-child(1) {
+      margin-right: 30%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    p:nth-last-child(3) {
+      margin-right: auto;
+    }
+    p:nth-last-child(2) {
+      margin-right: 20%;
+    }
+
+    p:nth-last-child(1) {
+      margin-right: 50%;
+    }
   }
 `;
 
@@ -1226,10 +1226,10 @@ const StanleyAvatarFloat1 = styled.img`
   right: 0;
   z-index: 5;
   height: auto;
-  width: clamp(100px, 95vw / 2.2, 950px);
+  width: clamp(250px, 98vw / 2.2, 950px);
 
   @media (max-width: 1280px) {
-    width: clamp(200px, 75vw / 2.2, 300px);
+    width: clamp(210px, 75vw / 2.2, 300px);
   }
 `;
 
@@ -1240,15 +1240,20 @@ const StanleyAvatarFloat2 = styled.img`
   z-index: 5;
   height: auto;
   width: clamp(100px, 95vw / 2.2, 950px);
-  transform: translateX(${props => (props.inView ? 0 : '-90px')});
+  transform: translateY(${props => (props.inView ? '70px' : '110px')});
   opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.5s 0.7s linear, transform 1.1s 0.7s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
-    left: 0;
-    width: clamp(200px, 75vw / 2.2, 300px);
-    position: relative;
+    left: auto;
+    right: 0;
+    width: clamp(250px, 75vw / 2.2, 300px);
+    transform: translateY(${props => (props.inView ? '70px' : '110px')}) scaleX(-1);
     height: auto;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;
 
@@ -1331,7 +1336,7 @@ const Wrapper = styled.main`
 
 const Section1 = styled.section`
   position: relative;
-  height: 50vw;
+  height: 94vh;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1343,19 +1348,20 @@ const Section1 = styled.section`
 
   padding-bottom: clamp(7vw, 5vw, 250px);
 
+  @media (max-width: 1650px) {
+    height: 80vh;
+  }
+
   @media (max-width: 1024px) {
+    height: 100%;
     padding-top: clamp(40px, 14vw, 120px);
-    padding-bottom: 25vw;
     border-radius: 0;
   }
 `;
 
 const Section2 = styled.section`
-  background: url(${section2bg});
-  background-repeat: repeat-y;
-  background-position: left;
   position: relative;
-  padding-top: clamp(60px, 12vw, 190px);
+  padding-top: clamp(100px, 12vw, 190px);
   padding-bottom: clamp(2vw, 12vw, 190px);
   display: flex;
   flex-direction: column;

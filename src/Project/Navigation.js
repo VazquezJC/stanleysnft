@@ -80,16 +80,16 @@ const Navigation = () => {
             </AlignTitle>
           </Link>
 
-          <Logo to="intro" spy={true} smooth={true} duration={500} offset={-150}>
+          <Logo to="intro" smooth={true} duration={500} offset={-150}>
             The Stanleys
           </Logo>
-          <DesktopLink to="who" spy={true} smooth={true} duration={500} offset={-150}>
+          <DesktopLink to="who" smooth={true} duration={500} offset={-150}>
             Who are The Stanleys?
           </DesktopLink>
-          <DesktopLink to="roadmap" spy={true} smooth={true} duration={500} offset={-150}>
+          <DesktopLink to="roadmap" smooth={true} duration={500} offset={-150}>
             Roadmap
           </DesktopLink>
-          <DesktopLink to="team" spy={true} smooth={true} duration={500} offset={-150}>
+          <DesktopLink to="team" smooth={true} duration={500} offset={-150}>
             Team
           </DesktopLink>
           <Socials>
@@ -194,7 +194,7 @@ const FloatingCorners = styled.div`
   }
 
   @media (max-width: 1024px) {
-    display none;
+    display: none;
   }
 `;
 
@@ -202,6 +202,7 @@ const AlignTitle = styled.div`
   position: absolute;
   display: none;
   left: 50%;
+  z-index: 5000;
   top: -12px;
   transform: translate(-50%);
 
