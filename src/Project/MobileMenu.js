@@ -4,18 +4,18 @@ import twitterIcon from 'App/assets/images/twitter.png';
 import discordIcon from 'App/assets/images/discord.png';
 import { font } from 'shared/styles';
 
-const MobileMenu = ({ isMenuOpen }) => {
+const MobileMenu = ({ isMenuOpen, handleMenuClick }) => {
   return (
     <Wrapper isOpen={isMenuOpen}>
       <MobileOverlayContents>
         <Column>
-          <MobileLink to="who" smooth={'easeOutQuint'} duration={500} offset={-130}>
+          <MobileLink to="who" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
             Who are The Stanleys?
           </MobileLink>
-          <MobileLink to="roadmap" smooth={'easeOutQuint'} duration={500} offset={-130}>
+          <MobileLink to="roadmap" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
             Roadmap
           </MobileLink>
-          <MobileLink to="team" spy={true} smooth={'easeOutQuint'} duration={500} offset={-130}>
+          <MobileLink to="team" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
             Team
           </MobileLink>
         </Column>

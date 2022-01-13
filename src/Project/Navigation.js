@@ -6,24 +6,29 @@ import MobileMenu from 'Project/MobileMenu';
 import menuOpen from 'App/assets/images/menu-open.png';
 import menuClose from 'App/assets/images/menu-close.png';
 import Title from './Title';
-import cornerLeft from 'App/assets/images/corner-left.png';
-import cornerRight from 'App/assets/images/corner-right.png';
 import twitterIcon from 'App/assets/images/twitter.png';
 import discordIcon from 'App/assets/images/discord.png';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-
-import { useScrollDirection } from 'react-use-scroll-direction';
-import { body1 } from '../data/LandingPageText';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [navigationVisible, setNavigationVisible] = useState(false);
-  const freezeScrollState = useRef(false);
+  const [navigationVisible, setNavigationVisible] = useState(true);
+  const prevScrollY = useRef(-1);
+
+  useEffect(() => {
+    const handleNavigation = e => {
+      if (navigationVisible && window.scrollY > prevScrollY.current) setNavigationVisible(false);
+      if (!navigationVisible && window.scrollY < prevScrollY.current) setNavigationVisible(true);
+      prevScrollY.current = window.scrollY;
+    };
+
+    window.addEventListener('scroll', handleNavigation);
+    return () => window.removeEventListener('scroll', handleNavigation);
+  }, [navigationVisible]);
 
   const handleMenuClick = () => {
     if (isMenuOpen === true) {
       setIsMenuOpen(false);
-
       enableBodyScroll(document.getElementById('root'));
     } else {
       setIsMenuOpen(true);
@@ -31,61 +36,30 @@ const Navigation = () => {
     }
   };
 
-  const { isScrollingUp, isScrollingDown } = useScrollDirection();
-
-  useEffect(() => {
-    const handleNavigation = e => {
-      if (freezeScrollState.current === false && window.scrollY > 200) {
-        if (isScrollingUp) setNavigationVisible(true);
-        if (isScrollingDown) setNavigationVisible(false);
-      }
-
-      if (freezeScrollState.current === false && window.scrollY > 1 && window.scrollY < 5) {
-        setNavigationVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleNavigation);
-
-    return () => {
-      window.removeEventListener('scroll', handleNavigation);
-    };
-  }, [isScrollingUp, isScrollingDown]);
-
-  useEffect(() => {
-    Events.scrollEvent.register('begin', () => {
-      freezeScrollState.current = true;
-
-      enableBodyScroll(document.getElementById('root'));
+  const handleCloseMenu = () => {
+    if (isMenuOpen === true) {
       setIsMenuOpen(false);
-    });
-    Events.scrollEvent.register('end', () => {
-      freezeScrollState.current = false;
-    });
-
-    return () => {
-      Events.scrollEvent.remove('begin');
-      Events.scrollEvent.remove('end');
-    };
-  }, []);
+      enableBodyScroll(document.getElementById('root'));
+    }
+  };
 
   return (
     <Fragment>
-      <MobileMenu isMenuOpen={isMenuOpen} />
-      <Wrapper displayNavigation={navigationVisible} position={isScrollingDown}>
+      <MobileMenu handleMenuClick={handleMenuClick} isMenuOpen={isMenuOpen} />
+      <Wrapper displayNavigation={navigationVisible}>
         <Container>
-          <Link to="intro" smooth={true} duration={500} offset={-150}>
+          <Link to="intro" smooth={true} onClick={handleCloseMenu} duration={500} offset={-150}>
             <AlignTitle>
               <Title />
             </AlignTitle>
           </Link>
-          <Logo to="intro" smooth={true} duration={500} offset={-150}>
+          <Logo to="intro" smooth={true} duration={500} offset={-220}>
             The Stanleys
           </Logo>
-          <DesktopLink to="who" smooth={true} duration={500} offset={-150}>
+          <DesktopLink to="who" smooth={true} duration={500} offset={-350}>
             Who are The Stanleys?
           </DesktopLink>
-          <DesktopLink to="roadmap" smooth={true} duration={500} offset={250}>
+          <DesktopLink to="roadmap" smooth={true} duration={500} offset={-120}>
             Roadmap
           </DesktopLink>
           <DesktopLink to="team" smooth={true} duration={500} offset={-150}>
@@ -101,12 +75,6 @@ const Navigation = () => {
               <DiscordLink>Discord</DiscordLink>
             </LinkOut>
           </Socials>
-
-          <FloatingCorners>
-            <CornerLeft src={cornerLeft} />
-            <CornerRight src={cornerRight} />
-          </FloatingCorners>
-
           <MobileMenuToggleButton>
             {isMenuOpen ? (
               <img onClick={handleMenuClick} src={menuClose} alt="" />
@@ -181,22 +149,6 @@ const DiscordLink = styled(OutboundLink)`
 const CornerLeft = styled.img``;
 const CornerRight = styled.img``;
 
-const FloatingCorners = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  bottom: -31px;
-  width: 1650px;
-
-  @media (max-width: 1650px) {
-    width: 100%;
-  }
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
-`;
-
 const AlignTitle = styled.div`
   position: absolute;
   display: none;
@@ -261,10 +213,42 @@ const DesktopLink = styled(Link)`
 `;
 
 const Container = styled.div`
+  &:before {
+    content: '';
+    position: absolute;
+    background-color: transparent;
+    bottom: -68px;
+    height: 68px;
+    width: 34px;
+    border-top-left-radius: 34px;
+    box-shadow: 0 -34px 0 0 #2b4f87;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+
+    background-color: transparent;
+    bottom: -68px;
+    right: 0;
+    height: 68px;
+    width: 34px;
+    border-top-right-radius: 34px;
+    box-shadow: 0 -34px 0 0 #2b4f87;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
   display: flex;
   position: relative;
   align-items: center;
-  max-width: 1650px;
+  max-width: 1651px;
   width: 100%;
 `;
 
@@ -288,11 +272,15 @@ const Wrapper = styled.div`
     height: 85px;
   }
 
-  top: ${props => props.position}px;
+  transform: translateY(${props => (props.displayNavigation ? '0' : '-130px')});
+  transition: 0.3s;
 
-  position: ${props => (props.displayNavigation ? 'fixed' : 'absolute')};
+  position: fixed;
+  background: #2b4f87;
 
-  background: ${props => (props.displayNavigation ? '#2b4f87' : '#2b4f87')};
+  @media (max-width: 1024px) {
+    transform: translateY(0);
+  }
 `;
 
 export default Navigation;
