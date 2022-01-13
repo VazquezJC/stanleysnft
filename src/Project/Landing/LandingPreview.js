@@ -239,7 +239,6 @@ const LandingPreview = () => {
                   <Profile person={team.colorsoftheworld} />
                 </UpperProfiles>
                 <LowerProfiles>
-                  <Profile person={team.chivas} />
                   <Profile person={team.apura} />
                 </LowerProfiles>
               </Profiles>
