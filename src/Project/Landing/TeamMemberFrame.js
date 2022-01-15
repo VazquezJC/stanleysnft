@@ -21,7 +21,7 @@ const TeamMemberFrame = forwardRef(({ person, color, frameOrientations, portrait
       <FrameContainer ref={ref} isVisible={isVisible}>
         <TeamImgContainer color={color}>
           <FrameSuitcase src={portrait} alt="" />
-          <FrameGlassFront src={frameGlass} alt="" />
+          <FrameGlassFront isVisible={isVisible} src={frameGlass} alt="" />
         </TeamImgContainer>
         <FrameLeft degree={frameOrientations.left} src={frameLeft} alt="" />
         <FrameRight degree={frameOrientations.right} src={frameRight} alt="" />
@@ -112,6 +112,10 @@ const FrameGlassFront = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
+
+  opacity: ${props => (props.isVisible ? 0.6 : 0)};
+  transform: translateX(${props => (props.isVisible ? '0' : '70px')});
+  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const TeamNameplateText = styled.div`
@@ -137,8 +141,8 @@ const TeamNameplate = styled.div`
   justify-content: center;
   display: flex;
   opacity: ${props => (props.isVisible ? 1 : 0)};
-  transform: translateY(${props => (props.isVisible ? '0' : '30px')});
-  transition: opacity 0.6s 1.1s linear, transform 0.8s 1.1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transform: translateY(${props => (props.isVisible ? '0' : '120px')});
+  transition: opacity 0.6s 0.3s linear, transform 0.6s 0.1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const TeamImgContainer = styled.div`

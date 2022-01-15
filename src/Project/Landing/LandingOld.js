@@ -187,6 +187,7 @@ const LandingPreview = () => {
       <Wrapper>
         <Container>
           <Section1 name="intro">
+            {!isMobileOnly && <UfoEasterEgg inView={titleInView} src={ufo} alt="" />}
             <WhiteHouse
               inView={titleInView}
               x={stanleysBackgrounds.current[stanleyBackgroundIndex.current].x}
@@ -325,6 +326,21 @@ const LandingPreview = () => {
     </>
   );
 };
+
+const UfoEasterEgg = styled.img`
+  position: absolute;
+  width: 236px;
+  height: 147px;
+  filter: contrast(20%);
+  filter: blur(${props => (props.inView ? '9px' : '35px')});
+  transform: scale(${props => (props.inView ? 1 : 0)});
+  left: ${props => (props.inView ? '130%' : '-5%')};
+  top: ${props => (props.inView ? '50%' : '-25%')};
+  opacity: ${props => (props.inView ? 1 : 0)};
+  z-index: 10;
+  transition: opacity 0.8s 9s linear, filter 0.5s 9s linear, left 3s 9s cubic-bezier(0.26, 0.67, 0.48, 0.91),
+    top 2.5s 9s cubic-bezier(0.26, 0.67, 0.48, 0.91), transform 2s 9s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+`;
 
 const HeaderExtender = styled.div`
   padding-left: 7vw;
@@ -475,6 +491,7 @@ const FilmStripBottom = styled(FilmStrip)`
 const PhotoLineupContainer = styled.div`
   display: flex;
   position: relative;
+  z-index: 20;
   flex-direction: column;
 `;
 
@@ -730,7 +747,7 @@ const AlignTitle = styled.div`
   opacity: ${props => (props.inView ? 1 : 0)};
   transition: opacity 0.2s 0.35s linear, transform 0.7s 0.25s cubic-bezier(0.26, 0.67, 0.48, 0.91);
   ${isMobileOnly && 'transition: opacity 0.2s 0.15s linear, transform 0.7s 0.05s cubic-bezier(0.26, 0.67, 0.48, 0.91)'};
-
+  z-index: 15;
   @media (max-width: 1024px) {
     display: none;
   }
@@ -776,6 +793,7 @@ const Section5 = styled.section`
 const WhiteHouse = styled.img`
   position: absolute;
   right: ${props => props.x}vw;
+  z-index: 5;
   bottom: ${props => props.y}vw;
   filter: blur(2.5px);
 
@@ -1372,7 +1390,7 @@ const StanleyAvatarFloat1 = styled.img`
   position: absolute;
   bottom: 0;
   right: 0;
-  z-index: 5;
+  z-index: 15;
   height: auto;
   width: clamp(250px, 98vw / 2.2, 950px);
 
