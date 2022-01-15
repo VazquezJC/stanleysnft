@@ -48,13 +48,22 @@ import teamFrameTop from 'App/assets/images/team-frame-top.png';
 import teamFrameBottom from 'App/assets/images/team-frame-bottom.png';
 import teamFrameLeft from 'App/assets/images/team-frame-left.png';
 import teamFrameRight from 'App/assets/images/team-frame-right.png';
-
+import teamFrameGlass from 'App/assets/images/team-frame-glass.png';
 import teamNameplateStartcap from 'App/assets/images/team-sign-left.png';
 import teamNameplateEndcap from 'App/assets/images/team-sign-right.png';
 import teamNameplateBg from 'App/assets/images/team-sign-bg.png';
-
 import teamFrameSuitcase from 'App/assets/images/team-frame-suitcase2.png';
 import teamFrameColors from 'App/assets/images/team-frame-colors2.png';
+import teamFrameSpeechMiddleLeft from 'App/assets/images/frame-speech-middle-left.png';
+import teamFrameSpeechMiddleRight from 'App/assets/images/frame-speech-middle-right.png';
+import teamFrameSpeechMiddleBg from 'App/assets/images/frame-speech-middle-bg.png';
+import teamFrameSpeechTopLeft from 'App/assets/images/frame-speech-top-left.png';
+import teamFrameSpeechTopRight from 'App/assets/images/frame-speech-top-right.png';
+import teamFrameSpeechTopBg from 'App/assets/images/frame-speech-top-bg.png';
+import teamFrameSpeechBottom from 'App/assets/images/frame-speech-bottom.png';
+
+import SpeechBubble from 'Project/Landing/SpeechBubble';
+import TeamMemberFrame from 'Project/Landing/TeamMemberFrame';
 
 import Navigation from 'Project/Navigation';
 
@@ -133,6 +142,21 @@ const LandingPreview = () => {
 
   const [rivermapRef, rivermapInView] = useInView({
     threshold: 0.15,
+    triggerOnce: true,
+  });
+
+  const [team1Ref, team1InView] = useInView({
+    threshold: isMobileOnly ? 0.1 : 0.2,
+    triggerOnce: true,
+  });
+
+  const [team2Ref, team2InView] = useInView({
+    threshold: isMobileOnly ? 0.1 : 0.7,
+    triggerOnce: true,
+  });
+
+  const [team3Ref, team3InView] = useInView({
+    threshold: isMobileOnly ? 0.1 : 1,
     triggerOnce: true,
   });
 
@@ -254,36 +278,44 @@ const LandingPreview = () => {
           <Section6>
             <WhoContent>
               {/* <QuestionImg src={headerQuestion} /> */}
-              <Header name="team">Meet the Team</Header>
+              <HeaderExtender>
+                <Header name="team">Meet the Team</Header>
+              </HeaderExtender>
               <Profiles>
-                <FrameContainer>
-                  <TeamImgContainer color={'orange'}>
-                    <FrameSuitcase src={teamFrameSuitcase} alt="" />
-                  </TeamImgContainer>
-                  <FrameLeft degree={0} src={teamFrameLeft} alt="" />
-                  <FrameRight src={teamFrameRight} alt="" />
-                  <FrameTop src={teamFrameTop} alt="" />
-                  <FrameBottom src={teamFrameBottom} alt="" />
-                  <TeamNameplate>
-                    <TeamNameplateText>Carlos "LittleSuitcase" Vazquez</TeamNameplateText>
-                    <TeamNameplateStartcap src={teamNameplateStartcap} alt="" />
-                    <TeamNameplateEndcap src={teamNameplateEndcap} alt="" />
-                  </TeamNameplate>
-                </FrameContainer>
-                <FrameContainer>
-                  <TeamImgContainer color={'green'}>
-                    <FrameSuitcase src={teamFrameColors} alt="" />
-                  </TeamImgContainer>
-                  <FrameLeft degree={3} src={teamFrameLeft} alt="" />
-                  <FrameRight degree={-5} src={teamFrameRight} alt="" />
-                  <FrameTop degree={-6} src={teamFrameTop} alt="" />
-                  <FrameBottom degree={-4} src={teamFrameBottom} alt="" />
-                  <TeamNameplate>
-                    <TeamNameplateText>Hilde "ColorsOfTheWorld" Hendriks-Vos</TeamNameplateText>
-                    <TeamNameplateStartcap src={teamNameplateStartcap} alt="" />
-                    <TeamNameplateEndcap src={teamNameplateEndcap} alt="" />
-                  </TeamNameplate>
-                </FrameContainer>
+                <TeamMemberFrame
+                  person={team.littlesuitcase}
+                  color={'orange'}
+                  portrait={teamFrameSuitcase}
+                  frameOrientations={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                  name='Carlos "LittleSuitcase" Vazquez'
+                  description={'Crypto dad, golf nut, and world traveler. Ask me where I am going next...'}
+                  isVisible={team1InView}
+                  ref={team1Ref}
+                />
+                <TeamMemberFrame
+                  person={team.colorsoftheworld}
+                  color={'green'}
+                  portrait={teamFrameColors}
+                  frameOrientations={{ top: -6, left: 3, right: -5, bottom: -4 }}
+                  name='Hilde "ColorsOfTheWorld" Hendriks-Vos'
+                  description={
+                    'Art lover, art creator, and travel fanatic. NFT aficionado, and eager to learn everything new that comes my way.'
+                  }
+                  isVisible={team2InView}
+                  ref={team2Ref}
+                />
+                <TeamMemberFrame
+                  person={team.apura}
+                  color={'teal'}
+                  portrait={null}
+                  frameOrientations={{ top: 2, left: 1, right: 3, bottom: 1 }}
+                  name="Apura"
+                  description={
+                    'Dad, serial business owner and crypto enthusiast. Strong believer in transparency, teamwork, and the power of community'
+                  }
+                  isVisible={team3InView}
+                  ref={team3Ref}
+                />
               </Profiles>
             </WhoContent>
           </Section6>
@@ -294,78 +326,8 @@ const LandingPreview = () => {
   );
 };
 
-const TeamNameplateText = styled.div`
-  z-index: 100;
-  position: absolute;
-  transform: rotate(1.5deg);
-  left: 40px;
-  font-family: 'Sedgwick Ave', 'cursive';
-  font-size: 20px;
-  text-shadow: 1px 2px #a95d2b;
-  top: 38px;
-  color: #2b1709;
-`;
-
-const TeamNameplateStartcap = styled.img`
-  position: absolute;
-  left: 0;
-`;
-const TeamNameplateEndcap = styled.img`
-  position: absolute;
-  right: 0;
-`;
-
-const TeamNameplate = styled.div`
-  position: absolute;
-  bottom: -20px;
-  left: -50px;
-  width: 390px;
-`;
-
-// background-repeat: repeat-x;
-// background: url(${teamNameplateBg});
-
-const TeamImgContainer = styled.div`
-  position: absolute;
-  width: 75%;
-  height: 75%;
-  background-color: ${props => props.color};
-  top: 50px;
-  left: 40px;
-`;
-
-const FrameColors = styled.img``;
-const FrameSuitcase = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const Frame = styled.img`
-  position: absolute;
-`;
-
-const FrameTop = styled(Frame)`
-  top: 15px;
-  transform: rotate(${props => props.degree + 'deg'});
-`;
-const FrameBottom = styled(Frame)`
-  bottom: 0;
-  right: 20px;
-  transform: rotate(${props => props.degree + 'deg'});
-`;
-const FrameLeft = styled(Frame)`
-  left: 0;
-  transform: rotate(${props => props.degree + 'deg'});
-`;
-const FrameRight = styled(Frame)`
-  right: 10px;
-  transform: rotate(${props => props.degree + 'deg'});
-`;
-
-const FrameContainer = styled.div`
-  position: relative;
-  width: 316px;
-  height: 361px;
+const HeaderExtender = styled.div`
+  padding-left: 7vw;
 `;
 
 const Section = styled.section`
@@ -869,7 +831,6 @@ const WhoContent = styled.div`
   flex-direction: column;
   gap: 7px;
   width: 100%;
-  max-width: 1250px;
   @media (max-width: 1024px) {
     align-items: flex-start;
     gap: 0;
@@ -879,12 +840,17 @@ const WhoContent = styled.div`
 const Profiles = styled.div`
   display: flex;
   position: relative;
-  flex-direction: row;
-  row-gap: 180px;
-  column-gap: 160px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin-top: 100px;
+  row-gap: 140px;
+  column-gap: 140px;
 
   @media (max-width: 1024px) {
     flex-direction: column;
+    align-items: center;
+    width: 100%;
     row-gap: 0;
   }
 `;
@@ -951,10 +917,10 @@ const QuestionImg = styled.img`
 const Section6 = styled(Section)`
   border-radius: 0 0 34px 34px;
   position: relative;
-  padding-left: 8vw;
-  padding-right: 8vw;
-  padding-top: clamp(70px, 12vw, 235px);
-  padding-bottom: clamp(80px, 14vw, 310px);
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-top: clamp(70px, 6vw, 235px);
+  padding-bottom: clamp(80px, 8vw, 310px);
   gap: 4vw;
   display: flex;
   background-color: ${color.background['container']};
@@ -963,6 +929,8 @@ const Section6 = styled(Section)`
 
   @media (max-width: 1024px) {
     border-radius: 0;
+    padding-left: 3vw;
+    padding-right: 3vw;
   }
 `;
 
