@@ -17,19 +17,7 @@ import socialTwitter from 'App/assets/images/social_twitter.png';
 import socialInstagram from 'App/assets/images/social_instagram.png';
 import socialLinkedin from 'App/assets/images/social_linkedin.png';
 
-const Member = forwardRef(({ person, color, frameOrientations, portrait, name, description, isVisible }, ref) => {
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-  function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  function clamp(val, min, max) {
-    return val > max ? max : val < min ? min : val;
-  }
-
+const Member = forwardRef(({ person, color, frameOrientations, portrait, name, description, isVisible, speechDelay }, ref) => {
   return (
     <Wrapper>
       <FrameContainer ref={ref} isVisible={isVisible}>
@@ -41,7 +29,7 @@ const Member = forwardRef(({ person, color, frameOrientations, portrait, name, d
         <FrameRight degree={frameOrientations.right} src={frameRight} alt="" />
         <FrameTop degree={frameOrientations.top} src={frameTop} alt="" />
         <FrameBottom degree={frameOrientations.bottom} src={frameBottom} alt="" />
-        <SpeechBubble randomDelay={clamp(getRandomArbitrary(1, 4), 0, 5)} isVisible={isVisible} text={description} />
+        <SpeechBubble randomDelay={speechDelay} isVisible={isVisible} text={description} />
         <SocialFrameContainer>
           {person.linkedin.length > 0 && (
             <Social>
@@ -117,7 +105,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 30px;
-  margin-bottom: 120px;
+  margin-bottom: 50px;
 `;
 
 const FrameGlassFront = styled.img`

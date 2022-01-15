@@ -119,7 +119,6 @@ export const section3_column1_roadmapExplainer = `
 
 // SECTION 3: Initial List
 export const section3_column1_initialList = `
-  <h3>Initial</h3>
   <li>42.5% profit sharing during mint for those that buy and hold beyond 10 days</li>
   <li>100% ownership after mint (first of its kind) for those that buy and hold beyond 10 days</li>
   <li>Eligibility to represent the community as part of the future leadership</li>
@@ -131,7 +130,6 @@ export const section3_column1_initialList = `
 
 // SECTION 3: TBD List
 export const section3_column1_tbdList = `
-  <h3>TBD</h3>
   <li>Evolving international awareness (badges, #flyer tokenization)</li>
   <li>Additional characters that expand potential for future growth</li>
   <li>Profit sharing evolution</li>

@@ -99,15 +99,24 @@ const Container = styled.div`
     transform 0.6s ${props => (isMobileOnly ? '0.9' : props.randomDelay)}s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   max-width: 320px;
+  width: calc(30vw / 2);
   position: absolute;
   display: flex;
   flex-direction: column;
   bottom: 270px;
   left: 110px;
 
+  @media (max-width: 1280px) {
+    width: calc(40vw / 2);
+  }
+
+  @media (max-width: 1024px) {
+    width: calc(90vw / 2);
+  }
+
   @media (max-width: 480px) {
     left: 5%;
-    max-width: 270px;
+    width: 80vw;
   }
 `;
 

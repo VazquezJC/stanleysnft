@@ -7,9 +7,9 @@ const Title = () => {
   return (
     <TitleArea>
       <Framer>
-        <Frame src={frame} />
-        <Logo src={title} />
-        <Portrait src={portrait} />
+        <Frame src={frame} alt="" />
+        <Logo src={title} alt="The Stanleys Title" />
+        <Portrait src={portrait} alt="" />
       </Framer>
     </TitleArea>
   );

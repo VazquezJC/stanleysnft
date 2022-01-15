@@ -40,6 +40,16 @@ import stanleyHippo3_1024w from 'App/assets/images/stanley-s1-hippoboy-3-1024w.p
 import stanleyHippo3_1280w from 'App/assets/images/stanley-s1-hippoboy-3-1280w.png';
 import stanleyHippo3_1650w from 'App/assets/images/stanley-s1-hippoboy-3-1650w.png';
 
+import stanleyHippo1_avif_1024w from 'App/assets/images/stanley-s1-hippoboy-1-1024w.avif';
+import stanleyHippo1_avif_1280w from 'App/assets/images/stanley-s1-hippoboy-1-1280w.avif';
+import stanleyHippo1_avif_1650w from 'App/assets/images/stanley-s1-hippoboy-1-1650w.avif';
+import stanleyHippo2_avif_1024w from 'App/assets/images/stanley-s1-hippoboy-2-1024w.avif';
+import stanleyHippo2_avif_1280w from 'App/assets/images/stanley-s1-hippoboy-2-1280w.avif';
+import stanleyHippo2_avif_1650w from 'App/assets/images/stanley-s1-hippoboy-2-1650w.avif';
+import stanleyHippo3_avif_1024w from 'App/assets/images/stanley-s1-hippoboy-3-1024w.avif';
+import stanleyHippo3_avif_1280w from 'App/assets/images/stanley-s1-hippoboy-3-1280w.avif';
+import stanleyHippo3_avif_1650w from 'App/assets/images/stanley-s1-hippoboy-3-1650w.avif';
+
 import filmStripEdge from 'App/assets/images/film-strip.png';
 
 import bgEiffelPng from 'App/assets/images/background-eiffel.png';
@@ -56,6 +66,16 @@ import stanleyCroc2_1650w from 'App/assets/images/stanley-s2-croc-2-1650w.png';
 import stanleyCroc3_1024w from 'App/assets/images/stanley-s2-croc-3-1024w.png';
 import stanleyCroc3_1280w from 'App/assets/images/stanley-s2-croc-3-1280w.png';
 import stanleyCroc3_1650w from 'App/assets/images/stanley-s2-croc-3-1650w.png';
+
+import stanleyCroc1_avif_1024w from 'App/assets/images/stanley-s2-croc-1-1024w.avif';
+import stanleyCroc1_avif_1280w from 'App/assets/images/stanley-s2-croc-1-1280w.avif';
+import stanleyCroc1_avif_1650w from 'App/assets/images/stanley-s2-croc-1-1650w.avif';
+import stanleyCroc2_avif_1024w from 'App/assets/images/stanley-s2-croc-2-1024w.avif';
+import stanleyCroc2_avif_1280w from 'App/assets/images/stanley-s2-croc-2-1280w.avif';
+import stanleyCroc2_avif_1650w from 'App/assets/images/stanley-s2-croc-2-1650w.avif';
+import stanleyCroc3_avif_1024w from 'App/assets/images/stanley-s2-croc-3-1024w.avif';
+import stanleyCroc3_avif_1280w from 'App/assets/images/stanley-s2-croc-3-1280w.avif';
+import stanleyCroc3_avif_1650w from 'App/assets/images/stanley-s2-croc-3-1650w.avif';
 import bgRiver from 'App/assets/images/section2_background2.png';
 
 import mapLeft from 'App/assets/images/map-left2.png';
@@ -157,9 +177,32 @@ const Landing = () => {
     triggerOnce: true,
   });
 
-  const stanleysHippos1024w = useRef([stanleyHippo1_1024w, stanleyHippo2_1024w, stanleyHippo3_1024w]);
-  const stanleysHippos1280w = useRef([stanleyHippo1_1280w, stanleyHippo2_1280w, stanleyHippo3_1280w]);
-  const stanleysHippos1650w = useRef([stanleyHippo1_1650w, stanleyHippo2_1650w, stanleyHippo3_1650w]);
+  const stanleysHippos = useRef({
+    png: {
+      '1024w': [stanleyHippo1_1024w, stanleyHippo2_1024w, stanleyHippo3_1024w],
+      '1280w': [stanleyHippo1_1280w, stanleyHippo2_1280w, stanleyHippo3_1280w],
+      '1650w': [stanleyHippo1_1650w, stanleyHippo2_1650w, stanleyHippo3_1650w],
+    },
+    avif: {
+      '1024w': [stanleyHippo1_avif_1024w, stanleyHippo2_avif_1024w, stanleyHippo3_avif_1024w],
+      '1280w': [stanleyHippo1_avif_1280w, stanleyHippo2_avif_1280w, stanleyHippo3_avif_1280w],
+      '1650w': [stanleyHippo1_avif_1650w, stanleyHippo2_avif_1650w, stanleyHippo3_avif_1650w],
+    },
+  });
+
+  const stanleysCrocs = useRef({
+    png: {
+      '1024w': [stanleyCroc1_1024w, stanleyCroc2_1024w, stanleyCroc3_1024w],
+      '1280w': [stanleyCroc1_1280w, stanleyCroc2_1280w, stanleyCroc3_1280w],
+      '1650w': [stanleyCroc1_1650w, stanleyCroc2_1650w, stanleyCroc3_1650w],
+    },
+    avif: {
+      '1024w': [stanleyCroc1_avif_1024w, stanleyCroc2_avif_1024w, stanleyCroc3_avif_1024w],
+      '1280w': [stanleyCroc1_avif_1280w, stanleyCroc2_avif_1280w, stanleyCroc3_avif_1280w],
+      '1650w': [stanleyCroc1_avif_1650w, stanleyCroc2_avif_1650w, stanleyCroc3_avif_1650w],
+    },
+  });
+
   const stanleysCrocs1024w = useRef([stanleyCroc1_1024w, stanleyCroc2_1024w, stanleyCroc3_1024w]);
   const stanleysCrocs1280w = useRef([stanleyCroc1_1280w, stanleyCroc2_1280w, stanleyCroc3_1280w]);
   const stanleysCrocs1650w = useRef([stanleyCroc1_1650w, stanleyCroc2_1650w, stanleyCroc3_1650w]);
@@ -203,8 +246,12 @@ const Landing = () => {
               <Title />
             </AlignTitle>
             <StanleyAvatarFloat1 inView={titleInView}>
+              <source
+                type="image/avif"
+                srcSet={`${stanleysHippos.current['avif']['1024w'][stanleyIndex]} 1024w, ${stanleysHippos.current['avif']['1280w'][stanleyIndex]} 1280w, ${stanleysHippos.current['avif']['1650w'][stanleyIndex]} 1650w`}
+              />
               <img
-                srcSet={`${stanleysHippos1024w.current[stanleyIndex]} 1024w, ${stanleysHippos1280w.current[stanleyIndex]} 1280w, ${stanleysHippos1650w.current[stanleyIndex]} 1650w`}
+                srcSet={`${stanleysHippos.current['png']['1024w'][stanleyIndex]} 1024w, ${stanleysHippos.current['png']['1280w'][stanleyIndex]} 1280w, ${stanleysHippos.current['png']['1650w'][stanleyIndex]} 1650w`}
                 alt="Stanley Hippo NFTs"
               />
             </StanleyAvatarFloat1>
@@ -230,8 +277,12 @@ const Landing = () => {
                 dangerouslySetInnerHTML={{ __html: section2_column2 }}
               />
               <StanleyAvatarFloat2 inView={stanley2InView} ref={stanley2Ref}>
+                <source
+                  type="image/avif"
+                  srcSet={`${stanleysCrocs.current['avif']['1024w'][stanleyIndex]} 1024w, ${stanleysCrocs.current['avif']['1280w'][stanleyIndex]} 1280w, ${stanleysCrocs.current['avif']['1650w'][stanleyIndex]} 1650w`}
+                />
                 <img
-                  srcSet={`${stanleysCrocs1024w.current[stanleyIndex]} 1024w, ${stanleysCrocs1280w.current[stanleyIndex]} 1280w, ${stanleysCrocs1650w.current[stanleyIndex]} 1650w`}
+                  srcSet={`${stanleysCrocs.current['png']['1024w'][stanleyIndex]} 1024w, ${stanleysCrocs.current['png']['1280w'][stanleyIndex]} 1280w, ${stanleysCrocs.current['png']['1650w'][stanleyIndex]} 1650w`}
                   alt="Stanley Crocodile NFTs"
                 />
               </StanleyAvatarFloat2>
@@ -250,16 +301,14 @@ const Landing = () => {
                       dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }}
                     />
                     <RoadmapLists>
-                      <InitialList
-                        ref={roadmapList1Ref}
-                        inView={roadmapList1InView}
-                        dangerouslySetInnerHTML={{ __html: section3_column1_initialList }}
-                      />
-                      <TBDList
-                        ref={roadmapList2Ref}
-                        inView={roadmapList2InView}
-                        dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}
-                      ></TBDList>
+                      <InitialWrapper ref={roadmapList1Ref} inView={roadmapList1InView}>
+                        <h3>Initial</h3>
+                        <InitialList dangerouslySetInnerHTML={{ __html: section3_column1_initialList }} />
+                      </InitialWrapper>
+                      <TBDWrapper ref={roadmapList2Ref} inView={roadmapList2InView}>
+                        <h3>TBD</h3>
+                        <TBDList dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}></TBDList>
+                      </TBDWrapper>
                     </RoadmapLists>
                   </MapContents>
                   <RightMap />
@@ -291,9 +340,9 @@ const Landing = () => {
               <source type="image/avif" srcSet={`${roadmapAvif_1280w} 1280w, ${roadmapAvif_1650w} 1650w`} />
               <img srcSet={`${roadmapPng_1280w} 1280w, ${roadmapPng_1650w} 1650w`} alt="Visual Representation of Roadmap" />
             </ProgressMap>
-            <UfoImage inView={rivermapInView} src={ufoPng} />
+            <UfoImage inView={rivermapInView} src={ufoPng} alt="" />
           </ProgressMapWrapper>
-          <Border2 src={border} />
+          <Border2 src={border} alt="" />
           <Section6>
             <WhoContent>
               {/* <QuestionImg src={headerQuestion} /> */}
@@ -310,6 +359,7 @@ const Landing = () => {
                   description={'Crypto dad, golf nut, and world traveler. Ask me where I am going next...'}
                   isVisible={team1InView}
                   ref={team1Ref}
+                  speechDelay={2.1}
                 />
                 <Member
                   person={team.colorsoftheworld}
@@ -322,6 +372,7 @@ const Landing = () => {
                   }
                   isVisible={team2InView}
                   ref={team2Ref}
+                  speechDelay={4.1}
                 />
                 <Member
                   person={team.apura}
@@ -334,6 +385,7 @@ const Landing = () => {
                   }
                   isVisible={team3InView}
                   ref={team3Ref}
+                  speechDelay={6.8}
                 />
               </Profiles>
             </WhoContent>
@@ -344,6 +396,60 @@ const Landing = () => {
     </>
   );
 };
+
+const InitialWrapper = styled.div`
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 0.3s linear;
+
+  li {
+    &:before {
+      position: absolute;
+      display: inline-block;
+      top: 4px;
+      left: -32px;
+      content: '';
+      background-image: url(${checkBox1});
+      background-size: 22px 22px;
+      width: 22px;
+      height: 22px;
+    }
+
+    position: relative;
+    margin-bottom: 12px;
+    left: 15px;
+    margin-left: 10px;
+    line-height: 22px;
+    ${font.size(16)};
+  }
+
+  width: 50%;
+  margin-top: 10px;
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+    width: auto;
+  }
+`;
+const TBDWrapper = styled.div`
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 0.3s linear;
+  width: 40%;
+
+  li {
+    &:before {
+      content: '- ';
+    }
+
+    position: relative;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    line-height: 22px;
+    ${font.size(16)};
+  }
+  @media (max-width: 768px) {
+    width: auto;
+  }
+`;
 
 const UfoEasterEgg = styled.img`
   position: absolute;
@@ -436,6 +542,8 @@ const Pulse2 = keyframes`
 
 const StarPng = styled.img`
   position: absolute;
+  width: auto;
+  height: auto;
   bottom: ${props => props.bottom};
   left: ${props => props.left};
   animation: ${props => props.animation} ${props => props.duration}s ${props => props.delay}s steps(1, end) infinite;
@@ -462,6 +570,8 @@ const ufoAnimation = keyframes`
 const UfoImage = styled.img`
   position: absolute;
   right: 23%;
+  width: auto;
+  height: auto;
 
   transform: translateY(${props => (props.inView ? 0 : '50px')});
   opacity: ${props => (props.inView ? 1 : 0)};
@@ -831,61 +941,9 @@ const RarityList = styled.ul`
   line-height: 20px;
 `;
 
-const TBDList = styled.ul`
-  opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.6s 0.3s linear;
-  width: 40%;
+const TBDList = styled.ul``;
 
-  li {
-    &:before {
-      content: '- ';
-    }
-
-    position: relative;
-    margin-bottom: 12px;
-    margin-left: 10px;
-    line-height: 22px;
-    ${font.size(16)};
-  }
-  @media (max-width: 768px) {
-    width: auto;
-  }
-`;
-
-const InitialList = styled.ul`
-  opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.6s 0.3s linear;
-
-  li {
-    &:before {
-      position: absolute;
-      display: inline-block;
-      top: 4px;
-      left: -32px;
-      content: '';
-      background-image: url(${checkBox1});
-      background-size: 22px 22px;
-      width: 22px;
-      height: 22px;
-    }
-
-    position: relative;
-    margin-bottom: 12px;
-    left: 15px;
-    margin-left: 10px;
-    line-height: 22px;
-    ${font.size(16)};
-  }
-
-  width: 50%;
-  margin-top: 10px;
-
-  @media (max-width: 768px) {
-    margin-top: 0;
-
-    width: auto;
-  }
-`;
+const InitialList = styled.ul``;
 
 const RoadmapLists = styled.div`
   position: relative;
