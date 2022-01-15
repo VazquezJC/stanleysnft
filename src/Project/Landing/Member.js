@@ -1,54 +1,68 @@
 import styled from 'styled-components';
-import { forwardRef, useRef } from 'react';
+import { forwardRef, useEffect } from 'react';
 import SpeechBubble from 'Project/Landing/SpeechBubble';
+
 import frameTop from 'App/assets/images/team-frame-top.png';
 import frameBottom from 'App/assets/images/team-frame-bottom.png';
 import frameLeft from 'App/assets/images/team-frame-left.png';
 import frameRight from 'App/assets/images/team-frame-right.png';
 import frameGlass from 'App/assets/images/team-frame-glass.png';
+
 import nameplateBorderLeft from 'App/assets/images/team-sign-left.png';
 import nameplateMiddleBg from 'App/assets/images/team-sign-bg.png';
 import nameplateBorderRight from 'App/assets/images/team-sign-right.png';
-import frameSocialBg from 'App/assets/images/team-frame-social.png';
 
+import frameSocialBg from 'App/assets/images/team-frame-social.png';
 import socialTwitter from 'App/assets/images/social_twitter.png';
 import socialInstagram from 'App/assets/images/social_instagram.png';
 import socialLinkedin from 'App/assets/images/social_linkedin.png';
 
-const TeamMemberFrame = forwardRef(({ person, color, frameOrientations, portrait, name, description, isVisible }, ref) => {
+const Member = forwardRef(({ person, color, frameOrientations, portrait, name, description, isVisible }, ref) => {
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function clamp(val, min, max) {
+    return val > max ? max : val < min ? min : val;
+  }
+
   return (
     <Wrapper>
       <FrameContainer ref={ref} isVisible={isVisible}>
         <TeamImgContainer color={color}>
-          <FrameSuitcase src={portrait} alt="" />
+          <FrameSuitcase src={portrait} alt={`${name}'s Portrait`} />
           <FrameGlassFront isVisible={isVisible} src={frameGlass} alt="" />
         </TeamImgContainer>
         <FrameLeft degree={frameOrientations.left} src={frameLeft} alt="" />
         <FrameRight degree={frameOrientations.right} src={frameRight} alt="" />
         <FrameTop degree={frameOrientations.top} src={frameTop} alt="" />
         <FrameBottom degree={frameOrientations.bottom} src={frameBottom} alt="" />
-        <SpeechBubble isVisible={isVisible} text={description} />
+        <SpeechBubble randomDelay={clamp(getRandomArbitrary(1, 4), 0, 5)} isVisible={isVisible} text={description} />
         <SocialFrameContainer>
           {person.linkedin.length > 0 && (
             <Social>
-              <SocialLink href={person.linkedin}>
-                <SocialIcon src={socialLinkedin} alt="" />
+              <SocialLink tabIndex="0" href={person.linkedin}>
+                <SocialIcon src={socialLinkedin} alt="Linkedin Icon" />
                 &nbsp;Linkedin
               </SocialLink>
             </Social>
           )}
           {person.twitter.length > 0 && (
             <Social>
-              <SocialLink href={person.twitter}>
-                <SocialIcon src={socialTwitter} alt="" />
+              <SocialLink tabIndex="0" href={person.twitter}>
+                <SocialIcon src={socialTwitter} alt="Twitter Icon" />
                 &nbsp;Twitter
               </SocialLink>
             </Social>
           )}
           {person.instagram.length > 0 && (
             <Social>
-              <SocialLink href={person.instagram}>
-                <SocialIcon src={socialInstagram} alt="" />
+              <SocialLink tabIndex="0" href={person.instagram}>
+                <SocialIcon src={socialInstagram} alt="Instagram Icon" />
                 &nbsp;Instagram
               </SocialLink>
             </Social>
@@ -147,11 +161,11 @@ const TeamNameplate = styled.div`
 
 const TeamImgContainer = styled.div`
   position: absolute;
-  width: 75%;
-  height: 75%;
+  width: 247px;
+  height: 270px;
   background-color: ${props => props.color};
   top: 50px;
-  left: 40px;
+  left: 15px;
 `;
 
 const FrameSuitcase = styled.img`
@@ -193,4 +207,4 @@ const FrameContainer = styled.div`
   transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
-export default TeamMemberFrame;
+export default Member;

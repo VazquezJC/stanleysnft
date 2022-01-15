@@ -6,7 +6,7 @@ import { font } from 'shared/styles';
 
 const MobileMenu = ({ isMenuOpen, handleMenuClick }) => {
   return (
-    <Wrapper isOpen={isMenuOpen}>
+    <Wrapper isOpen={isMenuOpen} aria-hidden={isMenuOpen ? 'true' : 'false'}>
       <MobileOverlayContents>
         <Column>
           <MobileLink to="who" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
@@ -120,7 +120,7 @@ const MobileOverlayContents = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.nav`
   position: fixed;
   top: 0;
   left: ${props => (props.isOpen ? '0%' : '100%')};

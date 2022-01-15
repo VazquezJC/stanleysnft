@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState, Fragment, useRef } from 'react';
-import { Link, Events } from 'react-scroll';
+import { Link } from 'react-scroll';
 import { font } from 'shared/styles';
 import MobileMenu from 'Project/MobileMenu';
 import menuOpen from 'App/assets/images/menu-open.png';
@@ -46,40 +46,40 @@ const Navigation = () => {
   return (
     <Fragment>
       <MobileMenu handleMenuClick={handleMenuClick} isMenuOpen={isMenuOpen} />
-      <Wrapper displayNavigation={navigationVisible}>
+      <Wrapper aria-expanded={navigationVisible ? 'true' : 'false'} displayNavigation={navigationVisible}>
         <Container>
           <Link to="intro" smooth={true} onClick={handleCloseMenu} duration={500} offset={-150}>
             <AlignTitle>
               <Title />
             </AlignTitle>
           </Link>
-          <Logo to="intro" smooth={true} duration={500} offset={-220}>
+          <Logo tabIndex="0" to="intro" smooth={true} duration={500} offset={-220}>
             The Stanleys
           </Logo>
-          <DesktopLink to="who" smooth={true} duration={500} offset={-350}>
+          <DesktopLink tabIndex="0" to="who" smooth={true} duration={500} offset={-350}>
             Who are The Stanleys?
           </DesktopLink>
-          <DesktopLink to="roadmap" smooth={true} duration={500} offset={-120}>
+          <DesktopLink tabIndex="0" to="roadmap" smooth={true} duration={500} offset={-120}>
             Roadmap
           </DesktopLink>
-          <DesktopLink to="team" smooth={true} duration={500} offset={-150}>
+          <DesktopLink tabIndex="0" to="team" smooth={true} duration={500} offset={-150}>
             Team
           </DesktopLink>
           <Socials>
-            <LinkOut href="https://twitter.com/StanleysNFT">
+            <LinkOut tabIndex="0" href="https://twitter.com/StanleysNFT">
               <TwitterIcon src={twitterIcon} alt="" />
               <TwitterLink>Twitter</TwitterLink>
             </LinkOut>
-            <LinkOut href="https://t.co/1Emyr0KD1t">
+            <LinkOut tabIndex="0" href="https://t.co/1Emyr0KD1t">
               <DiscordIcon src={discordIcon} alt="" />
               <DiscordLink>Discord</DiscordLink>
             </LinkOut>
           </Socials>
           <MobileMenuToggleButton>
             {isMenuOpen ? (
-              <img onClick={handleMenuClick} src={menuClose} alt="" />
+              <img aria-label="Close Mobile Menu" onClick={handleMenuClick} src={menuClose} alt="" />
             ) : (
-              <img onClick={handleMenuClick} src={menuOpen} alt="" />
+              <img aria-label="Open Mobile Menu" onClick={handleMenuClick} src={menuOpen} alt="" />
             )}
           </MobileMenuToggleButton>
         </Container>
@@ -90,6 +90,7 @@ const Navigation = () => {
 
 const LinkOut = styled.a`
   display: flex;
+  margin-right: 40px;
 `;
 
 const DiscordIcon = styled.img`
@@ -115,8 +116,6 @@ const TwitterIcon = styled.img`
   }
 `;
 
-const Links = styled.div``;
-
 const Socials = styled.div`
   position: absolute;
   right: 0;
@@ -129,7 +128,6 @@ const Socials = styled.div`
 `;
 
 const OutboundLink = styled.div`
-  margin-right: 40px;
   cursor: pointer;
   display: flex;
 `;
@@ -145,9 +143,6 @@ const DiscordLink = styled(OutboundLink)`
     display: none;
   }
 `;
-
-const CornerLeft = styled.img``;
-const CornerRight = styled.img``;
 
 const AlignTitle = styled.div`
   position: absolute;
@@ -252,7 +247,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.nav`
   position: fixed;
   justify-content: center;
   height: 100px;

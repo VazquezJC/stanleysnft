@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import teamFrameSpeechMiddleLeft from 'App/assets/images/frame-speech-middle-left.png';
 import teamFrameSpeechMiddleRight from 'App/assets/images/frame-speech-middle-right.png';
-import teamFrameSpeechMiddleBg from 'App/assets/images/frame-speech-middle-bg.png';
 import teamFrameSpeechTopLeft from 'App/assets/images/frame-speech-top-left.png';
 import teamFrameSpeechTopRight from 'App/assets/images/frame-speech-top-right.png';
 import teamFrameSpeechTopBg from 'App/assets/images/frame-speech-top-bg.png';
@@ -10,15 +9,16 @@ import teamFrameSpeechBottomBg from 'App/assets/images/frame-speech-bottom-bg.pn
 import teamFrameSpeechBottom from 'App/assets/images/frame-speech-bottom.png';
 import teamFrameSpeechBottomLeft from 'App/assets/images/frame-speech-bottom-left.png';
 import teamFrameSpeechBottomRight from 'App/assets/images/frame-speech-bottom-right.png';
+import { isMobileOnly } from 'react-device-detect';
 
-const SpeechBubble = ({ text, isVisible }) => {
+const SpeechBubble = ({ text, randomDelay, isVisible }) => {
   return (
-    <Container isVisible={isVisible}>
+    <Container randomDelay={randomDelay} isVisible={isVisible}>
       <Upper>
         <Left>
-          <TopLeft src={teamFrameSpeechTopLeft} />
+          <img src={teamFrameSpeechTopLeft} alt="" />
           <MiddleLeft />
-          <BottomLeft src={teamFrameSpeechBottomLeft} />
+          <img src={teamFrameSpeechBottomLeft} alt="" />
         </Left>
         <Middle>
           <MiddleTop />
@@ -26,12 +26,12 @@ const SpeechBubble = ({ text, isVisible }) => {
           <MiddleBottom />
         </Middle>
         <Right>
-          <TopRight src={teamFrameSpeechTopRight} />
+          <img src={teamFrameSpeechTopRight} alt="" />
           <MiddleRight />
-          <BottomLeft src={teamFrameSpeechBottomRight} />
+          <img src={teamFrameSpeechBottomRight} alt="" />
         </Right>
       </Upper>
-      <Bottom src={teamFrameSpeechBottom} />
+      <Bottom src={teamFrameSpeechBottom} alt="" />
     </Container>
   );
 };
@@ -42,9 +42,6 @@ const MiddleBottom = styled.div`
   background: url(${teamFrameSpeechBottomBg});
   width: 100%;
 `;
-
-const BottomLeft = styled.img``;
-const BottomRight = styled.img``;
 
 const MiddleTop = styled.div`
   height: 16px;
@@ -62,7 +59,6 @@ const Right = styled.div`
 `;
 
 const TopLeft = styled.img``;
-
 const TopRight = styled.img``;
 
 const MiddleLeft = styled.div`
@@ -99,18 +95,19 @@ const Bottom = styled.img`
 const Container = styled.div`
   opacity: ${props => (props.isVisible ? 1 : 0)};
   transform: translateY(${props => (props.isVisible ? '0' : '10px')});
-  transition: opacity 0.3s 1.9s linear, transform 0.6s 1.7s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.3s ${props => (isMobileOnly ? '1.1' : props.randomDelay)}s linear,
+    transform 0.6s ${props => (isMobileOnly ? '0.9' : props.randomDelay)}s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   max-width: 320px;
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: -50px;
+  bottom: 270px;
   left: 110px;
 
   @media (max-width: 480px) {
     left: 5%;
-    max-width: 250px;
+    max-width: 270px;
   }
 `;
 
