@@ -1,38 +1,69 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { useEffect, useState, useRef } from 'react';
 import { font, color } from 'shared/styles';
-import stanleyAvatarFull1 from 'App/assets/images/stanleys_avatar_full_1.png';
-import stanleyAvatarFull2 from 'App/assets/images/stanleys_avatar_full_2.png';
-import photoBorder from 'App/assets/images/photo_border.png';
-import backgroundRiver from 'App/assets/images/section2_background.png';
-import backgroundWhiteHouse from 'App/assets/images/section_background_whitehouse.png';
+import { useInView } from 'react-intersection-observer';
+import { isMobileOnly } from 'react-device-detect';
+
+import photoBorder from 'App/assets/images/photo_border2.png';
+import backgroundRiver from 'App/assets/images/section2_background2.png';
 import border from 'App/assets/images/border.png';
-import phone from 'App/assets/images/phone.png';
+import phone from 'App/assets/images/phone2.png';
 import qr from 'App/assets/images/qr.jpg';
 import repeatBg from 'App/assets/images/repeat-bg.png';
-import tickInactive from 'App/assets/images/icon_tick_inactive.png';
-import bullet from 'App/assets/images/icon_bullet.png';
 
-import roadmap0 from 'App/assets/images/roadmap_0.png';
-import socialTwitter from 'App/assets/images/social_twitter.png';
-import socialInstagram from 'App/assets/images/social_instagram.png';
-import socialLinkedin from 'App/assets/images/social_linkedin.png';
+import qrScan from 'App/assets/images/qrscan.png';
+import cameraFlash from 'App/assets/images/cameraflash.png';
+import starSmall from 'App/assets/images/star-small.png';
 
-import map from 'App/assets/images/roadmap_map.png';
+import eiffel from 'App/assets/images/background-eiffel.png';
+import stonehenge from 'App/assets/images/background-stonehenge.png';
+import kremlin from 'App/assets/images/background-kremlin.png';
+import whitehouse from 'App/assets/images/background-whitehouse.png';
+
+import ufo from 'App/assets/images/ufo.png';
+
+import mapLeft from 'App/assets/images/map-left2.png';
+import mapMiddle from 'App/assets/images/map-middle2.png';
+import mapRight from 'App/assets/images/map-right2.png';
+
+import mapLeftBottom from 'App/assets/images/map-bottom-left.png';
+import mapRightBottom from 'App/assets/images/map-bottom-right.png';
+import mapMiddleBottom from 'App/assets/images/map-bottom-middle.png';
+
+import filmStripEdge from 'App/assets/images/film-strip.png';
+
+import checkBox1 from 'App/assets/images/checkbox1.png';
+
+import roadmapWithoutUfo from 'App/assets/images/roadmap_0_without_ufo.png';
+
+import newStanley1 from 'App/assets/images/Stanley_hippo-boy_1.png';
+import newStanley2 from 'App/assets/images/Stanley_hippo-boy_2.png';
+import newStanley3 from 'App/assets/images/Stanley_hippo-boy_3.png';
+import newStanley4 from 'App/assets/images/Stanleys_croc_1.png';
+import newStanley5 from 'App/assets/images/Stanleys_croc_2.png';
+import newStanley6 from 'App/assets/images/Stanleys_croc_3.png';
 import dice from 'App/assets/images/roadmap_dice.png';
 
-import stars from 'App/assets/images/section_background_stars.png';
-import Navigation from 'Project/Navigation';
+import teamFrameTop from 'App/assets/images/team-frame-top.png';
+import teamFrameBottom from 'App/assets/images/team-frame-bottom.png';
+import teamFrameLeft from 'App/assets/images/team-frame-left.png';
+import teamFrameRight from 'App/assets/images/team-frame-right.png';
 
-import { Fragment } from 'react';
+import teamNameplateStartcap from 'App/assets/images/team-sign-left.png';
+import teamNameplateEndcap from 'App/assets/images/team-sign-right.png';
+import teamNameplateBg from 'App/assets/images/team-sign-bg.png';
+
+import teamFrameSuitcase from 'App/assets/images/team-frame-suitcase2.png';
+import teamFrameColors from 'App/assets/images/team-frame-colors2.png';
+
+import Navigation from 'Project/Navigation';
 
 import Profile from 'Project/Landing/Profile';
 import Title from 'Project/Title';
 import {
-  riverProgression,
   section1,
   section2_column1,
   section2_column2,
-  qr_text,
   section3_column1_roadmapExplainer,
   section3_column1_initialList,
   section3_column1_tbdList,
@@ -42,80 +73,566 @@ import {
   footer,
 } from 'data/LandingPageText';
 
-const Landing = () => {
-  console.log(team.littlesuitcase);
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+const LandingPreview = () => {
+  const [stanleyIndex, setStanleyIndex] = useState(getRandomInt(3));
+  const stanleyBackgroundIndex = useRef(getRandomInt(4));
+
+  const [titleRef, titleInView] = useInView({
+    threshold: isMobileOnly ? 0 : 0.2,
+    triggerOnce: true,
+  });
+
+  const [landscapeRiverRef, landscapeRiverInView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  const [stanley2Ref, stanley2InView] = useInView({
+    threshold: isMobileOnly ? 0.15 : 0.55,
+    triggerOnce: true,
+  });
+
+  const [section2Paragaraph1Ref, section2Paragaraph1InView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  const [section2Paragaraph2Ref, section2Paragaraph2InView] = useInView({
+    threshold: isMobileOnly ? 0.1 : 0.55,
+    triggerOnce: true,
+  });
+
+  const [roadmapRef, roadmapInView] = useInView({
+    threshold: isMobileOnly ? 0 : 0.25,
+    triggerOnce: true,
+  });
+
+  const [roadmapExplainerRef, roadmapExplainerInView] = useInView({
+    threshold: isMobileOnly ? 0.05 : 0.85,
+    triggerOnce: true,
+  });
+
+  const [roadmapList1Ref, roadmapList1InView] = useInView({
+    threshold: isMobileOnly ? 0.1 : 0.25,
+    triggerOnce: true,
+  });
+
+  const [roadmapList2Ref, roadmapList2InView] = useInView({
+    threshold: isMobileOnly ? 0.1 : 0.45,
+    triggerOnce: true,
+  });
+
+  const [rarityRef, rarityInView] = useInView({
+    threshold: isMobileOnly ? 0.1 : 0.65,
+    triggerOnce: true,
+  });
+
+  const [rivermapRef, rivermapInView] = useInView({
+    threshold: 0.15,
+    triggerOnce: true,
+  });
+
+  const stanleysHippos = [newStanley1, newStanley2, newStanley3];
+  const stanleysCrocs = useRef([newStanley4, newStanley5, newStanley6]);
+  const stanleysBackgrounds = useRef([
+    { image: eiffel, x: 0, y: 8 },
+    { image: stonehenge, x: 1, y: 13 },
+    { image: kremlin, x: 3, y: 15 },
+    { image: whitehouse, x: 0, y: 13 },
+  ]);
+
+  useEffect(() => {
+    let stanleyTimer;
+    stanleyTimer = setTimeout(() => {
+      if (stanleyIndex < 2) {
+        setStanleyIndex(stanleyIndex + 1);
+      } else {
+        setStanleyIndex(0);
+      }
+    }, 2000);
+    return () => clearTimeout(stanleyTimer);
+  }, [stanleyIndex]);
+
   return (
-    <Fragment>
-      <Navigation />
+    <>
+      <Navigation titleInView={titleInView} />
       <Wrapper>
         <Container>
           <Section1 name="intro">
-            <WhiteHouse src={backgroundWhiteHouse} />
-            <AlignTitle>
+            <WhiteHouse
+              inView={titleInView}
+              x={stanleysBackgrounds.current[stanleyBackgroundIndex.current].x}
+              y={stanleysBackgrounds.current[stanleyBackgroundIndex.current].y}
+              src={stanleysBackgrounds.current[stanleyBackgroundIndex.current].image}
+            />
+            <AlignTitle inView={titleInView}>
               <Title />
             </AlignTitle>
-            <StanleyAvatarFloat1 src={stanleyAvatarFull1} alt="" />
-            <TextWrap1 dangerouslySetInnerHTML={{ __html: section1 }} />
+            <StanleyAvatarFloat1 inView={titleInView} src={stanleysHippos[stanleyIndex]} alt="" />
+            <TextWrap1 ref={titleRef} inView={titleInView} dangerouslySetInnerHTML={{ __html: section1 }} />
           </Section1>
-          <PhotoBorderImg src={photoBorder} />
-          <Section2 name="who">
-            <LandscapeRiver src={backgroundRiver} />
+          <PhotoLineupContainer>
+            <PhotoBorderImg src={photoBorder} />
+            <FilmStripTop src={filmStripEdge} alt="" />
+            <FilmStripBottom src={filmStripEdge} alt="" />
+          </PhotoLineupContainer>
+          <Section2>
+            <LandscapeRiver src={backgroundRiver} ref={landscapeRiverRef} inView={stanley2InView} />
             <Section2Organizer>
-              <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column1 }} />
-              <TextWrap2Section dangerouslySetInnerHTML={{ __html: section2_column2 }} />
-              <StanleyAvatarFloat2 src={stanleyAvatarFull2} alt="" />
+              <TextWrap2Section
+                name="who"
+                ref={section2Paragaraph1Ref}
+                inView={section2Paragaraph1InView}
+                dangerouslySetInnerHTML={{ __html: section2_column1 }}
+              />
+              <TextWrap2Section2
+                ref={section2Paragaraph2Ref}
+                inView={section2Paragaraph2InView}
+                dangerouslySetInnerHTML={{ __html: section2_column2 }}
+              />
+              <StanleyAvatarFloat2 inView={stanley2InView} ref={stanley2Ref} src={stanleysCrocs.current[stanleyIndex]} alt="" />
             </Section2Organizer>
           </Section2>
           <Border2 src={border} />
-          <Section3>
-            <QR>
-              <QRImg src={qr} />
-              <QRText>{qr_text}</QRText>
-            </QR>
-            <PhoneImg src={phone} />
-          </Section3>
           <Section4>
-            <Wrap4 name="roadmap">
-              <Roadmap>
-                <Map src={map} />
-                <RoadmapExplainer dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }} />
-                <RoadmapLists>
-                  <InitialList dangerouslySetInnerHTML={{ __html: section3_column1_initialList }} />
-                  <TBDList dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}></TBDList>
-                </RoadmapLists>
+            <Wrap4 ref={roadmapRef}>
+              <Roadmap inView={roadmapInView}>
+                <MapContainer name="roadmap">
+                  <LeftMap />
+                  <MapContents>
+                    <RoadmapExplainer
+                      ref={roadmapExplainerRef}
+                      inView={roadmapExplainerInView}
+                      dangerouslySetInnerHTML={{ __html: section3_column1_roadmapExplainer }}
+                    />
+                    <RoadmapLists>
+                      <InitialList
+                        ref={roadmapList1Ref}
+                        inView={roadmapList1InView}
+                        dangerouslySetInnerHTML={{ __html: section3_column1_initialList }}
+                      />
+                      <TBDList
+                        ref={roadmapList2Ref}
+                        inView={roadmapList2InView}
+                        dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}
+                      ></TBDList>
+                    </RoadmapLists>
+                  </MapContents>
+                  <RightMap />
+                </MapContainer>
+                <MapBottom>
+                  <LeftMapBottom />
+                  <MiddleMapBottom />
+                  <RightMapBottom />
+                </MapBottom>
               </Roadmap>
-              <Rarity>
+              <Rarity ref={rarityRef} inView={rarityInView}>
                 <Dice src={dice} />
                 <RarityExplainer dangerouslySetInnerHTML={{ __html: section3_column2_rarityExplainer }} />
                 <RarityList dangerouslySetInnerHTML={{ __html: section3_column2_traitsList }}></RarityList>
               </Rarity>
             </Wrap4>
-            <Stars src={stars} />
+            <BackgroundGradient src={repeatBg} />
+            <Stars isWoken={rivermapInView}>
+              <StarSmall duration={1.2} animation={Pulse1} delay={0.02} left={'10%'} bottom={'60px'} src={starSmall} />
+              <StarSmall duration={1.5} animation={Pulse1} delay={0.04} left={'40%'} src={starSmall} />
+              <StarSmall duration={1.6} animation={Pulse2} delay={0.08} left={'60%'} bottom={0} src={starSmall} />
+              <StarSmall duration={2.5} animation={Pulse1} delay={0.12} left={'80%'} bottom={'40px'} src={starSmall} />
+              <StarSmall duration={2} animation={Pulse1} delay={0.15} left={'30%'} bottom={'10px'} src={starSmall} />
+              <StarSmall duration={1} animation={Pulse0} delay={0.2} left={'90%'} src={starSmall} />
+            </Stars>
           </Section4>
-          <RoadmapMap src={roadmap0} />
+          <RoadmapWrapper>
+            <RoadmapMap ref={rivermapRef} inView={rivermapInView} src={roadmapWithoutUfo} />
+            <UfoImage inView={rivermapInView} src={ufo} alt="" />
+          </RoadmapWrapper>
           <Border2 src={border} />
           <Section6>
             <WhoContent>
               {/* <QuestionImg src={headerQuestion} /> */}
               <Header name="team">Meet the Team</Header>
               <Profiles>
-                <UpperProfiles>
-                  <Profile person={team.littlesuitcase} />
-                  <Profile person={team.colorsoftheworld} />
-                </UpperProfiles>
-                <LowerProfiles>
-                  <Profile person={team.chivas} />
-                  <Profile person={team.apura} />
-                </LowerProfiles>
+                <FrameContainer>
+                  <TeamImgContainer color={'orange'}>
+                    <FrameSuitcase src={teamFrameSuitcase} alt="" />
+                  </TeamImgContainer>
+                  <FrameLeft degree={0} src={teamFrameLeft} alt="" />
+                  <FrameRight src={teamFrameRight} alt="" />
+                  <FrameTop src={teamFrameTop} alt="" />
+                  <FrameBottom src={teamFrameBottom} alt="" />
+                  <TeamNameplate>
+                    <TeamNameplateText>Carlos "LittleSuitcase" Vazquez</TeamNameplateText>
+                    <TeamNameplateStartcap src={teamNameplateStartcap} alt="" />
+                    <TeamNameplateEndcap src={teamNameplateEndcap} alt="" />
+                  </TeamNameplate>
+                </FrameContainer>
+                <FrameContainer>
+                  <TeamImgContainer color={'green'}>
+                    <FrameSuitcase src={teamFrameColors} alt="" />
+                  </TeamImgContainer>
+                  <FrameLeft degree={3} src={teamFrameLeft} alt="" />
+                  <FrameRight degree={-5} src={teamFrameRight} alt="" />
+                  <FrameTop degree={-6} src={teamFrameTop} alt="" />
+                  <FrameBottom degree={-4} src={teamFrameBottom} alt="" />
+                  <TeamNameplate>
+                    <TeamNameplateText>Hilde "ColorsOfTheWorld" Hendriks-Vos</TeamNameplateText>
+                    <TeamNameplateStartcap src={teamNameplateStartcap} alt="" />
+                    <TeamNameplateEndcap src={teamNameplateEndcap} alt="" />
+                  </TeamNameplate>
+                </FrameContainer>
               </Profiles>
             </WhoContent>
           </Section6>
           <Footer dangerouslySetInnerHTML={{ __html: footer }} />
         </Container>
       </Wrapper>
-    </Fragment>
+    </>
   );
 };
+
+const TeamNameplateText = styled.div`
+  z-index: 100;
+  position: absolute;
+  transform: rotate(1.5deg);
+  left: 40px;
+  font-family: 'Sedgwick Ave', 'cursive';
+  font-size: 20px;
+  text-shadow: 1px 2px #a95d2b;
+  top: 38px;
+  color: #2b1709;
+`;
+
+const TeamNameplateStartcap = styled.img`
+  position: absolute;
+  left: 0;
+`;
+const TeamNameplateEndcap = styled.img`
+  position: absolute;
+  right: 0;
+`;
+
+const TeamNameplate = styled.div`
+  position: absolute;
+  bottom: -20px;
+  left: -50px;
+  width: 390px;
+`;
+
+// background-repeat: repeat-x;
+// background: url(${teamNameplateBg});
+
+const TeamImgContainer = styled.div`
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  background-color: ${props => props.color};
+  top: 50px;
+  left: 40px;
+`;
+
+const FrameColors = styled.img``;
+const FrameSuitcase = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const Frame = styled.img`
+  position: absolute;
+`;
+
+const FrameTop = styled(Frame)`
+  top: 15px;
+  transform: rotate(${props => props.degree + 'deg'});
+`;
+const FrameBottom = styled(Frame)`
+  bottom: 0;
+  right: 20px;
+  transform: rotate(${props => props.degree + 'deg'});
+`;
+const FrameLeft = styled(Frame)`
+  left: 0;
+  transform: rotate(${props => props.degree + 'deg'});
+`;
+const FrameRight = styled(Frame)`
+  right: 10px;
+  transform: rotate(${props => props.degree + 'deg'});
+`;
+
+const FrameContainer = styled.div`
+  position: relative;
+  width: 316px;
+  height: 361px;
+`;
+
+const Section = styled.section`
+  h2 {
+    position: relative;
+    ${font.header};
+    margin-bottom: 5px;
+    z-index: 5;
+    font-weight: 500;
+    line-height: 43px;
+    ${font.size(36)}
+
+    @media (max-width: 480px) {
+      line-height: 42px;
+      ${font.size(28)};
+    }
+  }
+
+  h3 {
+    position: relative;
+    ${font.header};
+    z-index: 5;
+    font-weight: 500;
+    line-height: 44px;
+    ${font.size(26)}
+    @media (max-width: 480px) {
+      ${font.size(22)};
+    }
+  }
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  p {
+    letter-spacing: -0.4px;
+    ${font.regular};
+    z-index: 15;
+    ${font.size(23)}
+    line-height: 32px;
+
+    @media (max-width: 1650px) {
+      ${font.size(22)}
+      line-height: 31px;
+    }
+
+    @media (max-width: 1024px) {
+      ${font.size(18)};
+      line-height: 27px;
+    }
+  }
+`;
+
+const Pulse0 = keyframes`
+0% { opacity: 0.3; transform: scale(0.6); }
+50% { opacity: 0.8; transform: scale(0.7);}
+100% { opacity: 0.3; transform: scale(0.6);}
+`;
+
+const Pulse1 = keyframes`
+0% { opacity: 0.5; transform: scale(0.3); }
+50% { opacity: 0.9; transform: scale(0.5);}
+100% { opacity: 0.5; transform: scale(0.3);}
+`;
+
+const Pulse2 = keyframes`
+0% { opacity: 0.2; transform: scale(0); }
+50% { opacity: 0.6; transform: scale(0.3);}
+100% { opacity: 0.3; transform: scale(0);}
+`;
+
+const Pulse3 = keyframes`
+0% { opacity: 0.8; transform: scale(0.95); }
+50% { opacity: 1; transform: scale(1);}
+100% { opacity: 0.8; transform: scale(0.92);}
+`;
+
+const StarSmall = styled.img`
+  position: absolute;
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+  animation: ${props => props.animation} ${props => props.duration}s ${props => props.delay}s steps(1, end) infinite;
+`;
+
+const StarMedium = styled.img`
+  position: absolute;
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+`;
+
+const StarLarge = styled.img`
+  width: auto;
+  height: auto;
+  z-index: 200;
+`;
+
+const RoadmapWrapper = styled.div`
+  position: relative;
+  height: auto;
+  line-height: 0;
+  width: 100%;
+  background-color: #7f8aa2;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const ufoAnimation = keyframes`
+  0% { top: 0px; }
+  50% { top: 10px; }
+  100% { top: 0px;}
+`;
+
+const UfoImage = styled.img`
+  position: absolute;
+  right: 23%;
+
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 0.63s linear, transform 1s 0.63s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  width: clamp(135px, 13.5vw, 236px);
+  top: 0;
+  z-index: 6000;
+  animation: ${ufoAnimation} 4s ease-in-out infinite;
+`;
+
+const FilmStrip = styled.img`
+  z-index: 900;
+  position: absolute;
+`;
+
+const FilmStripTop = styled(FilmStrip)`
+  top: -20px;
+  left: 0;
+`;
+const FilmStripBottom = styled(FilmStrip)`
+  transform: scaleY(-1);
+  bottom: -20px;
+  left: 0;
+`;
+
+const PhotoLineupContainer = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+`;
+
+const BackgroundGradient = styled.img`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+`;
+
+const ThePhone = styled.div`
+  position: relative;
+`;
+
+const QRPhoneLayer = styled.div``;
+
+const QRScan = styled.img`
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const MiddleMapBottom = styled.div`
+  background: url(${mapMiddleBottom});
+
+  width: 100%;
+`;
+
+const MapBottom = styled.div`
+  display: flex;
+  width: 100%;
+  height: 172px;
+`;
+
+const LeftMapBottom = styled.div`
+  min-width: 143px;
+
+  height: 172px;
+  background-repeat: no-repeat;
+
+  background: url(${mapLeftBottom});
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const RightMapBottom = styled.div`
+  background-repeat: no-repeat;
+  height: 172px;
+  min-width: 110px;
+  background: url(${mapRightBottom});
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const LeftMap = styled.div`
+  min-width: 143px;
+  background: url(${mapLeft});
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const RightMap = styled.div`
+  min-width: 110px;
+  background: url(${mapRight});
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const MapContainer = styled.div`
+  display: flex;
+`;
+
+const MapContents = styled.div`
+  padding-left: 45px;
+  display: flex;
+  flex-direction: column;
+  padding-right: 25px;
+
+  width: 100%;
+  padding-top: 140px;
+  padding-bottom: 30px;
+  background: url(${mapMiddle});
+  background-repeat: no-repeat;
+
+  @media (max-width: 1280px) {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-left: 8vw;
+    row-gap: 20px;
+    padding-right: 8vw;
+  }
+`;
+
+const MapBackgroundWrapper = styled.div`
+  position: absolute;
+  top: -150px;
+  right: 0;
+  width: 962px;
+  z-index: 5;
+
+  @media (max-width: 1650px) {
+    width: 862px;
+  }
+`;
+
+const MapBackground = styled.img`
+  width: 100%;
+  height: 100%;
+`;
 
 const SocialLink = styled.a`
   padding: 3px;
@@ -204,7 +721,6 @@ const QR = styled.div`
   position: relative;
   transform: translateY(-50%);
   top: 50%;
-  height: clamp(110px, 15vw, 205px);
   z-index: 15;
 `;
 
@@ -233,18 +749,26 @@ const QRText = styled.div`
 const Section2Organizer = styled.div`
   display: flex;
   margin-left: 8vw;
-  margin-right: 8vw;
-  gap: 5vw;
+  margin-right: 6vw;
+  gap: 3vw;
   padding-left: clamp(50px, 100vw / 5, 450px);
 
   @media (max-width: 1280px) {
     padding-left: 0;
+    margin-right: 8vw;
     flex-direction: column;
   }
 `;
 
 const AlignTitle = styled.div`
-  height: 16vw;
+  height: 550px;
+  width: 100%;
+  position: relative;
+  transform: translateY(${props => (props.inView ? '270px' : '260px')}) scale(${props => (props.inView ? 1.6 : '1.4')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.2s 0.35s linear, transform 0.7s 0.25s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  ${isMobileOnly && 'transition: opacity 0.2s 0.15s linear, transform 0.7s 0.05s cubic-bezier(0.26, 0.67, 0.48, 0.91)'};
+
   @media (max-width: 1024px) {
     display: none;
   }
@@ -252,34 +776,29 @@ const AlignTitle = styled.div`
 
 const LandscapeRiver = styled.img`
   position: absolute;
-  left: 0;
+  filter: blur(12px);
   bottom: 0;
+  left: 0;
   height: 100%;
   z-index: 0;
-
-  transition: opacity 0.25s ease-out;
-  @media (max-width: 1650px) {
-    opacity: 0.7;
-  }
+  transform: translateY(${props => (props.inView ? '-100px' : '-140px')}) scaleX(-1);
+  opacity: ${props => (props.inView ? 0.5 : 0)};
+  transition: opacity 0.6s 1.3s linear, transform 0.6s 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
-    opacity: 0.5;
+    opacity: ${props => (props.inView ? 0.5 : 0)};
   }
 
   @media (max-width: 1024px) {
-    opacity: 0.3;
+    opacity: ${props => (props.inView ? 0.3 : 0)};
   }
 `;
 
 const RoadmapMap = styled.img`
-  position: relative;
-  height: auto;
   width: 100%;
-  background-color: #7f8aa2;
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 1s linear, transform 1s 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const Section5 = styled.section`
@@ -294,24 +813,34 @@ const Section5 = styled.section`
 
 const WhiteHouse = styled.img`
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: ${props => props.x}vw;
+  bottom: ${props => props.y}vw;
+  filter: blur(2.5px);
 
-  transition: opacity 0.5s ease-in;
+  transform: translateY(${props => (props.inView ? '0px' : '-60px')}) scale(2);
+  opacity: ${props => (props.inView ? 0.3 : 0)};
+  transition: opacity 0.6s 2.7s linear, transform 0.6s 2.5s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
   @media (max-width: 1280px) {
-    opacity: 0.5;
+    opacity: 0.15;
   }
 
   @media (max-width: 1024px) {
-    opacity: 0.3;
+    transform: translateY(${props => (props.inView ? '0px' : '20px')}) scale(1.15);
+    transition: opacity 2s 0.2s linear, transform 3s 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+    opacity: ${props => (props.inView ? 0.1 : 0)};
   }
 `;
 
-const Stars = styled.img`
+const Stars = styled.div`
   position: absolute;
+  height: 200px;
+  width: 100%;
   bottom: 0;
-  width: clamp(1200px, 100%, 100%);
-  height: auto;
+  opacity: ${props => (props.isWoken ? 1 : 0)};
+  visibility: ${props => (props.isWoken ? 'visible' : 'hidden')};
+  transform: translateY(${props => (props.isWoken ? 0 : '90px')});
+  transition: opacity 0.6s linear, transform 2s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const Header = styled.h2`
@@ -341,7 +870,7 @@ const WhoContent = styled.div`
   gap: 7px;
   width: 100%;
   max-width: 1250px;
-  x @media (max-width: 1024px) {
+  @media (max-width: 1024px) {
     align-items: flex-start;
     gap: 0;
   }
@@ -349,10 +878,13 @@ const WhoContent = styled.div`
 
 const Profiles = styled.div`
   display: flex;
-  flex-direction: column;
-  row-gap: 30px;
+  position: relative;
+  flex-direction: row;
+  row-gap: 180px;
+  column-gap: 160px;
 
   @media (max-width: 1024px) {
+    flex-direction: column;
     row-gap: 0;
   }
 `;
@@ -416,7 +948,7 @@ const QuestionImg = styled.img`
   }
 `;
 
-const Section6 = styled.div`
+const Section6 = styled(Section)`
   border-radius: 0 0 34px 34px;
   position: relative;
   padding-left: 8vw;
@@ -426,6 +958,7 @@ const Section6 = styled.div`
   gap: 4vw;
   display: flex;
   background-color: ${color.background['container']};
+
   width: 100%;
 
   @media (max-width: 1024px) {
@@ -434,21 +967,21 @@ const Section6 = styled.div`
 `;
 
 const Footer = styled.footer`
-  padding-left: 7%;
-  padding-right: 7%;
+  padding-left: 8vw;
+  padding-right: 8vw;
   padding-top: 50px;
   padding-bottom: 50px;
   width: 100%;
   color: #7d8ab2;
   margin-bottom: 30px;
   p {
-    ${font.size(15)};
+    ${font.size(16)};
     line-height: 22px;
   }
 
   @media (max-width: 1024px) {
     p {
-      ${font.size(15)};
+      ${font.size(16)};
       line-height: 22px;
     }
   }
@@ -520,6 +1053,8 @@ const RarityItem = styled.li`
   ${font.size(16)};
 `;
 const RarityList = styled.ul`
+  display: flex;
+  flex-direction: column;
   li {
     &:before {
       content: '- ';
@@ -547,6 +1082,10 @@ const RoadmapListItem = styled.li`
 `;
 
 const TBDList = styled.ul`
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 0.3s linear;
+  width: 40%;
+
   li {
     &:before {
       content: '- ';
@@ -558,25 +1097,27 @@ const TBDList = styled.ul`
     line-height: 22px;
     ${font.size(16)};
   }
-
-  width: 40%;
   @media (max-width: 768px) {
     width: auto;
   }
 `;
+
 //tickInactive
 const InitialList = styled.ul`
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 0.3s linear;
+
   li {
     &:before {
       position: absolute;
       display: inline-block;
       top: 4px;
-      left: -25px;
+      left: -32px;
       content: '';
-      background-image: url(${tickInactive});
-      background-size: 20px 16px;
-      width: 20px;
-      height: 16px;
+      background-image: url(${checkBox1});
+      background-size: 22px 22px;
+      width: 22px;
+      height: 22px;
     }
 
     position: relative;
@@ -599,6 +1140,7 @@ const InitialList = styled.ul`
 
 const RoadmapLists = styled.div`
   position: relative;
+  z-index: 5;
   gap: 10%;
   display: flex;
   line-height: 24px;
@@ -610,32 +1152,38 @@ const RoadmapLists = styled.div`
   }
 
   @media (max-width: 768px) {
+    row-gap: 30px;
     flex-direction: column;
   }
 `;
 
 const Wrap4 = styled.div`
   display: flex;
-  margin-top: clamp(180px, 19vw, 390px);
-  gap: 15%;
+  gap: 5%;
 
-  margin-left: 8vw;
+  width: 100%;
+  margin-left: 3vw;
   margin-right: 8vw;
+
+  @media (max-width: 1280px) {
+    flex-direction: column;
+    margin-left: 3vw;
+    margin-right: 4vw;
+  }
 
   @media (max-width: 1024px) {
     gap: 0;
-    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
   }
 `;
 
-const Section4 = styled.section`
+const Section4 = styled(Section)`
   width: 100%;
   display: flex;
-  padding-bottom: clamp(80px, 13vw, 150px);
+  z-index: 600;
+  padding-bottom: clamp(80px, 13vw, 230px);
   position: relative;
-  background-image: url(${repeatBg});
-  background-position: bottom;
-  background-repeat: repeat-x;
   background-color: #6e91bb;
 `;
 
@@ -643,6 +1191,9 @@ const RoadmapExplainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.6s 0.3s linear;
 `;
 
 const RarityExplainer = styled.div`
@@ -653,28 +1204,50 @@ const RarityExplainer = styled.div`
 
 const Roadmap = styled.div`
   position: relative;
-  width: 60%;
+  width: 65%;
+  color: #000;
+  z-index: 500;
+  top: -80px;
 
-  @media (max-width: 1024px) {
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  ${isMobileOnly && 'opacity: 1; transform: translateY(0);'}
+
+  @media (max-width: 1280px) {
     width: 100%;
   }
 `;
 
 const Rarity = styled.div`
+  z-index: 5000;
   position: relative;
-  width: 25%;
+  width: 30%;
+  top: 200px;
+
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? 0 : '50px')});
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  @media (max-width: 1280px) {
+    top: 0;
+    margin-left: 5vw;
+    width: 60%;
+  }
 
   @media (max-width: 1024px) {
-    width: 100%;
-    margin-top: 100px;
-    margin-right: 0;
+    width: 84vw;
+    margin-left: 8vw;
+    margin-top: 30px;
+    margin-right: 8vw;
   }
 `;
 
 const QRImg = styled.img`
+  border: 6px solid #000;
   position: absolute;
   top: 50%;
-  border: 6px solid #000;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 15;
@@ -686,22 +1259,17 @@ const QRImg = styled.img`
 `;
 
 const PhoneImg = styled.img`
-  max-width: 325px;
-  min-width: 150px;
-  height: auto;
-  position: absolute;
-  left: clamp(56%, 100%, 56%);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
-  width: clamp(200px, 20vw, 20vw);
+  width: 100%;
+  height: 100%;
 `;
 
 const Border = styled.img`
   background-color: ${color.background['container']};
 `;
 
-const Border2 = styled.img``;
+const Border2 = styled.img`
+  z-index: 500;
+`;
 
 const HeaderList = styled.h2`
   margin-bottom: 10px;
@@ -761,15 +1329,61 @@ const TextWrap3 = styled(TextWrap2)`
 
 const TextWrap2Section = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
+
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transform: translateY(${props => (props.inView ? '-30px' : '0')});
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
-const TextWrap1 = styled.div`
-  width: clamp(650px, 40vw * 1.1, 850px);
-  z-index: 10;
+const TextWrap2Section2 = styled(TextWrap2Section)`
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
+    p:nth-last-child(1) {
+    }
+  }
+`;
+
+// margin-right: 20%;
+
+const TextWrap1 = styled.div`
+  position: relative;
+  width: clamp(650px, 40vw * 1.1, 650px);
+  z-index: 10;
+
+  transform: translateY(${props => (props.inView ? 0 : '30px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  ${isMobileOnly
+    ? 'transition: opacity 0.5s 0.35s linear, transform 1s 0.35s cubic-bezier(0.26, 0.67, 0.48, 0.91)'
+    : 'transition: opacity 0.5s 1.45s linear, transform 1s 1.45s cubic-bezier(0.26, 0.67, 0.48, 0.91)'};
+  @media (max-width: 1280px) {
     width: 100%;
+
+    p:nth-last-child(3) {
+      margin-right: 10%;
+    }
+
+    p:nth-last-child(2) {
+      margin-right: 30%;
+    }
+    p:nth-last-child(1) {
+      margin-right: 30%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    p:nth-last-child(3) {
+      margin-right: auto;
+    }
+    p:nth-last-child(2) {
+      margin-right: 20%;
+    }
+
+    p:nth-last-child(1) {
+      margin-right: 50%;
+    }
   }
 `;
 
@@ -780,80 +1394,50 @@ const PhotoBorderImg = styled.img`
 `;
 
 const StanleyAvatarFloat1 = styled.img`
+  transform: translateY(${props => (props.inView ? 0 : '50px')}) scaleX(-1);
+  opacity: ${props => (props.inView ? 1 : 0)};
+
+  ${isMobileOnly
+    ? 'transition: opacity 0.6s 0.35s linear, transform 0.8s 0.35s cubic-bezier(0.26, 0.67, 0.48, 0.91)'
+    : 'transition: opacity 0.5s 2.3s linear, transform 1.1s 2.3s cubic-bezier(0.26, 0.67, 0.48, 0.91)'};
+
   position: absolute;
   bottom: 0;
   right: 0;
   z-index: 5;
   height: auto;
-  width: clamp(100px, 75vw / 2.2, 750px);
-  max-width: 686px;
-  min-width: 250px;
+  width: clamp(250px, 98vw / 2.2, 950px);
 
   @media (max-width: 1280px) {
-    width: clamp(200px, 75vw / 2.2, 300px);
+    width: clamp(210px, 75vw / 2.2, 300px);
   }
 `;
 
 const StanleyAvatarFloat2 = styled.img`
   position: absolute;
-  bottom: 0;
   left: 0;
+  bottom: 0;
   z-index: 5;
   height: auto;
-  width: clamp(100px, 75vw / 2.2, 650px);
+  width: clamp(100px, 95vw / 2.2, 950px);
+  transform: translateY(${props => (props.inView ? '70px' : '110px')});
+  opacity: ${props => (props.inView ? 1 : 0)};
+  transition: opacity 0.5s 0.7s linear, transform 1.1s 0.7s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
-    left: -9vw;
-    width: clamp(200px, 75vw / 2.2, 300px);
-    position: relative;
+    left: auto;
+    right: 0;
+    width: clamp(250px, 75vw / 2.2, 300px);
+    transform: translateY(${props => (props.inView ? '70px' : '110px')}) scaleX(-1);
     height: auto;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;
 
 const Container = styled.main`
-  h2 {
-    position: relative;
-    ${font.header};
-    margin-bottom: 5px;
-    z-index: 5;
-    font-weight: 500;
-    line-height: 48px;
-    ${font.size(36)}
-    @media (max-width: 480px) {
-      line-height: 42px;
-      ${font.size(28)};
-    }
-  }
-
-  h3 {
-    position: relative;
-    ${font.header};
-    z-index: 5;
-    font-weight: 500;
-    line-height: 44px;
-    ${font.size(26)}
-    @media (max-width: 480px) {
-      ${font.size(22)};
-    }
-  }
-
-  em {
-    font-style: italic;
-    font-weight: 600;
-  }
-
-  p {
-    ${font.regular};
-    z-index: 15;
-    ${font.size(20)}
-    line-height: 30px;
-
-    @media (max-width: 1024px) {
-      ${font.size(18)};
-      line-height: 27px;
-    }
-  }
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -880,30 +1464,29 @@ const Wrapper = styled.main`
   }
 `;
 
-const Section1 = styled.section`
-  padding-top: 4vw;
+const Section1 = styled(Section)`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-left: 8vw;
   padding-right: 8vw;
-  background: ${color.background['container']};
-  border-radius: 34px 34px 0 0;
+  background-color: ${color.background['container']};
 
-  padding-bottom: clamp(5vw, 12vw, 250px);
+  border-radius: 34px 34px 0 0;
+  padding-bottom: clamp(7vw, 5vw, 250px);
 
   @media (max-width: 1024px) {
+    height: 100%;
     padding-top: clamp(40px, 14vw, 120px);
-    padding-bottom: 25vw;
     border-radius: 0;
   }
 `;
 
-const Section2 = styled.section`
+const Section2 = styled(Section)`
   position: relative;
-  padding-top: clamp(60px, 12vw, 190px);
-  padding-bottom: clamp(1vw, 12vw, 190px);
+  padding-top: clamp(100px, 12vw, 190px);
+  padding-bottom: clamp(2vw, 12vw, 190px);
   display: flex;
   flex-direction: column;
 
@@ -912,16 +1495,16 @@ const Section2 = styled.section`
 
   transition: 0.25s ease-out;
 
-  @media (max-width: 1280px) {
-    padding-bottom: 0;
+  @media (max-width: 480px) {
+    padding-bottom: 100px;
   }
 `;
 
-const Section3 = styled.section`
+const Section3 = styled(Section)`
   position: relative;
   width: 100%;
   height: 0;
   background-color: ${color.background['container']};
 `;
 
-export default Landing;
+export default LandingPreview;
