@@ -16,9 +16,9 @@ const SpeechBubble = ({ text, randomDelay, isVisible }) => {
     <Container randomDelay={randomDelay} isVisible={isVisible}>
       <Upper>
         <Left>
-          <img src={teamFrameSpeechTopLeft} alt="" />
+          <Image src={teamFrameSpeechTopLeft} alt="" />
           <MiddleLeft />
-          <img src={teamFrameSpeechBottomLeft} alt="" />
+          <Image src={teamFrameSpeechBottomLeft} alt="" />
         </Left>
         <Middle>
           <MiddleTop />
@@ -26,15 +26,20 @@ const SpeechBubble = ({ text, randomDelay, isVisible }) => {
           <MiddleBottom />
         </Middle>
         <Right>
-          <img src={teamFrameSpeechTopRight} alt="" />
+          <Image src={teamFrameSpeechTopRight} alt="" />
           <MiddleRight />
-          <img src={teamFrameSpeechBottomRight} alt="" />
+          <Image src={teamFrameSpeechBottomRight} alt="" />
         </Right>
       </Upper>
       <Bottom src={teamFrameSpeechBottom} alt="" />
     </Container>
   );
 };
+
+const Image = styled.img`
+  width: auto;
+  height: auto;
+`;
 
 const MiddleBottom = styled.div`
   height: 15px;
@@ -57,9 +62,6 @@ const Right = styled.div`
   flex-direction: column;
   display: flex;
 `;
-
-const TopLeft = styled.img``;
-const TopRight = styled.img``;
 
 const MiddleLeft = styled.div`
   background: url(${teamFrameSpeechMiddleLeft});
@@ -88,6 +90,8 @@ const Middle = styled.div`
   flex-direction: column;
 `;
 const Bottom = styled.img`
+  width: auto;
+  height: auto;
   position: relative;
   top: -6px;
 `;

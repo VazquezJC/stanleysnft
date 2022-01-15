@@ -21,11 +21,11 @@ const MobileMenu = ({ isMenuOpen, handleMenuClick }) => {
         </Column>
         <Column>
           <LinkOut href="https://twitter.com/StanleysNFT">
-            <TwitterIcon src={twitterIcon} />
+            <TwitterIcon src={twitterIcon} alt="Twitter Icon" />
             Twitter
           </LinkOut>
           <LinkOut href="https://t.co/1Emyr0KD1t">
-            <DiscordIcon src={discordIcon} />
+            <DiscordIcon src={discordIcon} alt="Discord Icon" />
             Discord
           </LinkOut>
         </Column>

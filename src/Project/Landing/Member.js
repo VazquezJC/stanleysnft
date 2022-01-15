@@ -149,8 +149,8 @@ const TeamNameplate = styled.div`
 
 const TeamImgContainer = styled.div`
   position: absolute;
-  width: 247px;
-  height: 270px;
+  width: 80%;
+  height: 80%;
   background-color: ${props => props.color};
   top: 50px;
   left: 15px;

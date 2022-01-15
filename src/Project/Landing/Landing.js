@@ -288,7 +288,7 @@ const Landing = () => {
               </StanleyAvatarFloat2>
             </Section2Organizer>
           </Section2>
-          <Border2 src={border} />
+          <Border2 src={border} alt="" />
           <Section4>
             <Wrap4 ref={roadmapRef}>
               <Roadmap inView={roadmapInView}>
@@ -599,6 +599,8 @@ const FilmStripBottom = styled(FilmStrip)`
 `;
 
 const PhotoLineupContainer = styled.div`
+  width: auto;
+  height: auto;
   display: flex;
   position: relative;
   z-index: 20;
@@ -883,7 +885,7 @@ const Footer = styled.footer`
   padding-top: 50px;
   padding-bottom: 50px;
   width: 100%;
-  color: #7d8ab2;
+  color: #93a2cc;
   margin-bottom: 30px;
   p {
     ${font.size(16)};
@@ -1052,6 +1054,8 @@ const Rarity = styled.div`
 `;
 
 const Border2 = styled.img`
+  width: auto;
+  height: auto;
   z-index: 500;
 `;
 
