@@ -22,7 +22,7 @@ const Member = forwardRef(({ person, color, frameOrientations, portrait, name, d
     <Wrapper>
       <FrameContainer ref={ref} isVisible={isVisible}>
         <TeamImgContainer color={color}>
-          <FrameSuitcase src={portrait} alt={`${name}'s Portrait`} />
+          <Stanely src={portrait} alt={`${name}'s Portrait`} />
           <FrameGlassFront isVisible={isVisible} src={frameGlass} alt="" />
         </TeamImgContainer>
         <FrameLeft degree={frameOrientations.left} src={frameLeft} alt="" />
@@ -127,15 +127,21 @@ const TeamNameplateText = styled.div`
   text-align: center;
   background: url(${nameplateMiddleBg});
   font-family: 'Sedgwick Ave', 'cursive';
-  font-size: 20px;
+  font-size: 21px;
   text-shadow: 1px 2px #a95d2b;
   top: 38px;
   color: #2b1709;
   height: 89px;
 `;
 
-const TeamNameplateStartcap = styled.img``;
-const TeamNameplateEndcap = styled.img``;
+const TeamNameplateStartcap = styled.img`
+  width: auto;
+  height: auto;
+`;
+const TeamNameplateEndcap = styled.img`
+  width: auto;
+  height: auto;
+`;
 
 const TeamNameplate = styled.div`
   max-width: 300px;
@@ -143,20 +149,20 @@ const TeamNameplate = styled.div`
   justify-content: center;
   display: flex;
   opacity: ${props => (props.isVisible ? 1 : 0)};
-  transform: translateY(${props => (props.isVisible ? '0' : '120px')});
+  transform: translateY(${props => (props.isVisible ? '0' : '30x')}) scale(${props => (props.isVisible ? 1 : 0.5)});
   transition: opacity 0.6s 0.3s linear, transform 0.6s 0.1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const TeamImgContainer = styled.div`
   position: absolute;
-  width: 80%;
-  height: 80%;
+  width: 76%;
+  height: 76%;
   background-color: ${props => props.color};
   top: 50px;
   left: 15px;
 `;
 
-const FrameSuitcase = styled.img`
+const Stanely = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -191,8 +197,8 @@ const FrameContainer = styled.div`
   width: 316px;
   height: 361px;
   opacity: ${props => (props.isVisible ? 1 : 0)};
-  transform: translateY(${props => (props.isVisible ? '0' : '70px')});
-  transition: opacity 0.6s linear, transform 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transform: translateY(${props => (props.isVisible ? '0' : '20px')});
+  transition: opacity 0.6s linear, transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 export default Member;

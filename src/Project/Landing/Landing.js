@@ -50,8 +50,6 @@ import stanleyHippo3_avif_1024w from 'App/assets/images/stanley-s1-hippoboy-3-10
 import stanleyHippo3_avif_1280w from 'App/assets/images/stanley-s1-hippoboy-3-1280w.avif';
 import stanleyHippo3_avif_1650w from 'App/assets/images/stanley-s1-hippoboy-3-1650w.avif';
 
-import filmStripEdge from 'App/assets/images/film-strip.png';
-
 import bgEiffelPng from 'App/assets/images/background-eiffel.png';
 import bgStonehengePng from 'App/assets/images/background-stonehenge.png';
 import bgKremlinPng from 'App/assets/images/background-kremlin.png';
@@ -87,6 +85,7 @@ import mapMiddleBottom from 'App/assets/images/map-bottom-middle.png';
 
 import dice from 'App/assets/images/roadmap_dice.png';
 import checkBox1 from 'App/assets/images/checkbox1.png';
+import checkBox1Tick from 'App/assets/images/checkbox1-tick.png';
 
 import roadmapAvif_1280w from 'App/assets/images/roadmap-progress-0-1280w.avif';
 import roadmapAvif_1650w from 'App/assets/images/roadmap-progress-0-1650w.avif';
@@ -105,7 +104,6 @@ function getRandomInt(max) {
 const Landing = () => {
   const [stanleyIndex, setStanleyIndex] = useState(getRandomInt(3));
   const stanleyBackgroundIndex = useRef(getRandomInt(4));
-  const skipArray = useRef([false, false, false, false, false, false, false, false, false, false, false, false, false]);
 
   const [titleRef, titleInView] = useInView({
     threshold: isMobileOnly ? 0 : 0.2,
@@ -163,17 +161,17 @@ const Landing = () => {
   });
 
   const [team1Ref, team1InView] = useInView({
-    threshold: isMobileOnly ? 0.1 : 0.2,
+    threshold: isMobileOnly ? 0.3 : 0.2,
     triggerOnce: true,
   });
 
   const [team2Ref, team2InView] = useInView({
-    threshold: isMobileOnly ? 0.1 : 0.7,
+    threshold: isMobileOnly ? 0.3 : 0.7,
     triggerOnce: true,
   });
 
   const [team3Ref, team3InView] = useInView({
-    threshold: isMobileOnly ? 0.1 : 1,
+    threshold: isMobileOnly ? 0.3 : 1,
     triggerOnce: true,
   });
 
@@ -203,20 +201,12 @@ const Landing = () => {
     },
   });
 
-  const stanleysCrocs1024w = useRef([stanleyCroc1_1024w, stanleyCroc2_1024w, stanleyCroc3_1024w]);
-  const stanleysCrocs1280w = useRef([stanleyCroc1_1280w, stanleyCroc2_1280w, stanleyCroc3_1280w]);
-  const stanleysCrocs1650w = useRef([stanleyCroc1_1650w, stanleyCroc2_1650w, stanleyCroc3_1650w]);
   const stanleysBackgrounds = useRef([
     { image: bgEiffelPng, x: 0, y: 8 },
     { image: bgStonehengePng, x: 1, y: 13 },
     { image: bgKremlinPng, x: 3, y: 15 },
     { image: bgWhitehousePng, x: 0, y: 13 },
   ]);
-
-  const handleTriggerArray = () => {
-    // Get a number.
-    // Create a new temporary array
-  };
 
   useEffect(() => {
     let stanleyTimer;
@@ -237,11 +227,12 @@ const Landing = () => {
         <Container>
           <Section1 name="intro">
             {!isMobileOnly && <UfoEasterEgg inView={titleInView} src={ufoPng} alt="" />}
-            <LandscapeMain
+            <BackgroundLandmark
               inView={titleInView}
               x={stanleysBackgrounds.current[stanleyBackgroundIndex.current].x}
               y={stanleysBackgrounds.current[stanleyBackgroundIndex.current].y}
-            ></LandscapeMain>
+              src={stanleysBackgrounds.current[stanleyBackgroundIndex.current].image}
+            />
             <AlignTitle inView={titleInView}>
               <Title />
             </AlignTitle>
@@ -259,11 +250,9 @@ const Landing = () => {
           </Section1>
           <PhotoLineupContainer>
             <PhotoBorderImg src={photoBorder} alt="Photos of Stanleys" />
-            <FilmStripTop src={filmStripEdge} alt="" />
-            <FilmStripBottom src={filmStripEdge} alt="" />
           </PhotoLineupContainer>
           <Section2>
-            <LandscapeRiver src={bgRiver} ref={landscapeRiverRef} inView={stanley2InView} alt="" />
+            <BackgroundRiver src={bgRiver} ref={landscapeRiverRef} inView={stanley2InView} alt="" />
             <Section2Organizer>
               <TextWrap2Section
                 name="who"
@@ -303,7 +292,15 @@ const Landing = () => {
                     <RoadmapLists>
                       <InitialWrapper ref={roadmapList1Ref} inView={roadmapList1InView}>
                         <h3>Initial</h3>
-                        <InitialList dangerouslySetInnerHTML={{ __html: section3_column1_initialList }} />
+                        <InitialList>
+                          <Unchecked>42.5% profit sharing during mint for those that buy and hold beyond 10 days</Unchecked>
+                          <Unchecked>100% ownership after mint (first of its kind) for those that buy and hold beyond 10 days</Unchecked>
+                          <Unchecked>Eligibility to represent the community as part of the future leadership</Unchecked>
+                          <Unchecked>500 QR coded NFTs during mint entitling buyer to an additional NFT at no charge</Unchecked>
+                          <Unchecked>3% mint proceeds charity contribution</Unchecked>
+                          <Checked>30 day 3x giveaways plus additional NFTs for those whitelisted</Checked>
+                          <Unchecked>Selected community relationships</Unchecked>
+                        </InitialList>
                       </InitialWrapper>
                       <TBDWrapper ref={roadmapList2Ref} inView={roadmapList2InView}>
                         <h3>TBD</h3>
@@ -337,7 +334,7 @@ const Landing = () => {
           </Section4>
           <ProgressMapWrapper ref={rivermapRef}>
             <ProgressMap inView={rivermapInView}>
-              <source type="image/avif" srcSet={`${roadmapAvif_1280w} 1280w, ${roadmapAvif_1650w} 1650w`} />
+              {/* <source type="image/avif" srcSet={`${roadmapAvif_1280w} 1280w, ${roadmapAvif_1650w} 1650w`} /> */}
               <img srcSet={`${roadmapPng_1280w} 1280w, ${roadmapPng_1650w} 1650w`} alt="Visual Representation of Roadmap" />
             </ProgressMap>
             <UfoImage inView={rivermapInView} src={ufoPng} alt="" />
@@ -397,30 +394,51 @@ const Landing = () => {
   );
 };
 
+const Unchecked = styled.li`
+  &:before {
+    position: absolute;
+    display: inline-block;
+    top: 4px;
+    left: -32px;
+    content: '';
+    background-image: url(${checkBox1});
+    background-size: 22px 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  position: relative;
+  margin-bottom: 12px;
+  left: 15px;
+  margin-left: 10px;
+  line-height: 22px;
+  ${font.size(16)};
+`;
+
+const Checked = styled.li`
+  &:before {
+    position: absolute;
+    display: inline-block;
+    top: 4px;
+    left: -32px;
+    content: '';
+    background-image: url(${checkBox1Tick});
+    background-size: 22px 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  position: relative;
+  margin-bottom: 12px;
+  left: 15px;
+  margin-left: 10px;
+  line-height: 22px;
+  ${font.size(16)};
+`;
+
 const InitialWrapper = styled.div`
   opacity: ${props => (props.inView ? 1 : 0)};
   transition: opacity 0.6s 0.3s linear;
-
-  li {
-    &:before {
-      position: absolute;
-      display: inline-block;
-      top: 4px;
-      left: -32px;
-      content: '';
-      background-image: url(${checkBox1});
-      background-size: 22px 22px;
-      width: 22px;
-      height: 22px;
-    }
-
-    position: relative;
-    margin-bottom: 12px;
-    left: 15px;
-    margin-left: 10px;
-    line-height: 22px;
-    ${font.size(16)};
-  }
 
   width: 50%;
   margin-top: 10px;
@@ -579,32 +597,14 @@ const UfoImage = styled.img`
 
   width: clamp(135px, 13.5vw, 236px);
   top: 0;
-  z-index: 6000;
+  z-index: 500;
   animation: ${ufoAnimation} 4s ease-in-out infinite;
 `;
 
-const FilmStrip = styled.img`
-  z-index: 900;
-  position: absolute;
-`;
-
-const FilmStripTop = styled(FilmStrip)`
-  top: -20px;
-  left: 0;
-`;
-const FilmStripBottom = styled(FilmStrip)`
-  transform: scaleY(-1);
-  bottom: -20px;
-  left: 0;
-`;
-
 const PhotoLineupContainer = styled.div`
-  width: auto;
-  height: auto;
-  display: flex;
   position: relative;
+  display: flex;
   z-index: 20;
-  flex-direction: column;
 `;
 
 const BackgroundGradient = styled.img`
@@ -723,16 +723,16 @@ const AlignTitle = styled.div`
   }
 `;
 
-const LandscapeRiver = styled.img`
+const BackgroundRiver = styled.img`
   position: absolute;
   filter: blur(12px);
   bottom: 0;
   left: 0;
   height: 100%;
   z-index: 0;
-  transform: translateY(${props => (props.inView ? '-100px' : '-140px')}) scaleX(-1);
+  transform: translateY(${props => (props.inView ? '-100px' : '-160px')}) scaleX(-1);
   opacity: ${props => (props.inView ? 0.5 : 0)};
-  transition: opacity 0.6s 1.3s linear, transform 0.6s 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.6s 1.3s linear, transform 1s 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1280px) {
     opacity: ${props => (props.inView ? 0.5 : 0)};
@@ -756,7 +756,7 @@ const ProgressMap = styled.picture`
   transition: opacity 0.6s 1s linear, transform 1s 1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
-const LandscapeMain = styled.div`
+const BackgroundLandmark = styled.img`
   position: absolute;
   right: ${props => props.x}vw;
   z-index: 5;
@@ -827,7 +827,7 @@ const Profiles = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    row-gap: 0;
+    row-gap: 60px;
   }
 `;
 
@@ -1118,13 +1118,16 @@ const TextWrap1 = styled.div`
 `;
 
 const PhotoBorderImg = styled.img`
+  width: 100%;
+  height: 100%;
+  min-width: 1024px;
   overflow-x: hidden;
   position: relative;
   z-index: 10;
 `;
 
 const StanleyAvatarFloat1 = styled.picture`
-  transform: translateY(${props => (props.inView ? 0 : '50px')}) scaleX(-1);
+  transform: translateY(${props => (props.inView ? '30px' : '80px')}) scaleX(-1);
   opacity: ${props => (props.inView ? 1 : 0)};
   ${isMobileOnly
     ? 'transition: opacity 0.6s 0.35s linear, transform 0.8s 0.35s cubic-bezier(0.26, 0.67, 0.48, 0.91)'

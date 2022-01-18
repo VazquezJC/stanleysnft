@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { useState, useEffect } from 'react';
 
 import teamFrameSpeechMiddleLeft from 'App/assets/images/frame-speech-middle-left.png';
 import teamFrameSpeechMiddleRight from 'App/assets/images/frame-speech-middle-right.png';
@@ -12,6 +13,16 @@ import teamFrameSpeechBottomRight from 'App/assets/images/frame-speech-bottom-ri
 import { isMobileOnly } from 'react-device-detect';
 
 const SpeechBubble = ({ text, randomDelay, isVisible }) => {
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    if (isVisible) {
+      let timer;
+      timer = setTimeout(() => setIsTyping(false), isMobileOnly ? 1500 : randomDelay * 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible]);
+
   return (
     <Container randomDelay={randomDelay} isVisible={isVisible}>
       <Upper>
@@ -22,7 +33,15 @@ const SpeechBubble = ({ text, randomDelay, isVisible }) => {
         </Left>
         <Middle>
           <MiddleTop />
-          <MiddleText>{text}</MiddleText>
+          <MiddleText>
+            {isTyping ? (
+              <WrapLoadingAnimation>
+                <TextLoading />
+              </WrapLoadingAnimation>
+            ) : (
+              text
+            )}
+          </MiddleText>
           <MiddleBottom />
         </Middle>
         <Right>
@@ -35,6 +54,63 @@ const SpeechBubble = ({ text, randomDelay, isVisible }) => {
     </Container>
   );
 };
+
+const dotsAnimated = keyframes`
+  0% {
+    background-color: #9880ff;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
+`;
+
+const WrapLoadingAnimation = styled.div`
+  width: 50px;
+  display: flex;
+  justify-content: center;
+`;
+
+const TextLoading = styled.div`
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation: ${dotsAnimated} 1s infinite linear alternate;
+  animation-delay: 0.5s;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: ${dotsAnimated} 1s infinite alternate;
+    animation-delay: 0s;
+  }
+
+  &:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: ${dotsAnimated} 1s infinite alternate;
+    animation-delay: 1s;
+  }
+`;
 
 const Image = styled.img`
   width: auto;
@@ -98,9 +174,9 @@ const Bottom = styled.img`
 
 const Container = styled.div`
   opacity: ${props => (props.isVisible ? 1 : 0)};
-  transform: translateY(${props => (props.isVisible ? '0' : '10px')});
-  transition: opacity 0.3s ${props => (isMobileOnly ? '1.1' : props.randomDelay)}s linear,
-    transform 0.6s ${props => (isMobileOnly ? '0.9' : props.randomDelay)}s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transform: translateY(${props => (props.isVisible ? '0' : '15px')}) scale(${props => (props.isVisible ? 1 : 0.92)});
+  transition: opacity 0.05s ${props => (isMobileOnly ? '0' : props.randomDelay)}s linear,
+    transform 0.05s ${props => (isMobileOnly ? '0' : props.randomDelay)}s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   max-width: 320px;
   width: calc(30vw / 2);
@@ -120,8 +196,9 @@ const Container = styled.div`
 
   @media (max-width: 480px) {
     left: 5%;
+    bottom: 250px;
     width: 80vw;
   }
 `;
-
+// ${props => (isMobileOnly ? '1.1' : props.randomDelay)}s
 export default SpeechBubble;

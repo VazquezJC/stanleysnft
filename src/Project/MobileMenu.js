@@ -6,35 +6,47 @@ import { font } from 'shared/styles';
 
 const MobileMenu = ({ isMenuOpen, handleMenuClick }) => {
   return (
-    <Wrapper isOpen={isMenuOpen} aria-hidden={isMenuOpen ? 'true' : 'false'}>
-      <MobileOverlayContents>
+    <Wrapper isOpen={isMenuOpen} aria-expanded={isMenuOpen ? 'true' : 'false'}>
+      <MobileOverlayContents aria-hidden={isMenuOpen ? 'false' : 'true'}>
         <Column>
-          <MobileLink to="who" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
-            Who are The Stanleys?
-          </MobileLink>
-          <MobileLink to="roadmap" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
-            Roadmap
-          </MobileLink>
-          <MobileLink to="team" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
-            Team
-          </MobileLink>
+          <Item>
+            <MobileLink to="who" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
+              Who are The Stanleys?
+            </MobileLink>
+          </Item>
+          <Item>
+            <MobileLink to="roadmap" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
+              Roadmap
+            </MobileLink>
+          </Item>
+          <Item>
+            <MobileLink to="team" onClick={handleMenuClick} smooth={'easeOutQuint'} duration={500} offset={-130}>
+              Team
+            </MobileLink>
+          </Item>
         </Column>
         <Column>
-          <LinkOut href="https://twitter.com/StanleysNFT">
-            <TwitterIcon src={twitterIcon} alt="Twitter Icon" />
-            Twitter
-          </LinkOut>
-          <LinkOut href="https://t.co/1Emyr0KD1t">
-            <DiscordIcon src={discordIcon} alt="Discord Icon" />
-            Discord
-          </LinkOut>
+          <Item>
+            <LinkOut href="https://twitter.com/StanleysNFT">
+              <TwitterIcon src={twitterIcon} alt="Twitter Icon" />
+              Twitter
+            </LinkOut>
+          </Item>
+          <Item>
+            <LinkOut href="https://t.co/1Emyr0KD1t">
+              <DiscordIcon src={discordIcon} alt="Discord Icon" />
+              Discord
+            </LinkOut>
+          </Item>
         </Column>
       </MobileOverlayContents>
     </Wrapper>
   );
 };
 
-const Column = styled.div`
+const Item = styled.li``;
+
+const Column = styled.ul`
   display: flex;
   row-gap: 30px;
   flex-direction: column;
@@ -96,7 +108,7 @@ const MobileLink = styled(Link)`
   cursor: pointer;
 `;
 
-const MobileOverlayContents = styled.div`
+const MobileOverlayContents = styled.nav`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -120,7 +132,7 @@ const MobileOverlayContents = styled.div`
   }
 `;
 
-const Wrapper = styled.nav`
+const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: ${props => (props.isOpen ? '0%' : '100%')};
