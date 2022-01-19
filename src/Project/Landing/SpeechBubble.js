@@ -57,16 +57,16 @@ const SpeechBubble = ({ text, randomDelay, isVisible }) => {
 
 const dotsAnimated = keyframes`
   0% {
-    background-color: #9880ff;
+    background-color: darkgray;
   }
   50%,
   100% {
-    background-color: #ebe6ff;
+    background-color: #ebebeb;
   }
 `;
 
 const WrapLoadingAnimation = styled.div`
-  width: 50px;
+  width: 100px;
   display: flex;
   justify-content: center;
 `;
@@ -76,8 +76,8 @@ const TextLoading = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: #9880ff;
-  color: #9880ff;
+  background-color: darkgray;
+  color: darkgray;
   animation: ${dotsAnimated} 1s infinite linear alternate;
   animation-delay: 0.5s;
 
@@ -90,8 +90,8 @@ const TextLoading = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #9880ff;
-    color: #9880ff;
+    background-color: darkgray;
+    color: darkgray;
     animation: ${dotsAnimated} 1s infinite alternate;
     animation-delay: 0s;
   }
@@ -105,8 +105,8 @@ const TextLoading = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #9880ff;
-    color: #9880ff;
+    background-color: darkgray;
+    color: darkgray;
     animation: ${dotsAnimated} 1s infinite alternate;
     animation-delay: 1s;
   }

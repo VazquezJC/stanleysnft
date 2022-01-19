@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { isMobileOnly } from 'react-device-detect';
 import Member from 'Project/Landing/Member';
 import Navigation from 'Project/Navigation';
+import Sign from 'Project/Landing/Sign';
 
 import Title from 'Project/Title';
 import {
@@ -18,6 +19,7 @@ import {
   section3_column2_traitsList,
   team,
   footer,
+  completed,
 } from 'data/LandingPageText';
 
 import photoBorder from 'App/assets/images/photo_border2.png';
@@ -91,6 +93,33 @@ import roadmapAvif_1280w from 'App/assets/images/roadmap-progress-0-1280w.avif';
 import roadmapAvif_1650w from 'App/assets/images/roadmap-progress-0-1650w.avif';
 import roadmapPng_1280w from 'App/assets/images/roadmap-progress-0-1280w.png';
 import roadmapPng_1650w from 'App/assets/images/roadmap-progress-0-1650w.png';
+import roadmapWater1 from 'App/assets/images/roadmap-progress-water1.png';
+import roadmapWater2 from 'App/assets/images/roadmap-progress-water2.png';
+import roadmapWater3 from 'App/assets/images/roadmap-progress-water3.png';
+import roadmapWater4 from 'App/assets/images/roadmap-progress-water4.png';
+import emptyRiver from 'App/assets/images/roadmap-progress-river-empty.png';
+import toprightTree from 'App/assets/images/roadmap-progress-topright-tree.png';
+import treeBottomLeft from 'App/assets/images/roadmap-progress-bottomleft-tree.png';
+import treeBottomLeft2 from 'App/assets/images/roadmap-progress-bottomleft-tree2.png';
+import gold from 'App/assets/images/roadmap-progress-bottomright-gold.png';
+import rocksBottomRight from 'App/assets/images/roadmap-progress-bottomright-rocks.png';
+import rockMiddle from 'App/assets/images/roadmap-progress-middle-rock.png';
+import rockTopLeft from 'App/assets/images/roadmap-progress-topleft-rocks.png';
+import plantMiddle from 'App/assets/images/roadmap-progress-middle-plant.png';
+import plant1TopLeft from 'App/assets/images/roadmap-progress-topleft-plant.png';
+import plant2TopLeft from 'App/assets/images/roadmap-progress-topleft-plant2.png';
+import plantRight from 'App/assets/images/roadmap-progress-right-plant.png';
+import treeTopRight from 'App/assets/images/roadmap-progress-topright-tree.png';
+import treeRight from 'App/assets/images/roadmap-progress-right-treeshrub.png';
+import hippo from 'App/assets/images/roadmap-progress-hippo.png';
+import giraffe from 'App/assets/images/roadmap-progress-giraffe.png';
+import crocodile from 'App/assets/images/roadmap-progress-crocodile.png';
+import water from 'App/assets/images/roadmap-progress-water.png';
+import waterMask from 'App/assets/images/roadmap-progress-mask.png';
+import waterFoam from 'App/assets/images/roadmap-progress-foam.png';
+import warthog from 'App/assets/images/roadmap-progress-warthog.png';
+import barrierOverlay from 'App/assets/images/roadmap-progress-barriers.png';
+
 import ufoPng from 'App/assets/images/ufo.png';
 
 import teamSuitcasePng from 'App/assets/images/team-frame-suitcase2.png';
@@ -103,6 +132,7 @@ function getRandomInt(max) {
 
 const Landing = () => {
   const [stanleyIndex, setStanleyIndex] = useState(getRandomInt(3));
+  const [progressWaterIndex, setProgressWaterIndex] = useState(-1);
   const stanleyBackgroundIndex = useRef(getRandomInt(4));
 
   const [titleRef, titleInView] = useInView({
@@ -201,6 +231,15 @@ const Landing = () => {
     },
   });
 
+  const determine = completed => {
+    if (completed === 3) return { 1024: 100, 768: 60, 480: 80, 360: 20 };
+    if (completed === 4) return { 1024: 100, 768: 80, 480: 60, 360: 40 };
+    if (completed === 5) return { 1024: 100, 768: 80, 480: 60, 360: 40 };
+    if (completed === 5) return { 1024: 100, 768: 80, 480: 60, 360: 40 };
+  };
+
+  const determineMobilePosition = useRef(determine(completed));
+
   const stanleysBackgrounds = useRef([
     { image: bgEiffelPng, x: 0, y: 8 },
     { image: bgStonehengePng, x: 1, y: 13 },
@@ -208,17 +247,54 @@ const Landing = () => {
     { image: bgWhitehousePng, x: 0, y: 13 },
   ]);
 
+  const signEntries = [
+    { text: 'Community Launch', coordinates: { x: 90, y: 100 } },
+    { text: '30 Day 3x Giveaways', coordinates: { x: 270, y: 150 } },
+    { text: 'Relationships', coordinates: { x: 480, y: 200 } },
+    { text: 'Mint', coordinates: { x: 520, y: 330 } },
+    { text: '500 NFT Winners', coordinates: { x: 450, y: 430 } },
+    { text: 'Charity Donation', coordinates: { x: 660, y: 470 } },
+    { text: 'Profit Sharing', coordinates: { x: 840, y: 510 } },
+    { text: 'Leadership Team Elections', coordinates: { x: 1010, y: 520 } },
+    { text: 'Community Ownership Transition', coordinates: { x: 1210, y: 550 } },
+  ];
+
+  const countMe = useRef(0);
+
   useEffect(() => {
     let stanleyTimer;
+
     stanleyTimer = setTimeout(() => {
       if (stanleyIndex < 2) {
         setStanleyIndex(stanleyIndex + 1);
       } else {
         setStanleyIndex(0);
       }
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(stanleyTimer);
   }, [stanleyIndex]);
+
+  useEffect(() => {
+    let determineWaterSpeed = depth => {
+      if (depth === 3) return 1000;
+      if (depth === 4) return 900;
+      if (depth === 5) return 800;
+      if (depth === 6) return 600;
+      if (depth === 7) return 450;
+      if (depth === 8) return 300;
+      if (depth === 9) return 250;
+      if (depth === 10) return 250;
+    };
+
+    let riverTimer = null;
+    if (rivermapInView && progressWaterIndex < completed) {
+      riverTimer = setTimeout(() => {
+        setProgressWaterIndex(progressWaterIndex + 1);
+      }, determineWaterSpeed(completed));
+    }
+
+    return () => clearTimeout(riverTimer);
+  }, [rivermapInView, progressWaterIndex]);
 
   return (
     <>
@@ -328,21 +404,41 @@ const Landing = () => {
               <StarPng duration={1.5} animation={Pulse1} delay={0.04} left={'40%'} src={star} alt="" />
               <StarPng duration={1.6} animation={Pulse2} delay={0.08} left={'60%'} bottom={0} src={star} alt="" />
               <StarPng duration={2.5} animation={Pulse1} delay={0.12} left={'80%'} bottom={'40px'} src={star} alt="" />
-              <StarPng duration={2} animation={Pulse1} delay={0.15} left={'30%'} bottom={'10px'} src={star} alt="" />
+              <StarPng duration={2} animation={Pulse1} delay={0.15} left={'30%'} bottom={'30px'} src={star} alt="" />
               <StarPng duration={1} animation={Pulse0} delay={0.2} left={'90%'} src={star} alt="" />
             </Stars>
           </Section4>
-          <ProgressMapWrapper ref={rivermapRef}>
-            <ProgressMap inView={rivermapInView}>
-              {/* <source type="image/avif" srcSet={`${roadmapAvif_1280w} 1280w, ${roadmapAvif_1650w} 1650w`} /> */}
-              <img srcSet={`${roadmapPng_1280w} 1280w, ${roadmapPng_1650w} 1650w`} alt="Visual Representation of Roadmap" />
-            </ProgressMap>
-            <UfoImage inView={rivermapInView} src={ufoPng} alt="" />
-          </ProgressMapWrapper>
-          <Border2 src={border} alt="" />
+          <ProgressMapWrapperNew>
+            <ProgressContainer inView={rivermapInView} mobilePos={determineMobilePosition.current} ref={rivermapRef}>
+              <RiverWrapper>
+                <UfoImage inView={rivermapInView} src={ufoPng} alt="" />
+                <Foam background={waterFoam} depth={progressWaterIndex} />
+                <BarrierOverlay background={barrierOverlay} depth={completed} />
+                <ProgressWater background={water} depth={progressWaterIndex} />
+                {/* <RiverGraphic src={progressWater.current[progressWaterIndex]} alt="" /> */}
+                <TopRightTree src={toprightTree} alt="" />
+                {signEntries.map((entry, idx) => (
+                  <Sign key={idx} text={entry.text} coordinates={entry.coordinates} depth={idx} />
+                ))}
+                <Crocodile inView={rivermapInView} src={crocodile} alt="" />
+                <Giraffe inView={rivermapInView} src={giraffe} alt="" />
+                <Hippo inView={rivermapInView} src={hippo} alt="" />
+                <Gold src={gold} alt="" />
+                <TreeTopRight src={treeRight} alt="" />
+                <TreeBottomLeft src={treeBottomLeft} alt="" />
+                <TreeBottomLeft2 src={treeBottomLeft2} alt="" />
+                <TopLeft1 inView={rivermapInView} src={plant1TopLeft} alt="" />
+                <TopLeft2 src={plant2TopLeft} alt="" />
+                <Warthog src={warthog} alt="" />
+                <EmptyRiver src={emptyRiver} alt="" />
+                <RockBottomRight src={rocksBottomRight} alt="" />
+                <RockTopLeft src={rockTopLeft} alt="" />
+              </RiverWrapper>
+            </ProgressContainer>
+          </ProgressMapWrapperNew>
+          {/* <Border2 src={border} alt="" /> */}
           <Section6>
             <WhoContent>
-              {/* <QuestionImg src={headerQuestion} /> */}
               <HeaderExtender>
                 <Header name="team">Meet the Team</Header>
               </HeaderExtender>
@@ -356,7 +452,7 @@ const Landing = () => {
                   description={'Crypto dad, golf nut, and world traveler. Ask me where I am going next...'}
                   isVisible={team1InView}
                   ref={team1Ref}
-                  speechDelay={2.1}
+                  speechDelay={1.5}
                 />
                 <Member
                   person={team.colorsoftheworld}
@@ -369,7 +465,7 @@ const Landing = () => {
                   }
                   isVisible={team2InView}
                   ref={team2Ref}
-                  speechDelay={4.1}
+                  speechDelay={3.3}
                 />
                 <Member
                   person={team.apura}
@@ -382,7 +478,7 @@ const Landing = () => {
                   }
                   isVisible={team3InView}
                   ref={team3Ref}
-                  speechDelay={6.8}
+                  speechDelay={4.7}
                 />
               </Profiles>
             </WhoContent>
@@ -393,6 +489,260 @@ const Landing = () => {
     </>
   );
 };
+
+// import treeBottomLeft from 'App/assets/images/roadmap-progress-bottomleft-tree.png';
+// import gold from 'App/assets/images/roadmap-progress-bottomright-gold.png';
+// import rocksBottomRight from 'App/assets/images/roadmap-progress-bottomright-rocks.png';
+// import rockMiddle from 'App/assets/images/roadmap-progress-middle-rock.png';
+// import rockTopLeft from 'App/assets/images/roadmap-progress-topleft-rocks.png';
+// import plantMiddle from 'App/assets/images/roadmap-progress-middle-plant.png';
+// import plant1TopLeft from 'App/assets/images/roadmap-progress-topleft-plant.png';
+// import plant2TopLeft from 'App/assets/images/roadmap-progress-topleft-plant2.png';
+// import plantRight from 'App/assets/images/roadmap-progress-right-plant.png';
+// import treeTopRight from 'App/assets/images/roadmap-progress-topright-tree.png';
+// import treeRight from 'App/assets/images/roadmap-progress-right-treeshrub.png';
+
+const Warthog = styled.img`
+  position: absolute;
+  top: -80px;
+  left: 35%;
+
+  @media (max-width: 1024px) {
+    left: 45%;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const RockBottomRight = styled.img`
+  right: 30px;
+  position: absolute;
+  bottom: 270px;
+  opacity: 1;
+`;
+const RockTopLeft = styled.img`
+  top: 90px;
+  position: absolute;
+  left: 280px;
+`;
+
+const AnimateFlower = keyframes`
+0% {opacity: 0; transform: translateY(20px) scaleY(1.1) scaleX(0.9);}
+30% {opacity: 0.8;}
+70% {opacity: 1; transform: translateY(-30px) scaleY(2) scaleX(0.5);}
+100% {opacity: 1; transform: translateY(0) scaleY(1) scaleX(1);}
+`;
+
+const TopLeft1 = styled.img`
+  top: 30px;
+  position: absolute;
+  left: 15px;
+  opacity: 1;
+`;
+
+// animation: ${props => (props.inView ? AnimateFlower : null)} 0.4s 0.2s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+// animation-fill-mode: forwards;
+
+const TopLeft2 = styled.img`
+  position: absolute;
+  top: 315px;
+  left: 220px;
+`;
+
+const TreeBottomLeft2 = styled.img`
+  position: absolute;
+  bottom: 160px;
+  z-index: 600;
+  left: clamp(200px, 20vw, 280px);
+`;
+
+const TreeBottomLeft = styled.img`
+  position: absolute;
+  bottom: -0;
+  left: 0;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const TreeTopRight = styled.img`
+  position: absolute;
+  top: -435x;
+  right: 0;
+`;
+
+const Gold = styled.img`
+  position: absolute;
+  bottom: -40px;
+  right: 0;
+`;
+
+const Foam = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1468px;
+  height: 787px;
+  background-image: url(${props => props.background});
+  background-position-y: ${props => -787 * props.depth}px;
+  background-size: cover;
+  z-index: 1;
+  transition: background-image 0s ease-in-out, background-position-y 0s ease-in-out, z-index 0s ease-in-out;
+`;
+
+const ProgressWater = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1468px;
+  height: 787px;
+  background-image: url(${props => props.background});
+  mask: url(${waterMask});
+  -webkit-mask-position-y: ${props => -787 * props.depth}px;
+  background-size: cover;
+  z-index: 0;
+  transition: background-image 1s ease-in-out, background-position-y 0s ease-in-out, z-index 0s ease-in-out;
+`;
+
+const BarrierOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1468px;
+  height: 787px;
+  background-image: url(${props => props.background});
+  background-position-y: ${props => -787 * (props.depth - 3)}px;
+  background-size: cover;
+  z-index: ${props => props.depth + 99};
+  transition: background-image 0s ease-in-out, background-position-y 0s ease-in-out, z-index 0s ease-in-out;
+`;
+
+const ProgressContainer = styled.div`
+  position: relative;
+  background-image: radial-gradient(#73b159 30%, transparent 70%);
+
+  @media (max-width: 1280px) {
+    left: clamp(100px, 20vw, 180px);
+  }
+
+  @media (max-width: 1024px) {
+    background-image: radial-gradient(#73b159 40%, transparent 60%);
+  }
+  @media (max-width: 768px) {
+    left: 160px;
+    top: -77px;
+    height: 500px;
+    transform: scale(0.7);
+  }
+
+  @media (max-width: 480px) {
+    left: 170px;
+    top: -81px;
+    height: 500px;
+    transform: scale(0.68);
+  }
+
+  @media (max-width: 360px) {
+    top: -177px;
+    left: 160px;
+    transform: scale(0.55);
+  }
+`;
+
+const AnimalBounce = keyframes`
+  0% { transform: translateY(0) scale(1); }
+  18% { transform: translateY(-60px) scaleY(1.1) scaleX(0.9); }
+  32% { transform: translateY(0) scale(1); }
+`;
+
+const Crocodile = styled.img`
+  position: absolute;
+  top: 180px;
+  z-index: 600;
+
+  right: clamp(100px, 19vw, 250px);
+  animation: ${props => (props.inView ? AnimalBounce : null)} 1s 5.2s 2 cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.3s 0.5s linear, transform 0.2s 0.5s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  @media (max-width: 1280px) {
+    right: 400px;
+  }
+
+  @media (max-width: 1024px) {
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+  }
+
+  @media (max-width: 360px) {
+  }
+`;
+
+const Giraffe = styled.img`
+  position: absolute;
+  z-index: 600;
+  top: 80px;
+  left: clamp(100px, 8vw, 140px);
+
+  animation: ${props => (props.inView ? AnimalBounce : null)} 1s 4.7s 2 cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: opacity 0.3s 0.5s linear, transform 0.2s 0.5s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+
+  @media (max-width: 1280px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    left: 2%;
+  }
+
+  @media (max-width: 768px) {
+    left: 10%;
+  }
+
+  @media (max-width: 480px) {
+    left: 140px;
+  }
+
+  @media (max-width: 360px) {
+  }
+`;
+
+const Hippo = styled.img`
+  top: 530px;
+  left: 470px;
+  z-index: 600;
+
+  position: absolute;
+`;
+
+const RiverWrapper = styled.div`
+  position: relative;
+`;
+
+const TopRightTree = styled.img`
+  position: absolute;
+  top: -140px;
+  left: 700px;
+  z-index: 500;
+
+  @media (max-width: 1024px) {
+    left: 150px;
+  }
+`;
+
+const EmptyRiver = styled.img``;
+
+const RiverGraphic = styled.img`
+  position: absolute;
+  top: 0;
+`;
 
 const Unchecked = styled.li`
   &:before {
@@ -567,6 +917,20 @@ const StarPng = styled.img`
   animation: ${props => props.animation} ${props => props.duration}s ${props => props.delay}s steps(1, end) infinite;
 `;
 
+const ProgressMapWrapperNew = styled.div`
+  position: relative;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+  padding-bottom: 150px;
+  background-image: linear-gradient(#73b159, #449321 85%);
+  border-bottom: 6px solid #000;
+  line-height: 0;
+  width: 100%;
+  z-index: 600;
+`;
+
 const ProgressMapWrapper = styled.div`
   position: relative;
   height: auto;
@@ -587,18 +951,18 @@ const ufoAnimation = keyframes`
 
 const UfoImage = styled.img`
   position: absolute;
-  right: 23%;
+  right: 21%;
   width: auto;
   height: auto;
+  transform: translateY(-180px);
 
-  transform: translateY(${props => (props.inView ? 0 : '50px')});
-  opacity: ${props => (props.inView ? 1 : 0)};
-  transition: opacity 0.6s 0.63s linear, transform 1s 0.63s cubic-bezier(0.26, 0.67, 0.48, 0.91);
-
-  width: clamp(135px, 13.5vw, 236px);
-  top: 0;
-  z-index: 500;
+  z-index: 600;
   animation: ${ufoAnimation} 4s ease-in-out infinite;
+
+  @media (max-width: 1024px) {
+    right: auto;
+    left: 25%;
+  }
 `;
 
 const PhotoLineupContainer = styled.div`
@@ -829,6 +1193,10 @@ const Profiles = styled.div`
     width: 100%;
     row-gap: 60px;
   }
+
+  @media (max-width: 480px) {
+    margin-top: 60px;
+  }
 `;
 
 const Name = styled.div`
@@ -990,8 +1358,8 @@ const Wrap4 = styled.div`
 const Section4 = styled(Section)`
   width: 100%;
   display: flex;
-  z-index: 600;
-  padding-bottom: clamp(80px, 13vw, 230px);
+  z-index: 500;
+  padding-bottom: 280px;
   position: relative;
   background-color: #6e91bb;
 `;
@@ -1172,7 +1540,7 @@ const StanleyAvatarFloat2 = styled.picture`
     height: auto;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     display: none;
   }
 `;

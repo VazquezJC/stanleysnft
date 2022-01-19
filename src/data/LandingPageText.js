@@ -1,5 +1,17 @@
 // IMPORTANT NOTE: All text is opened and closed with backticks. That's the only requirement.
 
+// Set to completion level. For example, if NFTs were minted, then value should be 4.
+//
+// 3 = 30 Day 3x Giveaways
+// 4 = Relationships
+// 5 = Mint
+// 6 = 500 NFT Winners
+// 7 = Charity Donation
+// 8 = Profit Sharing
+// 9 = Leadership Team Election
+// 10 = Community Ownership Transition
+export const completed = 3;
+
 // TEAM DETAILS
 // * Leave text space empty if not in use
 export const team = {

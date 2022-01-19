@@ -22,7 +22,7 @@ const Member = forwardRef(({ person, color, frameOrientations, portrait, name, d
     <Wrapper>
       <FrameContainer ref={ref} isVisible={isVisible}>
         <TeamImgContainer color={color}>
-          <Stanely src={portrait} alt={`${name}'s Portrait`} />
+          <StanelyAvatar src={portrait} alt={`${name}'s Portrait`} />
           <FrameGlassFront isVisible={isVisible} src={frameGlass} alt="" />
         </TeamImgContainer>
         <FrameLeft degree={frameOrientations.left} src={frameLeft} alt="" />
@@ -126,11 +126,10 @@ const TeamNameplateText = styled.div`
   align-items: center;
   text-align: center;
   background: url(${nameplateMiddleBg});
-  font-family: 'Sedgwick Ave', 'cursive';
   font-size: 21px;
   text-shadow: 1px 2px #a95d2b;
+  font-family: 'Sedgwick Ave', 'cursive';
   top: 38px;
-  color: #2b1709;
   height: 89px;
 `;
 
@@ -162,7 +161,7 @@ const TeamImgContainer = styled.div`
   left: 15px;
 `;
 
-const Stanely = styled.img`
+const StanelyAvatar = styled.img`
   position: absolute;
   top: 0;
   left: 0;
