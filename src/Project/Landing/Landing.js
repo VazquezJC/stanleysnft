@@ -89,14 +89,6 @@ import dice from 'App/assets/images/roadmap_dice.png';
 import checkBox1 from 'App/assets/images/checkbox1.png';
 import checkBox1Tick from 'App/assets/images/checkbox1-tick.png';
 
-import roadmapAvif_1280w from 'App/assets/images/roadmap-progress-0-1280w.avif';
-import roadmapAvif_1650w from 'App/assets/images/roadmap-progress-0-1650w.avif';
-import roadmapPng_1280w from 'App/assets/images/roadmap-progress-0-1280w.png';
-import roadmapPng_1650w from 'App/assets/images/roadmap-progress-0-1650w.png';
-import roadmapWater1 from 'App/assets/images/roadmap-progress-water1.png';
-import roadmapWater2 from 'App/assets/images/roadmap-progress-water2.png';
-import roadmapWater3 from 'App/assets/images/roadmap-progress-water3.png';
-import roadmapWater4 from 'App/assets/images/roadmap-progress-water4.png';
 import emptyRiver from 'App/assets/images/roadmap-progress-river-empty.png';
 import toprightTree from 'App/assets/images/roadmap-progress-topright-tree.png';
 import treeBottomLeft from 'App/assets/images/roadmap-progress-bottomleft-tree.png';
@@ -186,7 +178,7 @@ const Landing = () => {
   });
 
   const [rivermapRef, rivermapInView] = useInView({
-    threshold: [0.15, 1],
+    threshold: isMobileOnly ? 0 : [0.15, 1],
     triggerOnce: true,
   });
 
@@ -231,15 +223,6 @@ const Landing = () => {
     },
   });
 
-  const determine = completed => {
-    if (completed === 3) return { 1024: 100, 768: 60, 480: 80, 360: 20 };
-    if (completed === 4) return { 1024: 100, 768: 80, 480: 60, 360: 40 };
-    if (completed === 5) return { 1024: 100, 768: 80, 480: 60, 360: 40 };
-    if (completed === 5) return { 1024: 100, 768: 80, 480: 60, 360: 40 };
-  };
-
-  const determineMobilePosition = useRef(determine(completed));
-
   const stanleysBackgrounds = useRef([
     { image: bgEiffelPng, x: 0, y: 8 },
     { image: bgStonehengePng, x: 1, y: 13 },
@@ -263,7 +246,6 @@ const Landing = () => {
 
   useEffect(() => {
     let stanleyTimer;
-
     stanleyTimer = setTimeout(() => {
       if (stanleyIndex < 2) {
         setStanleyIndex(stanleyIndex + 1);
@@ -287,13 +269,14 @@ const Landing = () => {
     };
 
     let riverTimer = null;
+
     if (rivermapInView && progressWaterIndex < completed) {
-      riverTimer = setTimeout(() => {
+      riverTimer = setInterval(() => {
         setProgressWaterIndex(progressWaterIndex + 1);
       }, determineWaterSpeed(completed));
     }
 
-    return () => clearTimeout(riverTimer);
+    return () => clearInterval(riverTimer);
   }, [rivermapInView, progressWaterIndex]);
 
   return (
@@ -327,11 +310,10 @@ const Landing = () => {
           <PhotoLineupContainer>
             <PhotoBorderImg src={photoBorder} alt="Photos of Stanleys" />
           </PhotoLineupContainer>
-          <Section2>
+          <Section2 name="who">
             <BackgroundRiver src={bgRiver} ref={landscapeRiverRef} inView={stanley2InView} alt="" />
             <Section2Organizer>
               <TextWrap2Section
-                name="who"
                 ref={section2Paragaraph1Ref}
                 inView={section2Paragaraph1InView}
                 dangerouslySetInnerHTML={{ __html: section2_column1 }}
@@ -354,10 +336,10 @@ const Landing = () => {
             </Section2Organizer>
           </Section2>
           <Border2 src={border} alt="" />
-          <Section4>
+          <Section4 name="roadmap">
             <Wrap4 ref={roadmapRef}>
               <Roadmap inView={roadmapInView}>
-                <MapContainer name="roadmap">
+                <MapContainer>
                   <LeftMap />
                   <MapContents>
                     <RoadmapExplainer
@@ -369,18 +351,18 @@ const Landing = () => {
                       <InitialWrapper ref={roadmapList1Ref} inView={roadmapList1InView}>
                         <h3>Initial</h3>
                         <InitialList>
-                          <Unchecked>42.5% profit sharing during mint for those that buy and hold beyond 10 days</Unchecked>
-                          <Unchecked>100% ownership after mint (first of its kind) for those that buy and hold beyond 10 days</Unchecked>
-                          <Unchecked>Eligibility to represent the community as part of the future leadership</Unchecked>
-                          <Unchecked>500 QR coded NFTs during mint entitling buyer to an additional NFT at no charge</Unchecked>
-                          <Unchecked>3% mint proceeds charity contribution</Unchecked>
-                          <Checked>30 day 3x giveaways plus additional NFTs for those whitelisted</Checked>
-                          <Unchecked>Selected community relationships</Unchecked>
+                          {section3_column1_initialList.map(item => (
+                            <Unchecked isChecked={item.ticked}>{item.text}</Unchecked>
+                          ))}
                         </InitialList>
                       </InitialWrapper>
                       <TBDWrapper ref={roadmapList2Ref} inView={roadmapList2InView}>
                         <h3>TBD</h3>
-                        <TBDList dangerouslySetInnerHTML={{ __html: section3_column1_tbdList }}></TBDList>
+                        <TBDList>
+                          {section3_column1_tbdList.map(item => (
+                            <li>{item.text}</li>
+                          ))}
+                        </TBDList>
                       </TBDWrapper>
                     </RoadmapLists>
                   </MapContents>
@@ -394,8 +376,15 @@ const Landing = () => {
               </Roadmap>
               <Rarity ref={rarityRef} inView={rarityInView}>
                 <Dice src={dice} alt="Dice Image" />
-                <RarityExplainer dangerouslySetInnerHTML={{ __html: section3_column2_rarityExplainer }} />
-                <RarityList dangerouslySetInnerHTML={{ __html: section3_column2_traitsList }}></RarityList>
+                <RarityExplainer>
+                  <h2>{section3_column2_rarityExplainer.title}</h2>
+                  <p>{section3_column2_rarityExplainer.text}</p>
+                </RarityExplainer>
+                <RarityList>
+                  {section3_column2_traitsList.map(item => (
+                    <li>{item.text}</li>
+                  ))}
+                </RarityList>
               </Rarity>
             </Wrap4>
             <BackgroundGradient src={repeatBg} alt="" />
@@ -408,14 +397,14 @@ const Landing = () => {
               <StarPng duration={1} animation={Pulse0} delay={0.2} left={'90%'} src={star} alt="" />
             </Stars>
           </Section4>
-          <ProgressMapWrapperNew>
-            <ProgressContainer inView={rivermapInView} mobilePos={determineMobilePosition.current} ref={rivermapRef}>
+          <ProgressMapWrapperNew ref={rivermapRef}>
+            <RiverLandscape inView={rivermapInView} />
+            <ProgressContainer inView={rivermapInView}>
               <RiverWrapper>
                 <UfoImage inView={rivermapInView} src={ufoPng} alt="" />
-                <Foam background={waterFoam} depth={progressWaterIndex} />
+                <Foam depth={progressWaterIndex} />
                 <BarrierOverlay background={barrierOverlay} depth={completed} />
-                <ProgressWater background={water} depth={progressWaterIndex} />
-                {/* <RiverGraphic src={progressWater.current[progressWaterIndex]} alt="" /> */}
+                <ProgressWater depth={progressWaterIndex} />
                 <TopRightTree src={toprightTree} alt="" />
                 {signEntries.map((entry, idx) => (
                   <Sign key={idx} text={entry.text} coordinates={entry.coordinates} depth={idx} />
@@ -425,9 +414,9 @@ const Landing = () => {
                 <Hippo inView={rivermapInView} src={hippo} alt="" />
                 <Gold src={gold} alt="" />
                 <TreeTopRight src={treeRight} alt="" />
-                <TreeBottomLeft src={treeBottomLeft} alt="" />
-                <TreeBottomLeft2 src={treeBottomLeft2} alt="" />
-                <TopLeft1 inView={rivermapInView} src={plant1TopLeft} alt="" />
+                <TreeBottomLeft inView={rivermapInView} src={treeBottomLeft} alt="" />
+                <TreeBottomLeft2 inView={rivermapInView} src={treeBottomLeft2} alt="" />
+                <TopLeft1 src={plant1TopLeft} alt="" />
                 <TopLeft2 src={plant2TopLeft} alt="" />
                 <Warthog src={warthog} alt="" />
                 <EmptyRiver src={emptyRiver} alt="" />
@@ -437,10 +426,10 @@ const Landing = () => {
             </ProgressContainer>
           </ProgressMapWrapperNew>
           {/* <Border2 src={border} alt="" /> */}
-          <Section6>
+          <Section6 name="team">
             <WhoContent>
               <HeaderExtender>
-                <Header name="team">Meet the Team</Header>
+                <Header>Meet the Team</Header>
               </HeaderExtender>
               <Profiles>
                 <Member
@@ -490,6 +479,35 @@ const Landing = () => {
   );
 };
 
+const LandscapeSkyBlock = styled.div`
+  position: absolute;
+  width: 100%;
+  top: -35px;
+  height: 50px;
+  background: #828aa1;
+  z-index: 18;
+`;
+
+const RiverLandscape = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  padding-bottom: 150px;
+  background-image: radial-gradient(#73b159 30%, transparent 70%), linear-gradient(#73b159, #449321 85%);
+  width: 100%;
+  z-index: 10;
+  opacity: 1;
+  transform: translateY(${props => (props.inView ? '0' : '-20px')});
+  transition: opacity 1s linear, transform ${isMobileOnly ? '2s' : '3s'} 0s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  will-change: transform;
+
+  @media (max-width: 1024px) {
+    background-image: radial-gradient(#73b159 40%, transparent 60%), linear-gradient(#73b159, #449321 85%);
+  }
+`;
+
 // import treeBottomLeft from 'App/assets/images/roadmap-progress-bottomleft-tree.png';
 // import gold from 'App/assets/images/roadmap-progress-bottomright-gold.png';
 // import rocksBottomRight from 'App/assets/images/roadmap-progress-bottomright-rocks.png';
@@ -506,6 +524,10 @@ const Warthog = styled.img`
   position: absolute;
   top: -80px;
   left: 35%;
+  opacity: 1;
+  z-index: 20;
+  ${props => (props.inView ? 'transform: translateY(0);' : 'transform: translateY(50px);')}
+  transition: opacity 0.6s 0.5s linear, transform 0.6s 0.5s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 
   @media (max-width: 1024px) {
     left: 45%;
@@ -522,6 +544,7 @@ const RockBottomRight = styled.img`
   bottom: 270px;
   opacity: 1;
 `;
+
 const RockTopLeft = styled.img`
   top: 90px;
   position: absolute;
@@ -535,11 +558,35 @@ const AnimateFlower = keyframes`
 100% {opacity: 1; transform: translateY(0) scaleY(1) scaleX(1);}
 `;
 
+const RandomFlowerTilt = keyframes`
+ 0% {
+  transform: rotate(0);
+ }
+30% {
+  transform: rotate(8deg);
+  transform-origin: bottom center;
+ }
+
+50% {
+  transform: rotate(0);
+ }
+
+ 70% {
+  transform: rotate(-8deg);
+  transform-origin: bottom center;
+ }
+
+ 100% {
+  transform: rotate(0);
+ }
+`;
+
 const TopLeft1 = styled.img`
   top: 30px;
   position: absolute;
   left: 15px;
   opacity: 1;
+  animation: ${RandomFlowerTilt} 4s linear infinite;
 `;
 
 // animation: ${props => (props.inView ? AnimateFlower : null)} 0.4s 0.2s cubic-bezier(0.26, 0.67, 0.48, 0.91);
@@ -549,6 +596,9 @@ const TopLeft2 = styled.img`
   position: absolute;
   top: 315px;
   left: 220px;
+
+  transform: translateY(${props => (props.inView ? '0' : '20px')});
+  transition: transform 6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const TreeBottomLeft2 = styled.img`
@@ -556,6 +606,9 @@ const TreeBottomLeft2 = styled.img`
   bottom: 160px;
   z-index: 600;
   left: clamp(200px, 20vw, 280px);
+
+  transform: translateY(${props => (props.inView ? '0' : '-5px')});
+  transition: transform 6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const TreeBottomLeft = styled.img`
@@ -582,80 +635,73 @@ const Gold = styled.img`
 
 const Foam = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
   width: 1468px;
   height: 787px;
-  background-image: url(${props => props.background});
+  background-image: url(${waterFoam});
   background-position-y: ${props => -787 * props.depth}px;
-  background-size: cover;
   z-index: 1;
-  transition: background-image 0s ease-in-out, background-position-y 0s ease-in-out, z-index 0s ease-in-out;
 `;
 
 const ProgressWater = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
   width: 1468px;
   height: 787px;
-  background-image: url(${props => props.background});
+  background-image: url(${water});
   mask: url(${waterMask});
   -webkit-mask-position-y: ${props => -787 * props.depth}px;
   background-size: cover;
   z-index: 0;
-  transition: background-image 1s ease-in-out, background-position-y 0s ease-in-out, z-index 0s ease-in-out;
 `;
 
 const BarrierOverlay = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
   width: 1468px;
   height: 787px;
   background-image: url(${props => props.background});
   background-position-y: ${props => -787 * (props.depth - 3)}px;
-  background-size: cover;
   z-index: ${props => props.depth + 99};
-  transition: background-image 0s ease-in-out, background-position-y 0s ease-in-out, z-index 0s ease-in-out;
 `;
 
 const ProgressContainer = styled.div`
   position: relative;
-  background-image: radial-gradient(#73b159 30%, transparent 70%);
+  ${props => (props.inView ? 'transform: translateY(0);' : `transform: translateY(10px);`)}
+  transition: transform ${isMobileOnly ? '2s' : '3s'} cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  z-index: 15;
+  
 
   @media (max-width: 1280px) {
     left: clamp(100px, 20vw, 180px);
   }
 
-  @media (max-width: 1024px) {
-    background-image: radial-gradient(#73b159 40%, transparent 60%);
-  }
   @media (max-width: 768px) {
     left: 160px;
     top: -77px;
     height: 500px;
-    transform: scale(0.7);
+    transform: translateY(${props => (props.inView ? '0' : '30px')}) scale(0.7);
   }
 
   @media (max-width: 480px) {
     left: 170px;
     top: -81px;
     height: 500px;
-    transform: scale(0.68);
+    transform: translateY(${props => (props.inView ? '0' : '30px')}) scale(0.68);
   }
 
   @media (max-width: 360px) {
     top: -177px;
     left: 160px;
-    transform: scale(0.55);
+    transform: translateY(${props => (props.inView ? '0' : '30px')}) scale(0.55);
   }
 `;
 
 const AnimalBounce = keyframes`
-  0% { transform: translateY(0) scale(1); }
-  18% { transform: translateY(-60px) scaleY(1.1) scaleX(0.9); }
-  32% { transform: translateY(0) scale(1); }
+        0%   { transform: scale(1,1)      translateY(0); }
+        10%  { transform: scale(1.1,.9)   translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-100px); }
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        57%  { transform: scale(1,1)      translateY(-7px); }
+        64%  { transform: scale(1,1)      translateY(0); }
+        100% { transform: scale(1,1)      translateY(0); }
 `;
 
 const Crocodile = styled.img`
@@ -715,15 +761,16 @@ const Giraffe = styled.img`
 `;
 
 const Hippo = styled.img`
+  position: absolute;
   top: 530px;
   left: 470px;
   z-index: 600;
-
-  position: absolute;
+  ${props => (props.inView ? 'transform: translateY(0);' : 'transform: translateY(-5px);')}
+  transition: transform 2s  cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const RiverWrapper = styled.div`
-  position: relative;
+  z-index: 2;
 `;
 
 const TopRightTree = styled.img`
@@ -737,7 +784,9 @@ const TopRightTree = styled.img`
   }
 `;
 
-const EmptyRiver = styled.img``;
+const EmptyRiver = styled.img`
+  z-index: 2;
+`;
 
 const RiverGraphic = styled.img`
   position: absolute;
@@ -751,7 +800,7 @@ const Unchecked = styled.li`
     top: 4px;
     left: -32px;
     content: '';
-    background-image: url(${checkBox1});
+    background-image: url(${props => (props.isChecked ? checkBox1Tick : checkBox1)});
     background-size: 22px 22px;
     width: 22px;
     height: 22px;
@@ -918,13 +967,13 @@ const StarPng = styled.img`
 `;
 
 const ProgressMapWrapperNew = styled.div`
+  background-color: #828aa1;
   position: relative;
   height: auto;
   display: flex;
   justify-content: center;
   align-self: flex-start;
   padding-bottom: 150px;
-  background-image: linear-gradient(#73b159, #449321 85%);
   border-bottom: 6px solid #000;
   line-height: 0;
   width: 100%;
@@ -944,7 +993,7 @@ const ProgressMapWrapper = styled.div`
 `;
 
 const ufoAnimation = keyframes`
-  0% { top: 0px; }
+  0% { top: 0px;  }
   50% { top: 10px; }
   100% { top: 0px;}
 `;
@@ -1593,7 +1642,7 @@ const Section1 = styled(Section)`
 
 const Section2 = styled(Section)`
   position: relative;
-  padding-top: clamp(100px, 12vw, 190px);
+  padding-top: clamp(100px, 14vw, 190px);
   padding-bottom: clamp(2vw, 12vw, 190px);
   display: flex;
   flex-direction: column;

@@ -1,7 +1,6 @@
-// IMPORTANT NOTE: All text is opened and closed with backticks. That's the only requirement.
+// IMPORTANT NOTE: Be mindful if quotations are closed with single quote ' or backtick `
 
-// Set to completion level. For example, if NFTs were minted, then value should be 4.
-//
+// RIVER INFOGRAPHIC PROGRESS
 // 3 = 30 Day 3x Giveaways
 // 4 = Relationships
 // 5 = Mint
@@ -22,6 +21,7 @@ export const team = {
     linkedin: `https://www.linkedin.com/in/jcvazquez`,
     twitter: ``,
     instagram: ``,
+    facebook: ``,
   },
   colorsoftheworld: {
     name: `Hilde Hendriks-Vos`,
@@ -30,14 +30,7 @@ export const team = {
     linkedin: `https://www.linkedin.com/in/hilde-vos/`,
     twitter: ``,
     instagram: `https://www.instagram.com/avondroodart`,
-  },
-  chivas: {
-    name: ``,
-    nickname: `Chivas`,
-    description: `IRL business owner, NFT enthusiast and crypto trader. Loves sports, communicating and building NFT communities.`,
-    linkedin: ``,
-    twitter: ``,
-    instagram: ``,
+    facebook: ``,
   },
   apura: {
     name: ``,
@@ -46,6 +39,7 @@ export const team = {
     linkedin: ``,
     twitter: ``,
     instagram: ``,
+    facebook: ``,
   },
 };
 
@@ -130,42 +124,42 @@ export const section3_column1_roadmapExplainer = `
 `;
 
 // SECTION 3: Initial List
-export const section3_column1_initialList = `
-  <li>42.5% profit sharing during mint for those that buy and hold beyond 10 days</li>
-  <li>100% ownership after mint (first of its kind) for those that buy and hold beyond 10 days</li>
-  <li>Eligibility to represent the community as part of the future leadership</li>
-  <li>500 QR coded NFTs during mint entitling buyer to an additional NFT at no charge</li>
-  <li>3% mint proceeds charity contribution</li>
-  <li>30 day 3x giveaways plus additional NFTs for those whitelisted</li>
-  <li>Selected community relationships</li>
-`;
+export const section3_column1_initialList = [
+  { text: '42.5% profit sharing during mint for those that buy and hold beyond 10 days', ticked: false },
+  { text: '100% ownership after mint (first of its kind) for those that buy and hold beyond 10 days', ticked: false },
+  { text: 'Eligibility to represent the community as part of the future leadership', ticked: false },
+  { text: '500 QR coded NFTs during mint entitling buyer to an additional NFT at no charge', ticked: false },
+  { text: '3% mint proceeds charity contribution', ticked: false },
+  { text: '30 day 3x giveaways plus additional NFTs for those whitelisted', ticked: true },
+  { text: 'Selected community relationships', ticked: false },
+];
 
 // SECTION 3: TBD List
-export const section3_column1_tbdList = `
-  <li>Evolving international awareness (badges, #flyer tokenization)</li>
-  <li>Additional characters that expand potential for future growth</li>
-  <li>Profit sharing evolution</li>
-  <li>Subsequent charity donation</li>
-  <li>Travel gaming</li>
-  <li>Merchandise</li>
-  <li>Others</li>
-`;
+export const section3_column1_tbdList = [
+  { text: 'Evolving international awareness (badges, #flyer tokenization)' },
+  { text: 'Additional characters that expand potential for future growth' },
+  { text: 'Profit sharing evolution' },
+  { text: 'Subsequent charity donation' },
+  { text: 'Travel gaming' },
+  { text: 'Merchandise' },
+  { text: 'Others' },
+];
 
 // SECTION 3: Rarity description
-export const section3_column2_rarityExplainer = `
-  <h2>Rarity Model</h2>
-  <p>The Rarity model is based on the following traits. More details will be shared as we get closer to mint.</p>
-`;
+export const section3_column2_rarityExplainer = {
+  title: 'Rarity Model',
+  description: 'The Rarity model is based on the following traits. More details will be shared as we get closer to mint.',
+};
 
 // SECTION 3: Traits List
-export const section3_column2_traitsList = `
-  <li>Character</li>
-  <li>Background</li>
-  <li>Landmarks</li>
-  <li>Facial characteristics</li>
-  <li>Facial accessories</li>
-  <li>Clothing accessories</li>
-`;
+export const section3_column2_traitsList = [
+  { text: 'Character' },
+  { text: 'Background' },
+  { text: 'Landmarks' },
+  { text: 'Facial characteristics' },
+  { text: 'Facial accessories' },
+  { text: 'Clothing accessories' },
+];
 
 // FOOTER: Legal stuff
 export const footer = `

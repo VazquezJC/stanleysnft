@@ -12,7 +12,7 @@ import teamFrameSpeechBottomLeft from 'App/assets/images/frame-speech-bottom-lef
 import teamFrameSpeechBottomRight from 'App/assets/images/frame-speech-bottom-right.png';
 import { isMobileOnly } from 'react-device-detect';
 
-const SpeechBubble = ({ text, randomDelay, isVisible }) => {
+const SpeechBubble = ({ text, type, randomDelay, isVisible }) => {
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const SpeechBubble = ({ text, randomDelay, isVisible }) => {
           <Image src={teamFrameSpeechBottomRight} alt="" />
         </Right>
       </Upper>
-      <Bottom src={teamFrameSpeechBottom} alt="" />
+      {type === 0 && <Bottom src={teamFrameSpeechBottom} alt="" />}
     </Container>
   );
 };

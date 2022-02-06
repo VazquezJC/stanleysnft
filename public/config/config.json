@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0xB2090683c24cc96f03ef751dDA26ea1929c35662",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xB2090683c24cc96f03ef751dDA26ea1929c35662",
+  "NETWORK": {
+    "NAME": "Ethereum Rinkeby",
+    "SYMBOL": "ETH",
+    "ID": 4
+  },
+  "NFT_NAME": "The Stanleys Test Collection",
+  "SYMBOL": "STANLEYTEST",
+  "MAX_SUPPLY": 500,
+  "WEI_COST": 5000000000000000,
+  "DISPLAY_COST": 0.005,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "",
+  "SHOW_BACKGROUND": false
+}
