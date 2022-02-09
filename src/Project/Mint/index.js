@@ -22,6 +22,7 @@ const Mint = () => {
   const blockchain = useSelector(state => state.blockchain);
   const data = useSelector(state => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
+  const [isSupplyLimited, setIsSupplyLimited] = useState(false);
   const [feedback, setFeedback] = useState(``);
   const [claimedNft, setClaimedNft] = useState(false);
   const [mintAmount, setMintAmount] = useState(1);
@@ -43,6 +44,20 @@ const Mint = () => {
     MARKETPLACE_LINK: '',
     SHOW_BACKGROUND: false,
   });
+
+  useEffect(() => {
+    let mintLimit = data.maxMint;
+    let genesisLimit = 500;
+    let maxLimit = 3000;
+    let remainingSupply = data.isGenesisLocked ? genesisLimit - data.totalSupply : maxLimit - data.totalSupply;
+    let newMintAmount = mintAmount + 1;
+
+    if (newMintAmount > mintLimit || newMintAmount > remainingSupply) {
+      setIsSupplyLimited(true);
+    } else {
+      setIsSupplyLimited(false);
+    }
+  }, [mintAmount]);
 
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
@@ -78,15 +93,18 @@ const Mint = () => {
       })
       .then(receipt => {
         console.log(receipt);
-        toast.success('Congratulations! You successfully minted a Stanely genesis NFT!', {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(
+          `${mintAmount > 1 ? mintAmount + ' Genesis Stanleys successfully minted!' : 'Genesis Stanley successfully minted!'}`,
+          {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
         // setFeedback(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`);
         setClaimingNft(false);
         setClaimedNft(true);
@@ -103,11 +121,9 @@ const Mint = () => {
   };
 
   const incrementMintAmount = () => {
-    let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 50) {
-      newMintAmount = 50;
+    if (!isSupplyLimited) {
+      setMintAmount(mintAmount + 1);
     }
-    setMintAmount(newMintAmount);
   };
 
   const getData = () => {
@@ -133,7 +149,16 @@ const Mint = () => {
 
   useEffect(() => {
     getData();
+    console.log('data effect');
   }, [blockchain.account]);
+
+  useEffect(() => {
+    let genesisLimit = 500;
+    let maxLimit = 3000;
+    let remainingSupply = data.isGenesisLocked ? genesisLimit - data.totalSupply : maxLimit - data.totalSupply;
+
+    if (mintAmount > remainingSupply) setMintAmount(remainingSupply);
+  }, [data.totalSupply]);
 
   return (
     <Wrapper>
@@ -202,7 +227,7 @@ const Mint = () => {
           </MiniWrapper>
         ) : (
           <MiniWrapper>
-            <ButtonContainer>
+            <ButtonContainer isHidden={isSupplyLimited}>
               <ButtonWrapperChange isBusy={claimingNft}>
                 <ButtonChangeBase disabled={claimingNft ? 1 : 0} isBusy={claimingNft} onClick={() => decrementMintAmount()}>
                   <ButtonText>-</ButtonText>
@@ -237,7 +262,7 @@ const Mint = () => {
             </ButtonContainer>
 
             <TotalSupply isTriggered={!blockchain.account === '' && !blockchain.smartContract === null}>
-              Supply: {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+              Supply: {data.totalSupply} / {data.isGenesisLocked ? 500 : 3000}
             </TotalSupply>
             <Feedback>{feedback}</Feedback>
           </MiniWrapper>
@@ -255,12 +280,8 @@ const Mint = () => {
   );
 };
 
-// Shake randomly between 4 and 10 seconds
-// When processing, shake between 2 and 4 seconds
-// When successful, stop shaking and open up. Eyes blink. Multiple eyes for more NFTs
-
 const ButtonContainer = styled.div`
-  display: flex;
+  ${props => (props.isHidden ? 'display: none;' : 'display: flex;')}
   column-gap: 8px;
 `;
 
@@ -390,9 +411,10 @@ const AnimateTotalSupply = keyframes`
 `;
 
 const TotalSupply = styled.div`
-  font-size: 28px;
+  font-size: 26px;
   opacity: 0;
-  color: #000;
+  color: #fff;
+  font-weight: 400;
 
   animation: ${AnimateTotalSupply} 0.6s 2.1s cubic-bezier(0.26, 0.67, 0.48, 0.91);
   animation-fill-mode: forwards;

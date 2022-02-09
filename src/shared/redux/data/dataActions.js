@@ -25,16 +25,17 @@ export const fetchData = () => {
   return async dispatch => {
     dispatch(fetchDataRequest());
     try {
-      let totalSupply = await store.getState().blockchain.smartContract.methods.totaltotalSupply().call();
-      // let cost = await store
-      //   .getState()
-      //   .blockchain.smartContract.methods.cost()
-      //   .call();
+      let isGenesisLocked = await store.getState().blockchain.smartContract.methods.isGenesisLocked().call();
+      let totalSupply = await store.getState().blockchain.smartContract.methods.totalSupply().call();
+      let price = await store.getState().blockchain.smartContract.methods.price().call();
+      let maxMint = await store.getState().blockchain.smartContract.methods.maxMint().call();
 
       dispatch(
         fetchDataSuccess({
           totalSupply,
-          // cost,
+          price,
+          isGenesisLocked,
+          maxMint,
         })
       );
     } catch (err) {
