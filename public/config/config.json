@@ -1,16 +1,16 @@
 {
-  "CONTRACT_ADDRESS": "0x80532d4fB95C1dD2663A4B498CAc5ffF5397fF8b",
-  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x80532d4fB95C1dD2663A4B498CAc5ffF5397fF8b",
+  "CONTRACT_ADDRESS": "0x784F6fc6AFdb7a89695648Cc151992961787a624",
+  "SCAN_LINK": "https://ropsten.etherscan.io/address/0x784F6fc6AFdb7a89695648Cc151992961787a624",
   "NETWORK": {
-    "NAME": "Ethereum Rinkeby",
+    "NAME": "Rinekby Testnet",
     "SYMBOL": "ETH",
     "ID": 4
   },
   "NFT_NAME": "The Stanleys Test Collection",
-  "SYMBOL": "STANLEYTEST",
+  "SYMBOL": "STANLEYS",
   "MAX_SUPPLY": 500,
-  "WEI_COST": 50000000000000000,
-  "DISPLAY_COST": 0.05,
+  "WEI_COST": 5000000000000000,
+  "DISPLAY_COST": 0.005,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "",

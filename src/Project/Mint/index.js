@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'shared/redux/blockchain/blockchainActions';
 import { fetchData } from 'shared/redux/data/dataActions';
@@ -45,22 +45,70 @@ const Mint = () => {
     SHOW_BACKGROUND: false,
   });
 
-  useEffect(() => {
-    let mintLimit = data.maxMint;
-    let genesisLimit = 500;
-    let maxLimit = 3000;
-    let remainingSupply = data.isGenesisLocked ? genesisLimit - data.totalSupply : maxLimit - data.totalSupply;
-    let newMintAmount = mintAmount + 1;
+  const checkButton = useCallback(() => {
+    let maxMint = data.maxMintAmountPerTx;
+    let remainingSupply = data.availableSupply - data.totalSupply;
 
-    if (newMintAmount > mintLimit || newMintAmount > remainingSupply) {
-      setIsSupplyLimited(true);
+    if (remainingSupply <= maxMint) {
+      if (remainingSupply < mintAmount) setMintAmount(remainingSupply);
     } else {
-      setIsSupplyLimited(false);
+      if (mintAmount > maxMint) {
+        setMintAmount(20);
+      }
     }
-  }, [mintAmount]);
+
+    if (remainingSupply === 0) setIsSupplyLimited(true);
+  }, [mintAmount, data.totalSupply, data.availableSupply, data.maxMintAmountPerTx]);
+
+  useEffect(() => {
+    checkButton();
+  }, [mintAmount, checkButton]);
+
+  useEffect(() => {
+    checkButton();
+  }, [data.totalSupply, checkButton]);
+
+  const incrementMintAmount = () => {
+    setMintAmount(mintAmount + 1);
+  };
+
+  const decrementMintAmount = () => {
+    let newMintAmount = mintAmount - 1;
+    if (newMintAmount < 1) {
+      newMintAmount = 1;
+    }
+    setMintAmount(newMintAmount);
+  };
+
+  const getData = () => {
+    if (blockchain.account !== '' && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account));
+    }
+  };
+
+  const getConfig = async () => {
+    const configResponse = await fetch('/config/config.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+    const config = await configResponse.json();
+    SET_CONFIG(config);
+  };
+
+  useEffect(() => {
+    getConfig();
+  }, []);
+
+  useEffect(() => {
+    getData();
+    console.log('data effect');
+  }, [blockchain.account]);
 
   const claimNFTs = () => {
-    let cost = CONFIG.WEI_COST;
+    // let cost = CONFIG.WEI_COST;
+    let cost = data.cost ? data.cost : CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -112,54 +160,6 @@ const Mint = () => {
       });
   };
 
-  const decrementMintAmount = () => {
-    let newMintAmount = mintAmount - 1;
-    if (newMintAmount < 1) {
-      newMintAmount = 1;
-    }
-    setMintAmount(newMintAmount);
-  };
-
-  const incrementMintAmount = () => {
-    if (!isSupplyLimited) {
-      setMintAmount(mintAmount + 1);
-    }
-  };
-
-  const getData = () => {
-    if (blockchain.account !== '' && blockchain.smartContract !== null) {
-      dispatch(fetchData(blockchain.account));
-    }
-  };
-
-  const getConfig = async () => {
-    const configResponse = await fetch('/config/config.json', {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
-    const config = await configResponse.json();
-    SET_CONFIG(config);
-  };
-
-  useEffect(() => {
-    getConfig();
-  }, []);
-
-  useEffect(() => {
-    getData();
-    console.log('data effect');
-  }, [blockchain.account]);
-
-  useEffect(() => {
-    let genesisLimit = 500;
-    let maxLimit = 3000;
-    let remainingSupply = data.isGenesisLocked ? genesisLimit - data.totalSupply : maxLimit - data.totalSupply;
-
-    if (mintAmount > remainingSupply) setMintAmount(remainingSupply);
-  }, [data.totalSupply]);
-
   return (
     <Wrapper>
       <ToastContainer
@@ -188,7 +188,7 @@ const Mint = () => {
         <PresentContainer>
           <Box claimedNft={claimedNft} src={boxBase} alt="" />
           <Eyes src={boxEyes} alt="" />
-          <Lid claimedNft={claimedNft} src={boxLid} alt="" />
+          <Lid claimedNft={claimedNft} isBusy={claimingNft} src={boxLid} alt="" />
         </PresentContainer>
 
         {/* <div>{truncate(CONFIG.CONTRACT_ADDRESS, 15)}</div>
@@ -227,7 +227,7 @@ const Mint = () => {
           </MiniWrapper>
         ) : (
           <MiniWrapper>
-            <ButtonContainer isHidden={isSupplyLimited}>
+            <ButtonContainer isHidden={isSupplyLimited} isBusy={claimingNft}>
               <ButtonWrapperChange isBusy={claimingNft}>
                 <ButtonChangeBase disabled={claimingNft ? 1 : 0} isBusy={claimingNft} onClick={() => decrementMintAmount()}>
                   <ButtonText>-</ButtonText>
@@ -236,7 +236,6 @@ const Mint = () => {
               <ButtonWrapper isBusy={claimingNft}>
                 <ButtonBase
                   disabled={claimingNft ? 1 : 0}
-                  isBusy={claimingNft}
                   onClick={e => {
                     e.preventDefault();
                     claimNFTs();
@@ -262,7 +261,7 @@ const Mint = () => {
             </ButtonContainer>
 
             <TotalSupply isTriggered={!blockchain.account === '' && !blockchain.smartContract === null}>
-              Supply: {data.totalSupply} / {data.isGenesisLocked ? 500 : 3000}
+              Supply: {data.totalSupply} / {data.availableSupply}
             </TotalSupply>
             <Feedback>{feedback}</Feedback>
           </MiniWrapper>
@@ -283,6 +282,9 @@ const Mint = () => {
 const ButtonContainer = styled.div`
   ${props => (props.isHidden ? 'display: none;' : 'display: flex;')}
   column-gap: 8px;
+  ${props => (props.isBusy ? 'filter: grayscale(100%);transform: scale(0.99);' : '')}
+
+  transition: all 0.35s cubic-bezier(0.26, 0.67, 0.48, 0.91);
 `;
 
 const FeedbackPosition = styled.div`
@@ -290,10 +292,35 @@ const FeedbackPosition = styled.div`
   top: 0;
   left: 0;
 `;
+
+const EyesAnimation = keyframes`
+  0% {
+    visibility: visible;
+  }
+
+  10% {
+    visibility: hidden;
+  }
+
+  12% {
+    visibility: visible;
+  }
+
+  80% {
+    visibility: hidden;
+
+  }
+
+  81% {
+    visibility: visible;
+  }
+`;
+
 const Eyes = styled.img`
   position: absolute;
   top: 200px;
   left: 190px;
+  animation: ${EyesAnimation} steps(2, end) 8000ms infinite;
 `;
 
 const BoxShake = keyframes`
@@ -332,12 +359,36 @@ const LidShake = keyframes`
   }
 `;
 
+const LidOpen = keyframes`
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  39% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  48% {
+    transform: translateY(-15px) rotate(1deg) translateX(1px);
+  }
+
+  63%{
+    transform: translateY(-43px) rotate(2deg) translateX(2px);
+  }
+
+  100% {
+    transform: translateY(-43px) rotate(2deg) translateX(2px);
+  }
+`;
+
 const Lid = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  animation: ${LidShake} steps(2, end) 5000ms infinite;
-  ${props => (props.claimedNft ? `transform: translatey(-50px); animation: null;` : ``)}
+  animation: ${props => (props.claimedNft ? LidOpen : LidShake)} steps(2, end) ${props => (props.isBusy ? '3500ms' : '5000ms')}
+    ${props => (props.claimedNft ? 1 : 'infinite')};
+  transition: transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  animation-fill-mode: forwards;
 `;
 
 const Box = styled.img`
@@ -498,6 +549,10 @@ const ButtonChangeBase = styled.button`
 
   animation-fill-mode: forwards;
 
+  &:disabled {
+    cursor: default;
+  }
+
   &:hover {
     ${props => (props.isBusy ? 'background-position-y: 85px;' : 'background-position-y: 170px;')};
     ${props => props.isBusy && 'background-position-y: 0;'}
@@ -527,12 +582,16 @@ const ButtonBase = styled.button`
 
   animation-fill-mode: forwards;
 
+  &:disabled {
+    cursor: default;
+  }
+
   &:hover {
-    ${props => (props.isBusy ? 'background-position-y: 85px;' : 'background-position-y: 170px;')};
+    ${props => (props.isBusy ? 'background-position-y: 85px;' : '')};
   }
 
   &:active {
-    background-position-y: 85px;
+    ${props => (props.isBusy ? 'background-position-y: 85px;' : '')};
   }
 
   ${props => (props.isBusy ? 'background-position-y: 85px;' : '')};

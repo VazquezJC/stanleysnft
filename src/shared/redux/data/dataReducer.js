@@ -1,9 +1,9 @@
 const initialState = {
   loading: false,
   totalSupply: 0,
-  price: 0,
-  maxMint: 20,
-  isGenesisLocked: false,
+  cost: 0,
+  maxMintAmountPerTx: 20,
+  availableSupply: 5,
   error: false,
   errorMsg: '',
 };
@@ -22,9 +22,9 @@ const dataReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         totalSupply: action.payload.totalSupply,
-        price: action.payload.price,
-        maxMint: action.payload.maxMint,
-        isGenesisLocked: action.payload.isGenesisLocked,
+        cost: action.payload.cost,
+        maxMintAmountPerTx: action.payload.maxMintAmountPerTx,
+        availableSupply: action.payload.availableSupply,
         error: false,
         errorMsg: '',
       };

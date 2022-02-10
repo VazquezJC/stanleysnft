@@ -201,12 +201,12 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_hiddenUri",
-        "type": "string"
+        "internalType": "uint256",
+        "name": "_availableSupply",
+        "type": "uint256"
       }
     ],
-    "name": "setHiddenUri",
+    "name": "setAvailableSupply",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -214,12 +214,25 @@
   {
     "inputs": [
       {
-        "internalType": "bool",
-        "name": "_state",
-        "type": "bool"
+        "internalType": "uint256",
+        "name": "_newcost",
+        "type": "uint256"
       }
     ],
-    "name": "setIsGenesisLocked",
+    "name": "setCost",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_hiddenUri",
+        "type": "string"
+      }
+    ],
+    "name": "setHiddenUri",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -254,24 +267,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_maxMint",
+        "name": "_maxMintAmountPerTx",
         "type": "uint256"
       }
     ],
-    "name": "setMaxMint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_newprice",
-        "type": "uint256"
-      }
-    ],
-    "name": "setPrice",
+    "name": "setMaxMintAmountPerTx",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -371,6 +371,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "availableSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -379,6 +392,19 @@
       }
     ],
     "name": "balanceOf",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "cost",
     "outputs": [
       {
         "internalType": "uint256",
@@ -447,19 +473,6 @@
   },
   {
     "inputs": [],
-    "name": "isGenesisLocked",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "isPaused",
     "outputs": [
       {
@@ -486,20 +499,7 @@
   },
   {
     "inputs": [],
-    "name": "maxGenesisSupply",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "maxMint",
+    "name": "maxMintAmountPerTx",
     "outputs": [
       {
         "internalType": "uint256",
@@ -576,19 +576,6 @@
         "internalType": "address",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "price",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",

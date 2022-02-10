@@ -415,7 +415,7 @@ const Landing = () => {
                 <Gold src={gold} alt="" />
                 <TreeTopRight src={treeRight} alt="" />
                 <TreeBottomLeft inView={rivermapInView} src={treeBottomLeft} alt="" />
-                <TreeBottomLeft2 inView={rivermapInView} src={treeBottomLeft2} alt="" />
+                {/* <TreeBottomLeft2 inView={rivermapInView} src={treeBottomLeft2} alt="" /> */}
                 <TopLeft1 src={plant1TopLeft} alt="" />
                 <TopLeft2 src={plant2TopLeft} alt="" />
                 <Warthog src={warthog} alt="" />
@@ -586,7 +586,6 @@ const TopLeft1 = styled.img`
   position: absolute;
   left: 15px;
   opacity: 1;
-  animation: ${RandomFlowerTilt} 4s linear infinite;
 `;
 
 // animation: ${props => (props.inView ? AnimateFlower : null)} 0.4s 0.2s cubic-bezier(0.26, 0.67, 0.48, 0.91);
@@ -613,7 +612,7 @@ const TreeBottomLeft2 = styled.img`
 
 const TreeBottomLeft = styled.img`
   position: absolute;
-  bottom: -0;
+  bottom: 0;
   left: 0;
 
   @media (max-width: 1024px) {
@@ -665,7 +664,7 @@ const BarrierOverlay = styled.div`
 const ProgressContainer = styled.div`
   position: relative;
   ${props => (props.inView ? 'transform: translateY(0);' : `transform: translateY(10px);`)}
-  transition: transform ${isMobileOnly ? '2s' : '3s'} cubic-bezier(0.26, 0.67, 0.48, 0.91);
+  transition: transform ${isMobileOnly ? '2s' : '0'} cubic-bezier(0.26, 0.67, 0.48, 0.91);
   z-index: 15;
   
 
