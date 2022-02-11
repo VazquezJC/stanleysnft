@@ -9,7 +9,7 @@
 // 8 = Profit Sharing
 // 9 = Leadership Team Election
 // 10 = Community Ownership Transition
-export const completed = 3;
+export const completed = 5;
 
 // TEAM DETAILS
 // * Leave text space empty if not in use
