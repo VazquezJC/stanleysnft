@@ -12,8 +12,9 @@ import boxLid from 'App/assets/images/box-lid2.png';
 import boxEyes from 'App/assets/images/box-eyes.png';
 import { font } from 'shared/styles';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const truncate = (input, len) => (input.length > len ? `${input.substring(0, len)}...` : input);
 
@@ -103,7 +104,6 @@ const Mint = () => {
 
   useEffect(() => {
     getData();
-    console.log('data effect');
   }, [blockchain.account]);
 
   const claimNFTs = () => {
@@ -112,8 +112,8 @@ const Mint = () => {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    console.log('Cost: ', totalCostWei);
-    console.log('Gas limit: ', totalGasLimit);
+    console.log(`Cost: ${totalCostWei / 1000000000000000000} ETH`);
+    console.log(`Gas limit: ${totalGasLimit} GWEI`);
     setFeedback(``);
     setClaimingNft(true);
     setClaimedNft(false);
@@ -127,32 +127,13 @@ const Mint = () => {
       })
       .once('error', err => {
         console.log(err);
-        toast.warning('Sorry, something went wrong. Please try again.', {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Sorry, something went wrong. Please try again.');
         // setFeedback('Sorry, something went wrong please try again later.');
         setClaimingNft(false);
       })
       .then(receipt => {
         console.log(receipt);
-        toast.success(
-          `${mintAmount > 1 ? mintAmount + ' Genesis Stanleys successfully minted!' : 'Genesis Stanley successfully minted!'}`,
-          {
-            position: 'top-center',
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
+        toast.success(`${mintAmount > 1 ? mintAmount + ' Genesis Stanleys successfully minted!' : 'Genesis Stanley successfully minted!'}`);
         // setFeedback(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`);
         setClaimingNft(false);
         setClaimedNft(true);
@@ -162,7 +143,7 @@ const Mint = () => {
 
   return (
     <Wrapper>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -172,7 +153,8 @@ const Mint = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
+      <Toaster position="top-right" reverseOrder={false} />
       <Stars>
         <StarPng duration={1.2} animation={Pulse1} left={'10%'} bottom={'20%'} src={star} alt="" />
         <StarPng duration={1.5} animation={Pulse1} left={'40%'} bottom={'40%'} src={star} alt="" />
@@ -187,7 +169,7 @@ const Mint = () => {
         </Link>
         <PresentContainer>
           <Box claimedNft={claimedNft} src={boxBase} alt="" />
-          <Eyes src={boxEyes} alt="" />
+          <Eyes claimedNft={claimedNft} src={boxEyes} alt="" />
           <Lid claimedNft={claimedNft} isBusy={claimingNft} src={boxLid} alt="" />
         </PresentContainer>
 
@@ -201,8 +183,6 @@ const Mint = () => {
 
             <ButtonWrapper isBusy={claimingNft}>
               <ButtonBase
-                disabled={claimingNft ? 1 : 0}
-                isBusy={claimingNft}
                 onClick={e => {
                   e.preventDefault();
                   dispatch(connect());
@@ -212,25 +192,14 @@ const Mint = () => {
                 <ButtonText>Connect Wallet</ButtonText>
               </ButtonBase>
             </ButtonWrapper>
-
-            {blockchain.errorMsg !== ''
-              ? toast.error(`${blockchain.errorMsg}`, {
-                  position: 'top-center',
-                  autoClose: 5000,
-                  hideProgressBar: true,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                })
-              : null}
+            {blockchain.errorMsg !== '' ? toast.error(`${blockchain.errorMsg}`) : ''}
           </MiniWrapper>
         ) : (
           <MiniWrapper>
             <ButtonContainer isHidden={isSupplyLimited} isBusy={claimingNft}>
               <ButtonWrapperChange isBusy={claimingNft}>
                 <ButtonChangeBase disabled={claimingNft ? 1 : 0} isBusy={claimingNft} onClick={() => decrementMintAmount()}>
-                  <ButtonText>-</ButtonText>
+                  <ButtonNumber>-</ButtonNumber>
                 </ButtonChangeBase>
               </ButtonWrapperChange>
               <ButtonWrapper isBusy={claimingNft}>
@@ -255,7 +224,7 @@ const Mint = () => {
               </ButtonWrapper>
               <ButtonWrapperChange isBusy={claimingNft}>
                 <ButtonChangeBase disabled={claimingNft ? 1 : 0} isBusy={claimingNft} onClick={() => incrementMintAmount()}>
-                  <ButtonText>+</ButtonText>
+                  <ButtonNumber>+</ButtonNumber>
                 </ButtonChangeBase>
               </ButtonWrapperChange>
             </ButtonContainer>
@@ -318,6 +287,7 @@ const EyesAnimation = keyframes`
 
 const Eyes = styled.img`
   position: absolute;
+  ${props => (props.isVisible ? 'display: flex;' : 'display:none;')}
   top: 200px;
   left: 190px;
   animation: ${EyesAnimation} steps(2, end) 8000ms infinite;
@@ -505,6 +475,13 @@ const ButtonText = styled.div`
   display: flex;
 `;
 
+const ButtonNumber = styled.div`
+  position: absolute;
+  color: #fff;
+  font-size: 30px;
+  display: flex;
+`;
+
 // &:after {
 //   content: '...'; /* ascii code for the ellipsis character */
 
@@ -566,6 +543,19 @@ const ButtonChangeBase = styled.button`
   ${props => (props.isBusy ? 'background-position-y: 0;' : '')}
 `;
 
+const TitleButtonOut = keyframes`
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+`;
+
 const ButtonBase = styled.button`
   position: relative;
   opacity: 0;
@@ -587,11 +577,11 @@ const ButtonBase = styled.button`
   }
 
   &:hover {
-    ${props => (props.isBusy ? 'background-position-y: 85px;' : '')};
+    ${props => (props.isBusy ? 'background-position-y: 85px;' : 'background-position-y: 170px')};
   }
 
   &:active {
-    ${props => (props.isBusy ? 'background-position-y: 85px;' : '')};
+    ${props => (props.isBusy ? 'background-position-y: 85px;' : 'background-position-y: 255px;')};
   }
 
   ${props => (props.isBusy ? 'background-position-y: 85px;' : '')};
