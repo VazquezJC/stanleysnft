@@ -398,7 +398,8 @@ const Landing = () => {
             </Stars>
           </Section4>
           <ProgressMapWrapperNew ref={rivermapRef}>
-            <RiverLandscape inView={rivermapInView} />
+            {/* <RiverLandscape inView={rivermapInView} /> */}
+            <RiverLandscape />
             <ProgressContainer inView={rivermapInView}>
               <RiverWrapper>
                 <UfoImage inView={rivermapInView} src={ufoPng} alt="" />
@@ -499,7 +500,7 @@ const RiverLandscape = styled.div`
   width: 100%;
   z-index: 10;
   opacity: 1;
-  transform: translateY(${props => (props.inView ? '0' : '-20px')});
+  /* transform: translateY(${props => (props.inView ? '0' : '-20px')}); */
   transition: opacity 1s linear, transform ${isMobileOnly ? '2s' : '3s'} 0s cubic-bezier(0.26, 0.67, 0.48, 0.91);
   will-change: transform;
 

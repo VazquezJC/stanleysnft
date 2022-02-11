@@ -154,7 +154,7 @@ const Mint = () => {
         draggable
         pauseOnHover
       /> */}
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <Stars>
         <StarPng duration={1.2} animation={Pulse1} left={'10%'} bottom={'20%'} src={star} alt="" />
         <StarPng duration={1.5} animation={Pulse1} left={'40%'} bottom={'40%'} src={star} alt="" />
